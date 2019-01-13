@@ -102,7 +102,6 @@
         userinfo0: {
           name:'',
           pass: '',
-          checkPass: '',
           company: '',
           mail:'',
           phone:''
