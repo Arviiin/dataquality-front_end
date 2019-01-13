@@ -138,17 +138,18 @@
         //   console.log(valid);
         //   if (valid) {
         //     alert('submit!');
-        //审核通过
-              this.$confirm('是否确认注册?', '确认注册', {
-                confirmButtonText: '确认',
-                cancelButtonText: '取消',
-                type: 'warning'
-              }).then(() => {
-                console.log("注册成功");
-                this.$message({
-                  type: 'info',
-                  message: '保存修改'
-                });
+
+        //确认注册按钮
+          this.$confirm('是否确认注册?', '确认注册', {
+            confirmButtonText: '确认',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            console.log("注册成功");
+            this.$message({
+              type: 'info',
+              message: '保存修改'
+            });
                 // this.$ajax({
                 //   method: 'post',
                 //   url: 'http://localhost:8080/reg',
@@ -161,22 +162,22 @@
                 //
 
                 //和后端交互
-                  this.$ajax.post('http://localhost:8080/reg',
-                  JSON.stringify(this.userinfo0),
-                  {headers: {'Content-Type': 'application/json;charset=UTF-8'}}
-                ).then(response => {
-                  this.$message({
-                    type: 'success',
-                    message: '注册成功'
-                  });
-                  let hopRouter
-                    = '/login/login'
-                  this.$router.replace(hopRouter);
-                }).catch(function (err) {
-                  console.log(err);
-                })
+                //   this.$ajax.post('http://localhost:8080/reg',
+                //   JSON.stringify(this.userinfo0),
+                //   {headers: {'Content-Type': 'application/json;charset=UTF-8'}}
+                // ).then(response => {
+                //   this.$message({
+                //     type: 'success',
+                //     message: '注册成功'
+                //   });
+                //   let hopRouter
+                //     = '/login/login'
+                //   this.$router.replace(hopRouter);
+                // }).catch(function (err) {
+                //   console.log(err);
+                // })
               }).catch(() => {
-                console.log("注册失败");
+                console.log("取消或注册失败");
                 this.$message({
                   type: 'info',
                   message: '取消'
