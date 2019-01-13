@@ -151,20 +151,20 @@
               message: '注册成功'
             });
              //和后端交互
-             //   this.$ajax.post('http://localhost:8080/reg',
-             //   JSON.stringify(this.userinfo0),
-             //   {headers: {'Content-Type': 'application/json;charset=UTF-8'}}
-             // ).then(response => {
-             //   this.$message({
-             //     type: 'success',
-             //     message: '注册成功'
-             //   });
-             //   let hopRouter
-             //     = '/login/login'
-             //   this.$router.replace(hopRouter);
-             // }).catch(function (err) {
-             //   console.log(err);
-             // })
+               this.$ajax.post('http://localhost:8080/loginreg/reg',
+               JSON.stringify(this.userinfo0),
+               {headers: {'Content-Type': 'application/json;charset=UTF-8'}}
+             ).then(response => {
+               this.$message({
+                 type: 'success',
+                 message: '注册成功'
+               });
+               let hopRouter
+                 = '/login/login'
+               this.$router.replace(hopRouter);
+             }).catch(function (err) {
+               console.log(err);
+             })
               }).catch(() => {
                 console.log("取消或注册失败");
                 this.$message({
