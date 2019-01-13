@@ -3,26 +3,26 @@
     <navHeader class="header" :vlogin="this.vlogin"></navHeader>
     <hr>
     <div>
-      <!--<div class="page-info page-overview">-->
-        <!--<div class="container">-->
-          <!--<a href="HelloWorld.vue">Home/</a>-->
-          <!--<h2>Login</h2>-->
-        <!--</div>-->
-      <!--</div>-->
-      <el-form :model="userinfo" status-icon :rules="rules" ref="userinfo" class="login-form">
-        <div class="title-container">
-          <h3 class="title">登陆界面</h3>
+      <div class="page-info">
+        <div class="container">
+          <a href="home.vue">home/</a>
+          <h2>Login</h2>
         </div>
-        <el-form-item>
-          <el-input v-model="userinfo.name" label="请输入用户名"></el-input>
+      </div>
+      <h1>登陆你的账户</h1>
+      <el-form :model="userinfo" status-icon :rules="rules" ref="userinfo" label-width="100px" class="login-form">
+        <!--<div class="title-container">-->
+          <!--<h3 class="title">登陆界面</h3>-->
+        <!--</div>-->
+        <el-form-item label="用户名" prop="name">
+          <el-input v-model.number="userinfo.name" clearable></el-input>
         </el-form-item>
-
-        <el-form-item>
-          <el-input type="password" v-model="userinfo.passwd" autocomplete="off"></el-input>
+        <el-form-item label="密码" prop="pass">
+          <el-input type="password" clearable v-model="userinfo.pass" autocomplete="off"></el-input>
         </el-form-item>
-
         <el-form-item>
-          <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click="handleLogin">登陆</el-button>
+          <el-button type="primary" @click="submitForm('userinfo')">提交</el-button>
+          <el-button @click="resetForm('userinfo')">重置</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -43,19 +43,84 @@ import navFooter from '@/views/components/footer'
         navFooter
       },
       data() {
+
+        var checkName = (rule, value, callback) => {
+          if (!value) {
+            return callback(new Error('用户名不能为空'));
+          }
+        };
+        var validatePass = (rule, value, callback) => {
+          if (value === '') {
+            callback(new Error('请输入密码'));
+          }
+        };
         return {
           userinfo: {
-            name: 'admin',
-            passwd: 'admin',
+            name:'',
+            pass: '',
           },
           result: '',
           vlogin:false,
+          rules: {
+            name: [
+              { validator: checkName, trigger: 'blur' }
+            ],
+            pass: [
+              { validator: validatePass, trigger: 'blur' }
+            ],
+          }
         }
       },
       methods: {
+        submitForm(formName) {
+          this.$refs[formName].validate((valid) => {
+            if (valid) {
+              alert('submit!');
+              // this.$confirm('是否确认登陆?', '确认登陆', {
+              //   confirmButtonText: '确认',
+              //   cancelButtonText: '取消',
+              //   type: 'warning'
+              // }).then(() => {
+              //   this.$ajax({
+              //     method: 'post',
+              //     url: 'http://localhost:8080/orderAudit/saveSupplierAudit',
+              //     data: {
+              //       "username": this.userinfo.name,
+              //       "password": this.userinfo.pass,
+              //
+              //     }
+              //   }).then(response => {
+              //     this.$message({
+              //       type: 'success',
+              //       message: '注册成功'
+              //     });
+              //     let hopRouter
+              //       = '/'
+              //     this.$router.replace(hopRouter);
+              //   }).catch(function (err) {
+              //     console.log(err);
+              //   })
+              // }).catch(() => {
+              //   this.$message({
+              //     type: 'info',
+              //     message: '取消'
+              //   });
+              // });
+
+            } else {
+              console.log('error submit!!');
+              return false;
+            }
+          });
+        },
+        resetForm(formName) {
+          this.$refs[formName].resetFields();
+        },
+
+
         handleLogin() {
           //后台接口
-          // this.$ajax.get('http://localhost:8080/user/login/' + this.userinfo.name + '/' + this.userinfo.passwd)
+          // this.$ajax.get('http://localhost:8080/user/login/' + this.userinfo.name + '/' + this.userinfo.pass)
           //   .then(response => {
           //     if (response.data === '') {
           //       this.result = 0;
@@ -63,14 +128,14 @@ import navFooter from '@/views/components/footer'
           //       this.result = response.data;
           //     }
           //   });
-          if (this.userinfo.name == "admin" && this.userinfo.passwd == "admin") {
+          if (this.userinfo.name == "admin" && this.userinfo.pass == "admin") {
             this.vlogin=true;
             // this.$router.push('/')
             this.$router.push({
               path: '/',
-              name: 'HelloWorld',
+              name: 'home',
               params: {
-                name: 'HelloWorld',
+                name: 'home',
                 dataObj: this.userinfo,
                 vlogin:this.vlogin
               }
@@ -99,7 +164,7 @@ import navFooter from '@/views/components/footer'
         //     //   }
         //     // }
         //     console.log(this.result);
-        //     if (this.userinfo.name == "admin" && this.userinfo.passwd == "admin") {
+        //     if (this.userinfo.name == "admin" && this.userinfo.pass == "admin") {
         //       this.$router.push('/dataprocess/datapro');
         //     }
         //     else if (this.result !== null && this.result !== -1 && this.result) {
@@ -120,12 +185,13 @@ import navFooter from '@/views/components/footer'
     right: 0;
     width: 500px;
     max-width: 100%;
-    padding: 35px 35px 15px 35px;
+    padding: 35px 35px;
     margin: 15px auto;
   }
   .page-info{
-    background:#252525;
+    background:#292929;
     padding:1% 0;
+    margin: 0 -15px;
   }
   .page-info a{
     color:#C6C6C6;
@@ -141,13 +207,11 @@ import navFooter from '@/views/components/footer'
   .page-info a:hover{
     color:#fff;
   }
-  .page-overview{
-    margin-bottom: 40px;
-  }
+
   .container {
     padding-right: 15px;
     padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
+    margin:0 30px;
+
   }
 </style>
