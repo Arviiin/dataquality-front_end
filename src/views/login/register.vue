@@ -100,11 +100,11 @@
           phone:''
         },
         userinfo0: {
-          name:'',
-          pass: '',
+          username:'',
+          password: '',
           company: '',
-          mail:'',
-          phone:''
+          email:'',
+          telephone:''
         },
         rules: {
           name: [
@@ -127,11 +127,11 @@
     },
     methods: {
       submitForm(formName) {
-        this.userinfo0.name=formName.name;
-        this.userinfo0.pass=formName.pass;
+        this.userinfo0.username=formName.name;
+        this.userinfo0.password=formName.pass;
         this.userinfo0.company=formName.company;
-        this.userinfo0.mail=formName.mail;
-        this.userinfo0.phone=formName.phone;
+        this.userinfo0.email=formName.mail;
+        this.userinfo0.telephone=formName.phone;
         console.log(this.userinfo0);
         // this.$refs[formName].validate((valid) => {
         //   console.log(valid);
