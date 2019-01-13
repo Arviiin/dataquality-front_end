@@ -138,12 +138,13 @@
         //   console.log(valid);
         //   if (valid) {
         //     alert('submit!');
-            //审核通过
+        //审核通过
               this.$confirm('是否确认注册?', '确认注册', {
                 confirmButtonText: '确认',
                 cancelButtonText: '取消',
                 type: 'warning'
               }).then(() => {
+                console.log("注册成功");
                 this.$message({
                   type: 'info',
                   message: '保存修改'
@@ -158,11 +159,8 @@
                 //     "email": this.userinfo.mail,
                 //     "telephone": this.userinfo.phone
                 //
-                this.userinfo0.name=this.formName.name;
-                this.userinfo0.pass=this.formName.pass;
-                this.userinfo0.company=this.formName.company;
-                this.userinfo0.mail=this.formName.mail;
-                this.userinfo0.phone=this.formName.phone;
+
+                //和后端交互
                   this.$ajax.post('http://localhost:8080/reg',
                   JSON.stringify(this.userinfo0),
                   {headers: {'Content-Type': 'application/json;charset=UTF-8'}}
@@ -178,6 +176,7 @@
                   console.log(err);
                 })
               }).catch(() => {
+                console.log("注册失败");
                 this.$message({
                   type: 'info',
                   message: '取消'
