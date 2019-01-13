@@ -148,34 +148,23 @@
             console.log("注册成功");
             this.$message({
               type: 'info',
-              message: '保存修改'
+              message: '注册成功'
             });
-                // this.$ajax({
-                //   method: 'post',
-                //   url: 'http://localhost:8080/reg',
-                //   data: {
-                //     "username": this.userinfo.name,
-                //     "password": this.userinfo.pass,
-                //     "company": this.userinfo.company,
-                //     "email": this.userinfo.mail,
-                //     "telephone": this.userinfo.phone
-                //
-
-                //和后端交互
-                //   this.$ajax.post('http://localhost:8080/reg',
-                //   JSON.stringify(this.userinfo0),
-                //   {headers: {'Content-Type': 'application/json;charset=UTF-8'}}
-                // ).then(response => {
-                //   this.$message({
-                //     type: 'success',
-                //     message: '注册成功'
-                //   });
-                //   let hopRouter
-                //     = '/login/login'
-                //   this.$router.replace(hopRouter);
-                // }).catch(function (err) {
-                //   console.log(err);
-                // })
+             //和后端交互
+             //   this.$ajax.post('http://localhost:8080/reg',
+             //   JSON.stringify(this.userinfo0),
+             //   {headers: {'Content-Type': 'application/json;charset=UTF-8'}}
+             // ).then(response => {
+             //   this.$message({
+             //     type: 'success',
+             //     message: '注册成功'
+             //   });
+             //   let hopRouter
+             //     = '/login/login'
+             //   this.$router.replace(hopRouter);
+             // }).catch(function (err) {
+             //   console.log(err);
+             // })
               }).catch(() => {
                 console.log("取消或注册失败");
                 this.$message({
