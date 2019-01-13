@@ -144,28 +144,31 @@
             cancelButtonText: '取消',
             type: 'warning'
           }).then(() => {
-            console.log("注册成功");
-            this.$message({
-              type: 'info',
-              message: '注册成功'
-            });
              //和后端交互
                this.$ajax.post('http://localhost:8080/loginreg/reg',
                JSON.stringify(this.userinfo0),
                {headers: {'Content-Type': 'application/json;charset=UTF-8'}}
              ).then(response => {
-               this.$message({
-                 type: 'success',
-                 message: '注册成功'
-               });
-               let hopRouter
-                 = '/login/login'
-               this.$router.replace(hopRouter);
+               if(response.data.status=="success"){
+                 this.$message({
+                   type: 'success',
+                   message: '注册成功'
+                 });
+                 let hopRouter
+                   = '/login/login'
+                 this.$router.replace(hopRouter);
+               }
+               else{
+                 this.$message({
+                   type: 'success',
+                   message: response.data.msg
+                 });
+               }
              }).catch(function (err) {
                console.log(err);
              })
               }).catch(() => {
-                console.log("取消或注册失败");
+                console.log("取消");
                 this.$message({
                   type: 'info',
                   message: '取消'
