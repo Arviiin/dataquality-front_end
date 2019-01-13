@@ -33,7 +33,7 @@
           <el-input v-model.number="userinfo.phone" clearable></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('userinfo')">提交</el-button>
+          <el-button type="primary" @click="submitForm(userinfo)">提交</el-button>
           <el-button @click="resetForm('userinfo')">重置</el-button>
         </el-form-item>
       </el-form>
@@ -99,6 +99,14 @@
           mail:'',
           phone:''
         },
+        userinfo0: {
+          name:'',
+          pass: '',
+          checkPass: '',
+          company: '',
+          mail:'',
+          phone:''
+        },
         rules: {
           name: [
             { validator: checkName, trigger: 'blur' }
@@ -120,27 +128,45 @@
     },
     methods: {
       submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
+        this.userinfo0.name=formName.name;
+        this.userinfo0.pass=formName.pass;
+        this.userinfo0.company=formName.company;
+        this.userinfo0.mail=formName.mail;
+        this.userinfo0.phone=formName.phone;
+        console.log(this.userinfo0);
+        // this.$refs[formName].validate((valid) => {
+        //   console.log(valid);
+        //   if (valid) {
+        //     alert('submit!');
             //审核通过
               this.$confirm('是否确认注册?', '确认注册', {
                 confirmButtonText: '确认',
                 cancelButtonText: '取消',
                 type: 'warning'
               }).then(() => {
-                //审核通过改状态变为1
-                this.$ajax({
-                  method: 'post',
-                  url: 'http://localhost:8080/reg',
-                  data: {
-                    "username": this.userinfo.name,
-                    "password": this.userinfo.pass,
-                    "company": this.userinfo.company,
-                    "email": this.userinfo.mail,
-                    "telephone": this.userinfo.phone
-                  }
-                }).then(response => {
+                this.$message({
+                  type: 'info',
+                  message: '保存修改'
+                });
+                // this.$ajax({
+                //   method: 'post',
+                //   url: 'http://localhost:8080/reg',
+                //   data: {
+                //     "username": this.userinfo.name,
+                //     "password": this.userinfo.pass,
+                //     "company": this.userinfo.company,
+                //     "email": this.userinfo.mail,
+                //     "telephone": this.userinfo.phone
+                //
+                this.userinfo0.name=this.formName.name;
+                this.userinfo0.pass=this.formName.pass;
+                this.userinfo0.company=this.formName.company;
+                this.userinfo0.mail=this.formName.mail;
+                this.userinfo0.phone=this.formName.phone;
+                  this.$ajax.post('http://localhost:8080/reg',
+                  JSON.stringify(this.userinfo0),
+                  {headers: {'Content-Type': 'application/json;charset=UTF-8'}}
+                ).then(response => {
                   this.$message({
                     type: 'success',
                     message: '注册成功'
@@ -158,11 +184,11 @@
                 });
               });
 
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
+          // } else {
+          //   console.log('error submit!!');
+          //   return false;
+          // }
+        // });
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
