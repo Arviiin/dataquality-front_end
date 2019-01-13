@@ -21,7 +21,7 @@
           <el-input type="password" clearable v-model="userinfo.pass" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('userinfo')">提交</el-button>
+          <el-button type="primary" @click="submitForm(userinfo)">登陆</el-button>
           <el-button @click="resetForm('userinfo')">重置</el-button>
         </el-form-item>
       </el-form>
@@ -73,61 +73,41 @@ import navFooter from '@/views/components/footer'
       },
       methods: {
         submitForm(formName) {
-          this.$refs[formName].validate((valid) => {
-            if (valid) {
-              alert('submit!');
-              // this.$confirm('是否确认登陆?', '确认登陆', {
-              //   confirmButtonText: '确认',
-              //   cancelButtonText: '取消',
-              //   type: 'warning'
-              // }).then(() => {
-              //   this.$ajax({
-              //     method: 'post',
-              //     url: 'http://localhost:8080/orderAudit/saveSupplierAudit',
-              //     data: {
-              //       "username": this.userinfo.name,
-              //       "password": this.userinfo.pass,
-              //
-              //     }
-              //   }).then(response => {
-              //     this.$message({
-              //       type: 'success',
-              //       message: '注册成功'
-              //     });
-              //     let hopRouter
-              //       = '/'
-              //     this.$router.replace(hopRouter);
-              //   }).catch(function (err) {
-              //     console.log(err);
-              //   })
-              // }).catch(() => {
-              //   this.$message({
-              //     type: 'info',
-              //     message: '取消'
-              //   });
-              // });
-
-            } else {
-              console.log('error submit!!');
-              return false;
-            }
-          });
-        },
-        resetForm(formName) {
-          this.$refs[formName].resetFields();
-        },
-
-
-        handleLogin() {
           //后台接口
-          // this.$ajax.get('http://localhost:8080/user/login/' + this.userinfo.name + '/' + this.userinfo.pass)
-          //   .then(response => {
-          //     if (response.data === '') {
-          //       this.result = 0;
-          //     } else {
-          //       this.result = response.data;
-          //     }
-          //   });
+          this.$ajax.get('http://localhost:8080/login/'
+            + this.userinfo.name + '/' + this.userinfo.pass)
+            .then(response => {
+              console.log(response.data)
+              if (response.data == 0) {
+                // this.result = 0;
+                this.$message({
+                  type: 'success',
+                  message: '登陆成功'
+                });
+                this.vlogin=true;
+                this.$router.push({
+                  path: '/login/loginsuc',
+                  name: 'loginsucess',
+                  params: {
+                    name: 'loginsucess',
+                    dataObj: this.userinfo.name,
+                    vlogin:this.vlogin
+                  }
+                })
+
+              } else if(response.data == 1){
+                this.$message({
+                  type: 'error',
+                  message: '用户名不存在'
+                });
+              }
+              else{
+                this.$message({
+                  type: 'error',
+                  message: '密码错误'
+                });
+              }
+            });
           if (this.userinfo.name == "admin" && this.userinfo.pass == "admin") {
             this.vlogin=true;
             // this.$router.push('/')
@@ -142,39 +122,48 @@ import navFooter from '@/views/components/footer'
             })
 
           }
+
         },
-        // watch: {
-        //   result: function () {
-        //     //     console.log(this.result);
-        //     //     if (this.result !== null && this.result !== -1 && this.result) {
-        //     //       localStorage.setItem('User', this.userName);
-        //     //       localStorage.setItem('MenuId', this.result.menuId);
-        //     //       if (this.result.company !== null) {
-        //     //         localStorage.setItem('Company', this.result.company);
-        //     //       }else {
-        //     //         localStorage.setItem('Company', '海王');
-        //     //       }
-        //     //     } else {
-        //     //       this.$message.error('用户名密码错误');
-        //     //       this.userName = '';
-        //     //       this.password = '';
-        //     //       this.result = -1;
-        //     //     }
-        //     //     this.$router.push('/home');
-        //     //   }
-        //     // }
-        //     console.log(this.result);
-        //     if (this.userinfo.name == "admin" && this.userinfo.pass == "admin") {
-        //       this.$router.push('/dataprocess/datapro');
-        //     }
-        //     else if (this.result !== null && this.result !== -1 && this.result) {
-        //
-        //     }
-        //     else {
-        //
-        //     }
-        //   }
-        // }
+        resetForm(formName) {
+          this.$refs[formName].resetFields();
+        },
+
+
+        watch: {
+          // result: function () {
+          //   {
+          //     console.log(this.result);
+          //     if (this.result !== null && this.result !== -1 && this.result) {
+          //       localStorage.setItem('User', this.userName);
+          //       localStorage.setItem('MenuId', this.result.menuId);
+          //       if (this.result.company !== null) {
+          //         localStorage.setItem('Company', this.result.company);
+          //       } else {
+          //         localStorage.setItem('Company', '海王');
+          //       }
+          //     } else {
+          //       this.$message.error('用户名密码错误');
+          //       this.userName = '';
+          //       this.password = '';
+          //       this.result = -1;
+          //     }
+          //     this.$router.push('/home');
+          //   }
+          //
+          //   console.log(this.result);
+          //   if (this.userinfo.name == "admin" && this.userinfo.pass == "admin") {
+          //     this.$router.push('/dataprocess/datapro');
+          //   }
+          //   else if (this.result !== null && this.result !== -1 && this.result) {
+          //
+          //   }
+          //   else {
+          //
+          //   }
+          // }
+        }//watch结束
+
+
       }
     }
 </script>

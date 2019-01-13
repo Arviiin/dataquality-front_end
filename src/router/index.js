@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import home from '@/views/login/home'
 import login from '@/views/login/login'
 import register from '@/views/login/register'
+import loginsucess from '@/views/login/loginsucess'
+
 
 Vue.use(Router)
 
@@ -32,7 +34,12 @@ export default new Router({
       component: register
     },
     {
-      path: '/loginsuc',
+      path: '/login/loginsucess',
+      name: 'loginsucess',
+      component: loginsucess
+    },
+    {
+      path: '/dataprocess/loginsuc',
       component: loginsuc,
       children: [
         {

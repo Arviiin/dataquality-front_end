@@ -12,15 +12,8 @@
       <div class="container">
         <div class="signin-section">
           <h3><span>数据质量</span> 看见数据的本质</h3>
-          <div v-if="vlogin==false">
-            <router-link to="/login/login">
-              <el-button type="primary">登录账户</el-button>
-            </router-link>
-            <router-link to="/login/register">
-              <el-button type="warning">加入我们</el-button>
-            </router-link>
-          </div>
-          <div v-if="vlogin==true">
+
+          <div>
             <router-link to="/dataprocess/databrowser">
               <el-button type="primary">管理我的数据</el-button>
             </router-link>
@@ -52,14 +45,14 @@
   import navHeader from '@/views/components/nav'
   import navFooter from '@/views/components/footer'
   export default {
-    name: 'home',
+    name: 'loginsucess',
     components:{
       navHeader,
       navFooter
     },
     data () {
       return {
-        vlogin:false,
+        vlogin:true,
         userinfo:{
           name:'',
         },
@@ -72,10 +65,10 @@
       }
     },
     mounted:function(){
-      // console.log(this.vlogin);
-      // console.log(this.$route.params);
-      // this.vlogin=this.$route.params.vlogin;
-      // this.userinfo.name=this.$route.params.dataObj.name;
+      console.log(this.vlogin);
+      console.log(this.$route.params);
+      this.vlogin=this.$route.params.vlogin;
+      this.userinfo.name=this.$route.params.dataObj;
     },
     methods: {
 
