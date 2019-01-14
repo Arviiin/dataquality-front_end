@@ -1,11 +1,11 @@
 <template>
   <div class="content">
     <el-header style="text-align: right; font-size: 14px" v-if="this.vlogin0==true">
-      <el-dropdown>
+      <el-dropdown @command="handleCommand">
         <i class="el-icon-setting" style="margin-right: 15px"></i>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>个人中心</el-dropdown-item>
-          <el-dropdown-item>退出登陆</el-dropdown-item>
+          <el-dropdown-item command="deal">管理数据</el-dropdown-item>
+          <el-dropdown-item command="logout">退出登陆</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
       <span>{{this.userinfo.name}}</span>
@@ -47,13 +47,49 @@
     ],
     data() {
       return {
-        vlogin0: this.vlogin?this.vlogin:false,
+        vlogin0: false,
+        vlogin:''
+      }
+    },
+    methods:{
+      handleCommand(command){
+        var _this = this;
+        if (command == 'logout') {
+          this.$confirm('注销登录吗?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(function () {
+            // getRequest("/logout")
+            _this.userinfo.name = null;
+            _this.vlogin = false;
+            _this.vlogin0 = false;
+            localStorage.clear();
+            console.log(localStorage.getItem("User"));
+            _this.$router.replace({
+                path: '/',
+                params: {
+                  vlogin:this.vlogin
+                }
+              },
+              );
+          }, function () {
+            //取消
+          })
+        }
+        if(command == 'deal'){
+          this.$router.replace({path: '/dataprocess/databrowser'});
+        }
       }
     },
     mounted:function () {
-      console.log(this.vlogin);
-      console.log(this.vlogin0);
-      console.log(this.userinfo);
+      if(localStorage.getItem("User"))
+      {
+        this.vlogin0=true;
+      }
+      else {
+        this.vlogin0=false;
+      }
     }
   }
 </script>

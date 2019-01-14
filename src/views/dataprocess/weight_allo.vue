@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navHeader class="header"></navHeader>
+    <navHeader class="header" :userinfo="this.userinfo" :vlogin="this.vlogin"></navHeader>
     <hr>
     <div>
       <menuSide></menuSide>
@@ -460,7 +460,8 @@
         value5: '',
         value6: '',
         value7: '',
-        editall:false
+        editall:false,
+        vlogin:'',
       }
     },
     methods: {
@@ -489,6 +490,13 @@
         this.value5='';
         this.value6='';
         this.value7='';
+      }
+    },
+    mounted:function () {
+      if(localStorage.getItem("User"))
+      {
+        this.userinfo.name=localStorage.getItem("User");
+        this.vlogin=true;
       }
     }
   }

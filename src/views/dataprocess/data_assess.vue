@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navHeader class="header"></navHeader>
+    <navHeader class="header" :userinfo="this.userinfo" :vlogin="this.vlogin"></navHeader>
     <hr>
     <div>
       <menuSide></menuSide>
@@ -221,7 +221,8 @@
           value: '选项3',
           label: '电话规则'
         }],
-        value8: ''
+        value8: '',
+        vlogin:''
       }
     },
     methods: {
@@ -246,6 +247,13 @@
             done();
           })
           .catch(_ => {});
+      }
+    },
+    mounted:function () {
+      if(localStorage.getItem("User"))
+      {
+        this.userinfo.name=localStorage.getItem("User");
+        this.vlogin=true;
       }
     }
   }
