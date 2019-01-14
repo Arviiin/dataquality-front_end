@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navHeader class="header" :vlogin="this.vlogin"></navHeader>
+    <navHeader class="header" :userinfo="this.userinfo" :vlogin="this.vlogin"></navHeader>
     <hr>
     <div>
       <div class="page-info">
@@ -43,7 +43,6 @@ import navFooter from '@/views/components/footer'
         navFooter
       },
       data() {
-
         var checkName = (rule, value, callback) => {
           if (!value) {
             return callback(new Error('用户名不能为空'));
@@ -79,92 +78,101 @@ import navFooter from '@/views/components/footer'
             .then(response => {
               console.log(response.data)
               if (response.data == 0) {
-                // this.result = 0;
-                this.$message({
-                  type: 'success',
-                  message: '登陆成功'
-                });
-                this.vlogin=true;
-                this.$router.push({
-                  path: '/login/loginsuc',
-                  name: 'loginsucess',
-                  params: {
-                    name: 'loginsucess',
-                    dataObj: this.userinfo.name,
-                    vlogin:this.vlogin
-                  }
-                })
+                this.result = 0;
+                // this.$message({
+                //   type: 'success',
+                //   message: '登陆成功'
+                // });
+                // this.vlogin=true;
+                // this.$router.push({
+                //   path: '/login/loginsuc',
+                //   name: 'loginsucess',
+                //   params: {
+                //     name: 'loginsucess',
+                //     dataObj: this.userinfo.name,
+                //     vlogin:this.vlogin
+                //   }
+                // })
 
               } else if(response.data == 1){
-                this.$message({
-                  type: 'error',
-                  message: '用户名不存在'
-                });
+                this.result = 1;
+                // this.$message({
+                //   type: 'error',
+                //   message: '用户名不存在'
+                // });
               }
               else{
-                this.$message({
-                  type: 'error',
-                  message: '密码错误'
-                });
+                this.result = 2;
+                // this.$message({
+                //   type: 'error',
+                //   message: '密码错误'
+                // });
               }
             });
-          if (this.userinfo.name == "admin" && this.userinfo.pass == "admin") {
-            this.vlogin=true;
-            // this.$router.push('/')
-            this.$router.push({
-              path: '/',
-              name: 'home',
-              params: {
-                name: 'home',
-                dataObj: this.userinfo,
-                vlogin:this.vlogin
-              }
-            })
-
-          }
+          // if (this.userinfo.name == "admin" && this.userinfo.pass == "admin") {
+          //   this.vlogin=true;
+          //   // this.$router.push('/')
+          //   this.$router.push({
+          //     path: '/',
+          //     name: 'home',
+          //     params: {
+          //       name: 'home',
+          //       dataObj: this.userinfo,
+          //       vlogin:this.vlogin
+          //     }
+          //   })
+          //
+          // }
 
         },
         resetForm(formName) {
           this.$refs[formName].resetFields();
         },
 
+      },//method结束
 
-        watch: {
-          // result: function () {
-          //   {
-          //     console.log(this.result);
-          //     if (this.result !== null && this.result !== -1 && this.result) {
-          //       localStorage.setItem('User', this.userName);
-          //       localStorage.setItem('MenuId', this.result.menuId);
-          //       if (this.result.company !== null) {
-          //         localStorage.setItem('Company', this.result.company);
-          //       } else {
-          //         localStorage.setItem('Company', '海王');
-          //       }
-          //     } else {
-          //       this.$message.error('用户名密码错误');
-          //       this.userName = '';
-          //       this.password = '';
-          //       this.result = -1;
-          //     }
-          //     this.$router.push('/home');
-          //   }
-          //
-          //   console.log(this.result);
-          //   if (this.userinfo.name == "admin" && this.userinfo.pass == "admin") {
-          //     this.$router.push('/dataprocess/datapro');
-          //   }
-          //   else if (this.result !== null && this.result !== -1 && this.result) {
-          //
-          //   }
-          //   else {
-          //
-          //   }
-          // }
-        }//watch结束
-
-
-      }
+      watch: {
+        result: function () {
+          {
+            if (this.result == 0) {
+              localStorage.setItem('User', this.userinfo.name);
+              this.$message({
+                type: 'success',
+                message: '登陆成功'
+              });
+              // } else {
+              //   this.$message.error('用户名密码错误');
+              //   this.userName = '';
+              //   this.password = '';
+              //   this.result = -1;
+              // }
+              // this.$router.push('/');
+              this.vlogin=true;
+              this.$router.push({
+                path: '/login/loginsuc',
+                name: 'loginsucess',
+                params: {
+                  name: 'loginsucess',
+                  dataObj: this.userinfo.name,
+                  vlogin:this.vlogin
+                }
+              })
+            }
+            else if(this.result==1){
+              this.$message({
+                type: 'error',
+                message: '用户名不存在'
+              });
+            }
+            else{
+              this.$message({
+                type: 'error',
+                message: '密码错误'
+              });
+            }
+          }
+        }
+      }//watch结束
     }
 </script>
 

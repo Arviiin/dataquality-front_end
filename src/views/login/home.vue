@@ -68,14 +68,16 @@
           require('../images/s2.jpg'),
           require('../images/s3.jpg')
         ],
-
       }
     },
     mounted:function(){
-      // console.log(this.vlogin);
-      // console.log(this.$route.params);
-      // this.vlogin=this.$route.params.vlogin;
-      // this.userinfo.name=this.$route.params.dataObj.name;
+      if(localStorage.getItem("User")){
+        this.userinfo.name=localStorage.getItem("User");
+        this.vlogin=true;
+      }
+      if(!localStorage.getItem("User")||this.$route.params.vlogin==false){
+        this.vlogin=false;
+      }
     },
     methods: {
 

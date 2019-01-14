@@ -145,11 +145,13 @@
             type: 'warning'
           }).then(() => {
              //和后端交互
-               this.$ajax.post('http://localhost:8080/loginreg/reg',
+               this.$ajax.post('http://localhost:8080/reg',
                JSON.stringify(this.userinfo0),
                {headers: {'Content-Type': 'application/json;charset=UTF-8'}}
              ).then(response => {
+               console.log(response.data);
                if(response.data.status=="success"){
+                 console.log("注册成功");
                  this.$message({
                    type: 'success',
                    message: '注册成功'
@@ -159,8 +161,9 @@
                  this.$router.replace(hopRouter);
                }
                else{
+                 console.log("注册失败");
                  this.$message({
-                   type: 'success',
+                   type: 'error',
                    message: response.data.msg
                  });
                }

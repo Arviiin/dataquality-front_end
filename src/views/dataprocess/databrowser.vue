@@ -1,38 +1,38 @@
 <template>
   <div>
-    <navHeader class="header"></navHeader>
+    <navHeader class="header" :userinfo="this.userinfo" :vlogin="this.vlogin"></navHeader>
     <hr>
     <div>
-      <menuSide></menuSide>
+      <menuSide :vlogin="this.vlogin"></menuSide>
       <!--<el-form :model="userinfo" status-icon :rules="rules2" ref="userinfo" class="login-form">-->
       <el-main style="background-color: #ffffff; height: 500px">
         <div class="title-container">
           <h3 class="title">数据一览</h3>
         </div>
-      <el-input placeholder="请输入内容" v-model="input3">
+      <el-input placeholder="请输入内容" v-model="input0">
         <template slot="prepend">请选择需要预览的数据（数据库+表名）</template>
         <el-button slot="append" icon="el-icon-search"></el-button>
       </el-input>
         <br>
         <br>
-        <el-table
-          :data="tableData"
-          style="width: 100%">
-          <el-table-column
-            prop="date"
-            label="字段1"
-            width="180">
-          </el-table-column>
-          <el-table-column
-            prop="name"
-            label="字段2"
-            width="180">
-          </el-table-column>
-          <el-table-column
-            prop="address"
-            label="字段3">
-          </el-table-column>
-        </el-table>
+        <!--<el-table-->
+          <!--:data="tableData"-->
+          <!--style="width: 100%">-->
+          <!--<el-table-column-->
+            <!--prop="date"-->
+            <!--label="字段1"-->
+            <!--width="180">-->
+          <!--</el-table-column>-->
+          <!--<el-table-column-->
+            <!--prop="name"-->
+            <!--label="字段2"-->
+            <!--width="180">-->
+          <!--</el-table-column>-->
+          <!--<el-table-column-->
+            <!--prop="address"-->
+            <!--label="字段3">-->
+          <!--</el-table-column>-->
+        <!--</el-table>-->
       </el-main>
         <!--<el-form-item>-->
           <!--<el-input v-model="userinfo.name"></el-input>-->
@@ -66,11 +66,19 @@
       return {
         userinfo :{
           name:'',
-          passwd:'',
         },
-        tableData:{
-
-        },
+        input0:'',
+        vlogin:this.$route.params.vlogin?this.$route.params.vlogin:'true',
+        // tableData:{
+        //
+        // },
+      }
+    },
+    mounted:function(){
+      if(localStorage.getItem("User"))
+      {
+        this.userinfo.name=localStorage.getItem("User");
+        this.vlogin=true;
       }
     },
     methods:{

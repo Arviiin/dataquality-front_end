@@ -38,16 +38,17 @@ export default new Router({
       name: 'loginsucess',
       component: loginsucess
     },
-    {
-      path: '/dataprocess/loginsuc',
-      component: loginsuc,
-      children: [
+    // {
+    //   path: '/dataprocess/loginsuc',
+    //   component: loginsuc,
+    //   children: [
         {
           path: "/dataprocess/datapro",
           component: datapro
         },
         {
           path: "/dataprocess/databrowser",
+          name: 'databrowser',
           component: databrowser
         },
         {
@@ -58,8 +59,8 @@ export default new Router({
           path: "/dataprocess/weight_allo",
           component: weight_allo
         },
-      ]
-    },
+    //   ]
+    // },
 
   ]
 })

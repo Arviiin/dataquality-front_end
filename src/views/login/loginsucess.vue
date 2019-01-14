@@ -14,9 +14,7 @@
           <h3><span>数据质量</span> 看见数据的本质</h3>
 
           <div>
-            <router-link to="/dataprocess/databrowser">
-              <el-button type="primary">管理我的数据</el-button>
-            </router-link>
+              <el-button type="primary" @click="process">管理我的数据</el-button>
           </div>
         </div>
       </div>
@@ -65,13 +63,21 @@
       }
     },
     mounted:function(){
-      console.log(this.vlogin);
-      console.log(this.$route.params);
       this.vlogin=this.$route.params.vlogin;
       this.userinfo.name=this.$route.params.dataObj;
     },
     methods: {
-
+      process(){
+        this.$router.push({
+          path: '/dataprocess/databrowser',
+          name: 'databrowser',
+          params: {
+            name: 'databrowser',
+            dataObj: this.userinfo.name,
+            vlogin:this.vlogin
+          }
+        })
+      }
     },
   }
 </script>
