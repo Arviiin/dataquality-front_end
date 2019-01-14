@@ -11,40 +11,42 @@
         </div>
       <el-input placeholder="请输入内容" v-model="input0">
         <template slot="prepend">请选择需要预览的数据（数据库+表名）</template>
-        <el-button slot="append" icon="el-icon-search"></el-button>
+        <el-button slot="append" icon="el-icon-search" @click="search(input0)"></el-button>
       </el-input>
         <br>
         <br>
-        <!--<el-table-->
-          <!--:data="tableData"-->
-          <!--style="width: 100%">-->
-          <!--<el-table-column-->
-            <!--prop="date"-->
-            <!--label="字段1"-->
-            <!--width="180">-->
-          <!--</el-table-column>-->
-          <!--<el-table-column-->
-            <!--prop="name"-->
-            <!--label="字段2"-->
-            <!--width="180">-->
-          <!--</el-table-column>-->
-          <!--<el-table-column-->
-            <!--prop="address"-->
-            <!--label="字段3">-->
-          <!--</el-table-column>-->
-        <!--</el-table>-->
+        <el-table
+          v-if="this.diag==true"
+          :data="tableData"
+          style="width: 100%"
+          height="250">
+          <el-table-column
+            fixed
+            prop="date"
+            label="日期">
+          </el-table-column>
+          <el-table-column
+            prop="name"
+            label="姓名">
+          </el-table-column>
+          <el-table-column
+            prop="province"
+            label="省份">
+          </el-table-column>
+          <el-table-column
+            prop="city"
+            label="市区">
+          </el-table-column>
+          <el-table-column
+            prop="address"
+            label="住址">
+          </el-table-column>
+          <el-table-column
+            prop="zip"
+            label="邮编">
+          </el-table-column>
+        </el-table>
       </el-main>
-        <!--<el-form-item>-->
-          <!--<el-input v-model="userinfo.name"></el-input>-->
-        <!--</el-form-item>-->
-        <!--<el-form-item>-->
-          <!--<el-input type="password" v-model="userinfo.passwd" autocomplete="off"></el-input>-->
-        <!--</el-form-item>-->
-        <!--<el-form-item>-->
-          <!--<el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click="handleLogin">登陆</el-button>-->
-        <!--</el-form-item>-->
-      <!--</el-form>-->
-
     </div>
   </div>
 
@@ -64,14 +66,63 @@
     },
     data(){
       return {
+        diag:false,
         userinfo :{
           name:'',
         },
         input0:'',
         vlogin:this.$route.params.vlogin?this.$route.params.vlogin:'true',
-        // tableData:{
-        //
-        // },
+        tableData:
+          [{
+          date: '2016-05-03',
+          name: '庄计龙',
+          province: '上海',
+          city: '长宁区',
+          address: '东华大学',
+          zip: 200333
+        }, {
+        date: '2016-05-02',
+          name: '猪猪侠',
+          province: '安徽',
+          city: '合肥市',
+          address: '合肥工业大学',
+          zip: 200333
+      }, {
+        date: '2016-05-04',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
+      }, {
+        date: '2016-05-01',
+          name: '马云',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
+      }, {
+        date: '2016-05-08',
+          name: '马化腾',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
+      }, {
+        date: '2016-05-06',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
+      }, {
+        date: '2016-05-07',
+          name: '王小虎',
+          province: '上海',
+          city: '普陀区',
+          address: '上海市普陀区金沙江路 1518 弄',
+          zip: 200333
+      }],
       }
     },
     mounted:function(){
@@ -82,7 +133,10 @@
       }
     },
     methods:{
-
+      search(tablename){
+        console.log(tablename);
+        this.diag=true;
+      }
     }
   }
 </script>
