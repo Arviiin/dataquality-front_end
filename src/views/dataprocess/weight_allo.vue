@@ -17,16 +17,16 @@
             <div class="grid-content bg-purple">一致性</div>
           </el-col>
           <el-col :span="3">
+            <div class="grid-content bg-purple">依从性</div>
+          </el-col>
+          <el-col :span="3">
             <div class="grid-content bg-purple">准确性</div>
           </el-col>
           <el-col :span="3">
             <div class="grid-content bg-purple">唯一性</div>
           </el-col>
           <el-col :span="3">
-            <div class="grid-content bg-purple">现实性</div>
-          </el-col>
-          <el-col :span="3">
-            <div class="grid-content bg-purple-light">可访问性</div>
+            <div class="grid-content bg-purple-light">现实性</div>
           </el-col>
           <el-col :span="3">
             <div class="grid-content bg-purple">保密性</div>
@@ -37,7 +37,7 @@
           <el-col :span="3">
             <div class="grid-content bg-purple">
               <el-select
-                v-model="value1"
+                v-model="weightValue.Completeness"
                 size="small"
                 filterable
                 allow-create
@@ -55,7 +55,7 @@
           <el-col :span="3">
             <div class="grid-content bg-purple">
               <el-select
-                v-model="value2"
+                v-model="weightValue.Consistency"
                 size="small"
                 filterable
                 allow-create
@@ -73,7 +73,7 @@
           <el-col :span="3">
             <div class="grid-content bg-purple">
               <el-select
-                v-model="value3"
+                v-model="weightValue.Compliance"
                 size="small"
                 filterable
                 allow-create
@@ -91,7 +91,7 @@
           <el-col :span="3">
             <div class="grid-content bg-purple">
               <el-select
-                v-model="value4"
+                v-model="weightValue.Accuracy"
                 size="small"
                 filterable
                 allow-create
@@ -109,7 +109,7 @@
           <el-col :span="3">
             <div class="grid-content bg-purple">
               <el-select
-                v-model="value5"
+                v-model="weightValue.Uniqueness"
                 size="small"
                 filterable
                 allow-create
@@ -127,7 +127,7 @@
           <el-col :span="3">
             <div class="grid-content bg-purple-light">
               <el-select
-                v-model="value6"
+                v-model="weightValue.Timeliness"
                 size="small"
                 filterable
                 allow-create
@@ -145,7 +145,7 @@
           <el-col :span="3">
             <div class="grid-content bg-purple">
               <el-select
-                v-model="value7"
+                v-model="weightValue.Vulnerability"
                 size="small"
                 filterable
                 allow-create
@@ -164,25 +164,25 @@
 
         <el-row v-if="editall==true">
           <el-col :span="3">
-            <div class="grid-content bg-purple">{{this.value1}}</div>
+            <div class="grid-content bg-purple">{{this.weightValue.Completeness}}</div>
           </el-col>
           <el-col :span="3">
-            <div class="grid-content bg-purple">{{this.value2}}</div>
+            <div class="grid-content bg-purple">{{this.weightValue.Consistency}}</div>
           </el-col>
           <el-col :span="3">
-            <div class="grid-content bg-purple">{{this.value3}}</div>
+            <div class="grid-content bg-purple">{{this.weightValue.Compliance}}</div>
           </el-col>
           <el-col :span="3">
-            <div class="grid-content bg-purple">{{this.value4}}</div>
+            <div class="grid-content bg-purple">{{this.weightValue.Accuracy}}</div>
           </el-col>
           <el-col :span="3">
-            <div class="grid-content bg-purple">{{this.value5}}</div>
+            <div class="grid-content bg-purple">{{this.weightValue.Uniqueness}}</div>
           </el-col>
           <el-col :span="3">
-            <div class="grid-content bg-purple-light">{{this.value6}}</div>
+            <div class="grid-content bg-purple-light">{{this.weightValue.Timeliness}}</div>
           </el-col>
           <el-col :span="3">
-            <div class="grid-content bg-purple">{{this.value7}}</div>
+            <div class="grid-content bg-purple">{{this.weightValue.Vulnerability}}</div>
           </el-col>
         </el-row>
 
@@ -453,13 +453,15 @@
           value: '1.0',
           label: '1.0'
         }],
-        value1: '',
-        value2: '',
-        value3: '',
-        value4: '',
-        value5: '',
-        value6: '',
-        value7: '',
+      weightValue: {
+          Completeness: '',
+          Consistency: '',
+          Compliance: '',
+          Accuracy: '',
+          Uniqueness: '',
+          Timeliness: '',
+          Vulnerability: ''
+      },
         editall:false,
         vlogin:'',
       }
@@ -479,17 +481,26 @@
       },
       saveall(){
         this.editall=true;
+        console.log(this.weightValue)
+        this.$ajax.post('http://localhost:8080/data/weight',
+          JSON.stringify(this.weightValue),
+          {headers: {'Content-Type': 'application/json;charset=UTF-8'}}
+        ).then(response => {
+          console.log(response.data);
+        }).catch(function (err) {
+          console.log(err);
+        })
       },
       clearall(){
         this.editall=false;
         // this.editall='false';
-        this.value1='';
-        this.value2='';
-        this.value3='';
-        this.value4='';
-        this.value5='';
-        this.value6='';
-        this.value7='';
+        this.weightValue.Completeness='';
+        this.weightValue.Consistency='';
+        this.weightValue.Compliance='';
+        this.weightValue.Accuracy='';
+        this.weightValue.Uniqueness='';
+        this.weightValue.Timeliness='';
+        this.weightValue.Vulnerability='';
       }
     },
     mounted:function () {

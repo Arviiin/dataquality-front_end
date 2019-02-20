@@ -163,7 +163,7 @@
             <el-button type="primary" @click="save_all">确 定</el-button>
           </span>
         </el-dialog>
-<hr v-if="tableVisible==true"/>
+        <hr v-if="tableVisible==true"/>
         <el-table v-if="tableVisible==true"
           :data="dimensions"
           style="width: 100%">
@@ -194,7 +194,7 @@
             label="操作"
             width="100">
             <template slot-scope="scope">
-              <el-button @click="deleterow(scope.row)" type="text" size="small">删除</el-button>
+              <el-button @click="deleterow(scope.$index)" type="text" size="small">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -255,9 +255,10 @@
         this.form.dimensionname = target
         this.dialogFormVisible = true
       },
-      deleterow(row) {
-        console.log(row);
-        this.dimensions.pop(row)
+      deleterow(index) {
+        console.log(index);
+        // this.dimensions.pop(row)
+        this.dimensions.splice(index,1);
       },
       save_edit() {
         console.log(this.form)
