@@ -2,7 +2,7 @@
       <div>
         <span>
           <a href="https://github.com/Arviiin/dataquality" style="color:#ccc;">
-            Copyright @ 2019 Arviiin All Rights Reserved
+            Copyright @ 2018-2019 Arviiin All Rights Reserved
           </a>
         </span>
       </div>
