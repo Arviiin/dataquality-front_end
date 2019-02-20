@@ -7,22 +7,23 @@
       <!--<el-form :model="userinfo" status-icon :rules="rules2" ref="userinfo" class="login-form">-->
       <el-main style="background-color: #ffffff; height: 500px">
         <div class="title-container">
-          <h3 class="title">数据质量综合量化指标维度编辑</h3>
+          <h2 class="title">数据质量综合量化指标维度编辑</h2>
         </div>
+        <br>
         <el-row>
           <el-col :span="8">
-            <div class="grid-content bg-purple">一级指标</div>
+            <div class="grid-content bg-purple" style="font-size: 18px;font-weight:700">一级指标</div>
           </el-col>
           <el-col :span="8">
-            <div class="grid-content bg-purple-light">二级指标1</div>
+            <div class="grid-content bg-purple" style="font-size: 18px;font-weight:700">二级指标1</div>
           </el-col>
           <el-col :span="8">
-            <div class="grid-content bg-purple">二级指标2</div>
+            <div class="grid-content bg-purple" style="font-size: 18px;font-weight:700">二级指标2</div>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="8">
-            <div class="grid-content bg-purple">完备性</div>
+            <div class="grid-content bg-purple-light">完备性</div>
           </el-col>
           <el-col :span="8">
             <div class="grid-content bg-purple-light">
@@ -37,7 +38,7 @@
         </el-row>
         <el-row>
           <el-col :span="8">
-            <div class="grid-content bg-purple">一致性</div>
+            <div class="grid-content bg-purple-light">一致性</div>
           </el-col>
           <el-col :span="8">
             <div class="grid-content bg-purple-light">
@@ -52,20 +53,17 @@
         </el-row>
         <el-row>
           <el-col :span="8">
-            <div class="grid-content bg-purple">依从性</div>
+            <div class="grid-content bg-purple-light">依从性</div>
           </el-col>
           <el-col :span="8">
             <div class="grid-content bg-purple-light">
               <el-button plain @click="handleUpdate('数据记录依从性')">数据记录依从性</el-button>
             </div>
           </el-col>
-          <el-col :span="8">
-            <div class="grid-content bg-purple"></div>
-          </el-col>
         </el-row>
         <el-row>
           <el-col :span="8">
-            <div class="grid-content bg-purple">准确性</div>
+            <div class="grid-content bg-purple-light">准确性</div>
           </el-col>
           <el-col :span="8">
             <div class="grid-content bg-purple-light">
@@ -75,48 +73,38 @@
         </el-row>
         <el-row>
           <el-col :span="8">
-            <div class="grid-content bg-purple">唯一性</div>
+            <div class="grid-content bg-purple-light">唯一性</div>
           </el-col>
           <el-col :span="8">
             <div class="grid-content bg-purple-light">
               <el-button plain @click="handleUpdate('数据记录唯一性')">数据记录唯一性</el-button>
             </div>
           </el-col>
-          <el-col :span="8">
-            <div class="grid-content bg-purple"></div>
-          </el-col>
         </el-row>
         <el-row>
           <el-col :span="8">
-            <div class="grid-content bg-purple">现实性</div>
+            <div class="grid-content bg-purple-light">现实性</div>
           </el-col>
           <el-col :span="8">
             <div class="grid-content bg-purple-light">
               <el-button plain @click="handleUpdate('基于时间段的时效性')">基于时间段的时效性</el-button>
             </div>
           </el-col>
-          <el-col :span="8">
-            <div class="grid-content bg-purple"></div>
-          </el-col>
         </el-row>
         <el-row>
           <el-col :span="8">
-            <div class="grid-content bg-purple">保密性</div>
+            <div class="grid-content bg-purple-light">保密性</div>
           </el-col>
           <el-col :span="8">
             <div class="grid-content bg-purple-light">
               <el-button plain @click="handleUpdate('数据非脆弱性')">数据非脆弱性</el-button>
             </div>
           </el-col>
-          <el-col :span="8">
-            <div class="grid-content bg-purple"></div>
-          </el-col>
         </el-row>
-
-        <el-row>
-          <el-col :offset="8">
+        <el-row v-if="tableVisible==true">
+          <el-col :offset="10">
             <div class="grid-content bg-purple">
-              <el-button type="primary" plain @click="dialogVisible = true">保存</el-button>
+              <el-button type="primary" plain @click="dialogVisible = true">提交</el-button>
             </div>
           </el-col>
         </el-row>
@@ -175,6 +163,43 @@
             <el-button type="primary" @click="save_all">确 定</el-button>
           </span>
         </el-dialog>
+<hr v-if="tableVisible==true"/>
+        <el-table v-if="tableVisible==true"
+          :data="dimensions"
+          style="width: 100%">
+          <el-table-column
+            prop="dimensionname"
+            label="指标名"
+            >
+          </el-table-column>
+          <el-table-column
+            prop="tablename"
+            label="表名"
+           >
+          </el-table-column>
+          <el-table-column
+          prop="columnname"
+          label="字段名">
+        </el-table-column>
+          <el-table-column
+            prop="rule"
+            label="规则约束">
+          </el-table-column>
+          <!--<el-table-column-->
+            <!--label="删除">-->
+            <!--<i class="el-icon-delete"></i>-->
+          <!--</el-table-column>-->
+          <el-table-column
+            fixed="right"
+            label="操作"
+            width="100">
+            <template slot-scope="scope">
+              <el-button @click="deleterow(scope.row)" type="text" size="small">删除</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+        <br>
+
       </el-main>
     </div>
   </div>
@@ -205,6 +230,7 @@
           rule: '',
           dimensionname:''
         },
+        tableVisible:'false',
         newForm:{},
         dimensions:[],
         dialogFormVisible: false,
@@ -229,6 +255,10 @@
         this.form.dimensionname = target
         this.dialogFormVisible = true
       },
+      deleterow(row) {
+        console.log(row);
+        this.dimensions.pop(row)
+      },
       save_edit() {
         console.log(this.form)
         this.newForm = Object.assign({}, this.form)
@@ -236,11 +266,11 @@
         this.dialogFormVisible = false
         this.dimensions.push(this.newForm)
         console.log(this.dimensions)
+        this.tableVisible = true
       },
       save_all() {
         this.dialogVisible = false
         console.log(this.dimensions)
-
         this.$ajax.post('http://localhost:8080/data/dimension',
           JSON.stringify(this.dimensions),
           {headers: {'Content-Type': 'application/json;charset=UTF-8'}}
@@ -288,18 +318,6 @@
 <style scoped>
   .el-button{
     margin-top: -100px;
-  }
-  .login-form {
-    left: 0;
-    right: 0;
-    width: 500px;
-    max-width: 100%;
-    padding: 35px 35px 15px 35px;
-    margin: 15px auto;
-  }
-  .page-info {
-    background: #252525;
-    padding: 1% 0;
   }
   .page-info a {
     color: #C6C6C6;
