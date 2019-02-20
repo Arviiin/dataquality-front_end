@@ -286,6 +286,9 @@
 </script>
 
 <style scoped>
+  .el-button{
+    margin-top: -100px;
+  }
   .login-form {
     left: 0;
     right: 0;
