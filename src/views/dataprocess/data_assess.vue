@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navHeader class="header" :userinfo="this.userinfo" :vlogin="this.vlogin"></navHeader>
+    <navHeader class="header" :userinfo="this.userinfo" :vlogin="this.vlogin0"></navHeader>
     <hr>
     <div>
       <menuSide></menuSide>
@@ -26,12 +26,12 @@
           </el-col>
           <el-col :span="8">
             <div class="grid-content bg-purple-light">
-              <el-button plain @click="handleUpdate()">数据文件完备性</el-button>
+              <el-button plain @click="handleUpdate('数据文件完备性')">数据文件完备性</el-button>
             </div>
           </el-col>
           <el-col :span="8">
             <div class="grid-content bg-purple">
-              <el-button plain @click="handleUpdate()">数据值完备性</el-button>
+              <el-button plain @click="handleUpdate('数据值完备性')">数据值完备性</el-button>
             </div>
           </el-col>
         </el-row>
@@ -41,13 +41,26 @@
           </el-col>
           <el-col :span="8">
             <div class="grid-content bg-purple-light">
-              <el-button plain @click="handleUpdate()">引用一致性</el-button>
+              <el-button plain @click="handleUpdate('数据引用一致性')">数据引用一致性</el-button>
             </div>
           </el-col>
           <el-col :span="8">
             <div class="grid-content bg-purple">
-              <el-button plain @click="handleUpdate()">格式一致性</el-button>
+              <el-button plain @click="handleUpdate('数据格式一致性')">数据格式一致性</el-button>
             </div>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="8">
+            <div class="grid-content bg-purple">依从性</div>
+          </el-col>
+          <el-col :span="8">
+            <div class="grid-content bg-purple-light">
+              <el-button plain @click="handleUpdate('数据记录依从性')">数据记录依从性</el-button>
+            </div>
+          </el-col>
+          <el-col :span="8">
+            <div class="grid-content bg-purple"></div>
           </el-col>
         </el-row>
         <el-row>
@@ -56,12 +69,7 @@
           </el-col>
           <el-col :span="8">
             <div class="grid-content bg-purple-light">
-              <el-button plain @click="handleUpdate()">数据语法准确性</el-button>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="grid-content bg-purple">
-              <el-button plain @click="handleUpdate()">数据范围准确性</el-button>
+              <el-button plain @click="handleUpdate('数据范围准确性')">数据范围准确性</el-button>
             </div>
           </el-col>
         </el-row>
@@ -71,7 +79,7 @@
           </el-col>
           <el-col :span="8">
             <div class="grid-content bg-purple-light">
-              <el-button plain @click="handleUpdate()">记录唯一性</el-button>
+              <el-button plain @click="handleUpdate('数据记录唯一性')">数据记录唯一性</el-button>
             </div>
           </el-col>
           <el-col :span="8">
@@ -84,20 +92,7 @@
           </el-col>
           <el-col :span="8">
             <div class="grid-content bg-purple-light">
-              <el-button plain @click="handleUpdate()">基于时间段的时效性</el-button>
-            </div>
-          </el-col>
-          <el-col :span="8" @click="handleUpdate()">
-            <div class="grid-content bg-purple"></div>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="8">
-            <div class="grid-content bg-purple">可访问性</div>
-          </el-col>
-          <el-col :span="8">
-            <div class="grid-content bg-purple-light">
-              <el-button plain @click="handleUpdate()">数据格式的可访问性</el-button>
+              <el-button plain @click="handleUpdate('基于时间段的时效性')">基于时间段的时效性</el-button>
             </div>
           </el-col>
           <el-col :span="8">
@@ -110,7 +105,7 @@
           </el-col>
           <el-col :span="8">
             <div class="grid-content bg-purple-light">
-              <el-button plain @click="handleUpdate()">非脆弱性</el-button>
+              <el-button plain @click="handleUpdate('数据非脆弱性')">数据非脆弱性</el-button>
             </div>
           </el-col>
           <el-col :span="8">
@@ -121,7 +116,7 @@
         <el-row>
           <el-col :offset="8">
             <div class="grid-content bg-purple">
-              <el-button type="primary" plain @click="save_edit">保存</el-button>
+              <el-button type="primary" plain @click="dialogVisible = true">保存</el-button>
             </div>
           </el-col>
         </el-row>
@@ -132,7 +127,7 @@
             <el-row>
               <el-col :span="8">
                 <el-form-item label="表名">
-                  <el-input v-model="form.name" autocomplete="off"></el-input>
+                  <el-input v-model="form.tablename" autocomplete="off"></el-input>
                 </el-form-item>
               </el-col>
               <el-col :span="8" :offset="6">
@@ -145,7 +140,7 @@
               <el-col :span="12">
                 <el-form-item label="规则约束">
                   <el-select
-                    v-model="value8"
+                    v-model="form.rule"
                     filterable
                     allow-create
                     default-first-option
@@ -163,7 +158,7 @@
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="dialogFormVisible = false">取 消</el-button>
-            <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+            <el-button type="primary" @click="save_edit">确 定</el-button>
           </div>
         </el-dialog>
 
@@ -177,7 +172,7 @@
           <span>是否保存已编辑信息</span>
           <span slot="footer" class="dialog-footer">
             <el-button @click="dialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+            <el-button type="primary" @click="save_all">确 定</el-button>
           </span>
         </el-dialog>
       </el-main>
@@ -207,39 +202,70 @@
         form: {
           tablename: '',
           columnname: '',
-          regular: ''
+          rule: '',
+          dimensionname:''
         },
+        newForm:{},
+        dimensions:[],
         dialogFormVisible: false,
         dialogVisible: false,
         options: [{
-          value: '选项1',
+          value: '邮箱规则',
           label: '邮箱规则'
         }, {
-          value: '选项2',
+          value: '邮编规则',
           label: '邮编规则'
         }, {
-          value: '选项3',
+          value: '电话规则',
           label: '电话规则'
         }],
         value8: '',
-        vlogin:''
+        vlogin0:''
       }
     },
     methods: {
-      handleLogin() {
-        this.$router.push('/dataprocess/datapro');
-      },
-      handleUpdate() {
-        // this.temp = Object.assign({}, row) // copy obj
-        // this.temp.timestamp = new Date(this.temp.timestamp)
-
+      handleUpdate(target) {
+        console.log(target)
+        this.form.dimensionname = target
         this.dialogFormVisible = true
-        // this.$nextTick(() => {
-        //   this.$refs['dataForm'].clearValidate()
-        // })
       },
       save_edit() {
-        this.dialogVisible = true
+        console.log(this.form)
+        this.newForm = Object.assign({}, this.form)
+        this.form={}
+        this.dialogFormVisible = false
+        this.dimensions.push(this.newForm)
+        console.log(this.dimensions)
+      },
+      save_all() {
+        this.dialogVisible = false
+        console.log(this.dimensions)
+
+        this.$ajax.post('http://localhost:8080/data/dimension',
+          JSON.stringify(this.dimensions),
+          {headers: {'Content-Type': 'application/json;charset=UTF-8'}}
+        ).then(response => {
+          console.log(response.data);
+          // if(response.data.status=="success"){
+          //   console.log("注册成功");
+          //   this.$message({
+          //     type: 'success',
+          //     message: '注册成功'
+          //   });
+          //   let hopRouter
+          //     = '/login/login'
+          //   this.$router.replace(hopRouter);
+          // }
+          // else{
+          //   console.log("注册失败");
+          //   this.$message({
+          //     type: 'error',
+          //     message: response.data.msg
+          //   });
+          // }
+        }).catch(function (err) {
+          console.log(err);
+        })
       },
       handleClose(done) {
         this.$confirm('确认关闭？')
@@ -253,7 +279,7 @@
       if(localStorage.getItem("User"))
       {
         this.userinfo.name=localStorage.getItem("User");
-        this.vlogin=true;
+        this.vlogin0=true;
       }
     }
   }
@@ -268,12 +294,10 @@
     padding: 35px 35px 15px 35px;
     margin: 15px auto;
   }
-
   .page-info {
     background: #252525;
     padding: 1% 0;
   }
-
   .page-info a {
     color: #C6C6C6;
     font-size: 1em;
@@ -281,34 +305,27 @@
     display: block;
     text-decoration: none;
   }
-
   .page-info h2 {
     text-align: left;
     color: deepskyblue;
   }
-
   .page-info a:hover {
     color: #fff;
   }
-
   .page-overview {
     margin-bottom: 40px;
   }
-
   .container {
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
   }
-
   .el-row {
     margin-bottom: 20px;
   }
-
   .grid-content {
     border-radius: 4px;
     min-height: 36px;
   }
-
 </style>
