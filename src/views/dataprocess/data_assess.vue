@@ -208,14 +208,12 @@
 
 <script>
   import navHeader from '@/views/components/nav'
-  import navFooter from '@/views/components/footer'
   import menuSide from '@/views/components/menuside'
 
   export default {
     name: "data_assess",
     components: {
       navHeader,
-      navFooter,
       menuSide
     },
     data() {

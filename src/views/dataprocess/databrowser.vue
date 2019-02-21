@@ -46,6 +46,13 @@
             label="邮编">
           </el-table-column>
         </el-table>
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          :total="1000"
+          style="float: right"
+        >
+        </el-pagination>
       </el-main>
     </div>
   </div>

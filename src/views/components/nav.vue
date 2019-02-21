@@ -1,22 +1,25 @@
 <template>
-  <div class="content">
-    <el-header style="text-align: right; font-size: 14px" v-if="this.vlogin0==true">
-      <el-dropdown @command="handleCommand">
-        <i class="el-icon-setting" style="margin-right: 15px"></i>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="deal">管理数据</el-dropdown-item>
-          <el-dropdown-item command="logout">退出登陆</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-      <span>{{this.userinfo.name}}</span>
-    </el-header>
+  <el-container class="content">
 
-    <el-header style="text-align: right; font-size: 14px;" v-if="this.vlogin0==false">
-      <router-link to="/login/login">
-        <span style="color:rgb(0,55,120)">登陆</span></router-link>
-      |
-      <router-link to="/login/register">
-        <span style="color:rgb(0,55,120)">注册</span></router-link>
+    <el-header style="text-align: right; font-size: 14px" >
+      <template v-if="this.vlogin0==true">
+        <el-dropdown @command="handleCommand">
+          <i class="el-icon-setting" style="margin-right: 15px"></i>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="deal">管理数据</el-dropdown-item>
+            <el-dropdown-item command="logout">退出登陆</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+        <span>{{this.userinfo.name}}</span>
+      </template>
+      <template v-else>
+        <router-link to="/login/login">
+          <span style="color:rgb(0,55,120)">登陆</span></router-link>
+        |
+        <router-link to="/login/register">
+          <span style="color:rgb(0,55,120)">注册</span></router-link>
+      </template>
+
     </el-header>
 
     <el-row :gutter="20">
@@ -36,7 +39,7 @@
         </div>
       </el-col>
     </el-row>
-  </div>
+  </el-container>
 </template>
 
 <script>

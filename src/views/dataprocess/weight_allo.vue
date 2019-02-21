@@ -37,7 +37,7 @@
           <el-col :span="3">
             <div class="grid-content bg-purple">
               <el-select
-                v-model="weightValue.Completeness"
+                v-model="weightValue.completeness"
                 size="small"
                 filterable
                 allow-create
@@ -55,7 +55,7 @@
           <el-col :span="3">
             <div class="grid-content bg-purple">
               <el-select
-                v-model="weightValue.Consistency"
+                v-model="weightValue.consistency"
                 size="small"
                 filterable
                 allow-create
@@ -73,7 +73,7 @@
           <el-col :span="3">
             <div class="grid-content bg-purple">
               <el-select
-                v-model="weightValue.Compliance"
+                v-model="weightValue.compliance"
                 size="small"
                 filterable
                 allow-create
@@ -91,7 +91,7 @@
           <el-col :span="3">
             <div class="grid-content bg-purple">
               <el-select
-                v-model="weightValue.Accuracy"
+                v-model="weightValue.accuracy"
                 size="small"
                 filterable
                 allow-create
@@ -109,7 +109,7 @@
           <el-col :span="3">
             <div class="grid-content bg-purple">
               <el-select
-                v-model="weightValue.Uniqueness"
+                v-model="weightValue.uniqueness"
                 size="small"
                 filterable
                 allow-create
@@ -127,7 +127,7 @@
           <el-col :span="3">
             <div class="grid-content bg-purple-light">
               <el-select
-                v-model="weightValue.Timeliness"
+                v-model="weightValue.timeliness"
                 size="small"
                 filterable
                 allow-create
@@ -145,7 +145,7 @@
           <el-col :span="3">
             <div class="grid-content bg-purple">
               <el-select
-                v-model="weightValue.Vulnerability"
+                v-model="weightValue.vulnerability"
                 size="small"
                 filterable
                 allow-create
@@ -164,25 +164,25 @@
 
         <el-row v-if="editall==true">
           <el-col :span="3">
-            <div class="grid-content bg-purple">{{this.weightValue.Completeness}}</div>
+            <div class="grid-content bg-purple">{{this.weightValue.completeness}}</div>
           </el-col>
           <el-col :span="3">
-            <div class="grid-content bg-purple">{{this.weightValue.Consistency}}</div>
+            <div class="grid-content bg-purple">{{this.weightValue.consistency}}</div>
           </el-col>
           <el-col :span="3">
-            <div class="grid-content bg-purple">{{this.weightValue.Compliance}}</div>
+            <div class="grid-content bg-purple">{{this.weightValue.compliance}}</div>
           </el-col>
           <el-col :span="3">
-            <div class="grid-content bg-purple">{{this.weightValue.Accuracy}}</div>
+            <div class="grid-content bg-purple">{{this.weightValue.accuracy}}</div>
           </el-col>
           <el-col :span="3">
-            <div class="grid-content bg-purple">{{this.weightValue.Uniqueness}}</div>
+            <div class="grid-content bg-purple">{{this.weightValue.uniqueness}}</div>
           </el-col>
           <el-col :span="3">
-            <div class="grid-content bg-purple-light">{{this.weightValue.Timeliness}}</div>
+            <div class="grid-content bg-purple-light">{{this.weightValue.timeliness}}</div>
           </el-col>
           <el-col :span="3">
-            <div class="grid-content bg-purple">{{this.weightValue.Vulnerability}}</div>
+            <div class="grid-content bg-purple">{{this.weightValue.vulnerability}}</div>
           </el-col>
         </el-row>
 
@@ -454,13 +454,13 @@
           label: '1.0'
         }],
       weightValue: {
-          Completeness: '',
-          Consistency: '',
-          Compliance: '',
-          Accuracy: '',
-          Uniqueness: '',
-          Timeliness: '',
-          Vulnerability: ''
+          completeness: '',
+          consistency: '',
+          compliance: '',
+          accuracy: '',
+          uniqueness: '',
+          timeliness: '',
+          vulnerability: ''
       },
         editall:false,
         vlogin:'',
@@ -494,13 +494,13 @@
       clearall(){
         this.editall=false;
         // this.editall='false';
-        this.weightValue.Completeness='';
-        this.weightValue.Consistency='';
-        this.weightValue.Compliance='';
-        this.weightValue.Accuracy='';
-        this.weightValue.Uniqueness='';
-        this.weightValue.Timeliness='';
-        this.weightValue.Vulnerability='';
+        this.weightValue.completeness='';
+        this.weightValue.consistency='';
+        this.weightValue.compliance='';
+        this.weightValue.accuracy='';
+        this.weightValue.uniqueness='';
+        this.weightValue.timeliness='';
+        this.weightValue.vulnerability='';
       }
     },
     mounted:function () {
