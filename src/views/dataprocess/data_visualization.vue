@@ -89,14 +89,14 @@
             },
             tooltip: {},
             legend: {
-              data: ['pv']
+              data: ['dq']
             },
             xAxis: {
               data: []
             },
             yAxis: {},
             series: [{
-              name: 'pv',
+              name: 'dq',
               type: 'line',
               data: []
             }],
