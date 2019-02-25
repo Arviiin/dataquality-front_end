@@ -1,6 +1,6 @@
 <template>
   <div>
-
+<!--//不知道改什么？？-->
     <navHeader class="header" :userinfo="this.userinfo" :vlogin="this.vlogin"></navHeader>
     <hr>
 
