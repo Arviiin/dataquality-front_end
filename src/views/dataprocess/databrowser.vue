@@ -52,6 +52,8 @@
   import navHeader from '@/views/components/nav'
   import navFooter from '@/views/components/footer'
   import menuSide from '@/views/components/menuside'
+  import {formatDate} from '../../script/common.js'
+
 
   let moment = require("moment");
 
@@ -119,11 +121,15 @@
          this.tableData = JSON.parse(this.tableData)
 
           for(var i=0;i<this.tableData.length;i++){
-            if(this.tableData[i].hasOwnProperty('createtime')){
-              this.tableData[i].createtime=moment(this.tableData[i].createtime).format('YYYY-MM-DD HH:mm:ss');
+            if(this.tableData[i].hasOwnProperty('createtime') && this.tableData[i].createtime != null && this.tableData[i].createtime != ""){
+              //this.tableData[i].createtime=moment(this.tableData[i].createtime).format('YYYY-MM-DD HH:mm:ss');
+              this.tableData[i].createtime= formatDate(new Date(this.tableData[i].createtime), 'yyyy.MM.dd hh:mm:ss')
+
             }
-            if(this.tableData[i].hasOwnProperty('updatetime')){
-              this.tableData[i].updatetime=moment(this.tableData[i].updatetime).format('YYYY-MM-DD HH:mm:ss');
+            if(this.tableData[i].hasOwnProperty('updatetime') && this.tableData[i].updatetime != null && this.tableData[i].updatetime != ""){
+              //this.tableData[i].updatetime=moment(this.tableData[i].updatetime).format('YYYY-MM-DD HH:mm:ss');
+              this.tableData[i].updatetime= formatDate(new Date(this.tableData[i].updatetime), 'yyyy.MM.dd hh:mm:ss')
+
             }
           }
           console.log(this.cols);
