@@ -140,13 +140,6 @@ import navFooter from '@/views/components/footer'
                 type: 'success',
                 message: '登陆成功'
               });
-              // } else {
-              //   this.$message.error('用户名密码错误');
-              //   this.userName = '';
-              //   this.password = '';
-              //   this.result = -1;
-              // }
-              // this.$router.push('/');
               this.vlogin=true;
               this.$router.push({
                 path: '/login/loginsuc',

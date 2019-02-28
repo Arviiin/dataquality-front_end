@@ -118,10 +118,12 @@
                   <el-input v-model="form.dimensionname" autocomplete="off" :disabled="true"></el-input>
                 </el-form-item>
               </el-col>
-
-              <el-col :span="8" :offset="6">
+              <el-col :span="8" :offset="2">
                 <el-form-item label="规则约束">
+                  <!--其他情况-->
                   <el-select
+                    class="xlk"
+                    v-if="form.dimensionname!='数据非脆弱性' && form.dimensionname!='基于时间段的时效性'"
                     v-model="form.rule"
                     filterable
                     allow-create
@@ -134,17 +136,41 @@
                       :value="item.value">
                     </el-option>
                   </el-select>
+                  <!--数据非脆弱性的情况-->
+                  <el-cascader
+                    v-if="form.dimensionname=='数据非脆弱性'"
+                    :options="options2"
+                    v-model="form.rule"
+                    :show-all-levels="false"
+                  ></el-cascader>
+                  <!--基于时间段的时效性-->
+                  <el-date-picker
+                    v-if="form.dimensionname=='基于时间段的时效性'"
+                    v-model="form.rule"
+                    type="daterange"
+                    range-separator="至"
+                    start-placeholder="开始日期"
+                    end-placeholder="结束日期"
+                    format="yyyy 年 MM 月 dd 日"
+                    value-format="yyyy-MM-dd">
+                  </el-date-picker>
                 </el-form-item>
               </el-col>
             </el-row>
             <el-row>
               <el-col :span="8">
-                <el-form-item label="表名">
+                <el-form-item label="表名" v-if="form.dimensionname!='数据引用一致性'">
+                  <el-input v-model="form.tablename"></el-input>
+                </el-form-item>
+                <el-form-item label="引用表:被引用表" v-if="form.dimensionname=='数据引用一致性'">
                   <el-input v-model="form.tablename"></el-input>
                 </el-form-item>
               </el-col>
-              <el-col :span="8" :offset="6">
-                <el-form-item label="字段名">
+              <el-col :span="8" :offset="2">
+                <el-form-item label="字段名" v-if="form.dimensionname!='数据引用一致性'">
+                  <el-input v-model="form.columnname"></el-input>
+                </el-form-item>
+                <el-form-item label="引用字段:被引用字段" v-if="form.dimensionname=='数据引用一致性'">
                   <el-input v-model="form.columnname"></el-input>
                 </el-form-item>
               </el-col>
@@ -191,10 +217,6 @@
             prop="rule"
             label="规则约束">
           </el-table-column>
-          <!--<el-table-column-->
-            <!--label="删除">-->
-            <!--<i class="el-icon-delete"></i>-->
-          <!--</el-table-column>-->
           <el-table-column
             fixed="right"
             label="操作"
@@ -239,6 +261,27 @@
         dimensions:[],
         dialogFormVisible: false,
         dialogVisible: false,
+        options2: [{
+          value: '密码强度',
+          label: '密码强度',
+          children: [{
+              value: '明文',
+              label: '明文'
+            }, {
+              value: '哈希/加盐',
+              label: '哈希/加盐'
+            }, {
+              value: 'MD5等加密算法',
+              label: 'MD5等加密算法'
+            }, {
+            value: '复合加密',
+            label: '复合加密'
+          }, {
+            value: '方式不明',
+            label: '方式不明'
+          }]
+        }],
+
         options: [{
           value: '邮箱规则',
           label: '邮箱规则'
@@ -248,24 +291,37 @@
         }, {
           value: '电话规则',
           label: '电话规则'
+        }, {
+          value: '忽略规则',
+          label: '忽略规则'
         }],
         value8: '',
-        vlogin0:''
+        vlogin0:'',
+        result:''
       }
     },
     methods: {
       handleUpdate(target) {
         console.log(target)
         this.form.dimensionname = target
+        this.form.rule=''
+        this.form.tablename=''
+        this.form.columnname=''
         this.dialogFormVisible = true
       },
       deleterow(index) {
         console.log(index);
-        // this.dimensions.pop(row)
         this.dimensions.splice(index,1);
       },
       save_edit() {
         console.log(this.form)
+        console.log(typeof this.form.rule);
+        if(typeof this.form.rule == "object" && this.form.rule[0]!='密码强度'){
+          this.form.rule = this.form.rule[0] + ':' + this.form.rule[1]
+        }
+        if(this.form.rule[0]=='密码强度'){
+          this.form.rule = this.form.rule[1]
+        }
         this.newForm = Object.assign({}, this.form)
         this.form={}
         this.dialogFormVisible = false
@@ -299,7 +355,7 @@
         this.userinfo.name=localStorage.getItem("User");
         this.vlogin0=true;
       }
-    }
+    },
   }
 </script>
 
@@ -340,7 +396,8 @@
     border-radius: 4px;
     min-height: 36px;
   }
-  /deep/ span.el-input__suffix{
-     top: 20px;
+  /deep/ .el-input__icon:after {
+     height: 0;
   }
+
 </style>
