@@ -12,7 +12,7 @@
           <h3 class="title">数据一览</h3>
         </div>
       <el-input placeholder="请输入内容" v-model="input0">
-        <template slot="prepend">请选择需要预览的数据（数据库+表名）</template>
+        <template slot="prepend">请选择需要预览的数据（输入表名）</template>
         <el-button slot="append" icon="el-icon-search" @click="search(input0)"></el-button>
       </el-input>
         <br>

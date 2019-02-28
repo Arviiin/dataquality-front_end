@@ -65,65 +65,41 @@
           }
         }
       },
-      methods: {
-        submitForm(formName) {
-          //后台接口
-          this.$ajax.get('http://localhost:8080/login/'
-            + this.userinfo.name + '/' + this.userinfo.pass)
-            .then(response => {
-              console.log(response.data)
-              if (response.data == 0) {
-                this.result = 0;
-                // this.$message({
-                //   type: 'success',
-                //   message: '登陆成功'
-                // });
-                // this.vlogin=true;
-                // this.$router.push({
-                //   path: '/login/loginsuc',
-                //   name: 'loginsucess',
-                //   params: {
-                //     name: 'loginsucess',
-                //     dataObj: this.userinfo.name,
-                //     vlogin:this.vlogin
-                //   }
-                // })
+      methods:{
+        updatePassword(tablename){
+          console.log(tablename);
+          this.$ajax({
+            method: 'post',
+            url: 'http://localhost:8080/data/list',
+            params: {
+              tablename: tablename
+            }
+          }).then(response => {
+            console.log(response.data);
+            this.cols = response.data.result.clo;
+            this.tableData = response.data.result.tableData;
+            // this.cols = JSON.parse(this.cols)
+            this.tableData = JSON.parse(this.tableData)
 
-              } else if(response.data == 1){
-                this.result = 1;
-                // this.$message({
-                //   type: 'error',
-                //   message: '用户名不存在'
-                // });
+            for(var i=0;i<this.tableData.length;i++){
+              if(this.tableData[i].hasOwnProperty('createtime') && this.tableData[i].createtime != null && this.tableData[i].createtime != ""){
+                //this.tableData[i].createtime=moment(this.tableData[i].createtime).format('YYYY-MM-DD HH:mm:ss');
+                this.tableData[i].createtime= formatDate(new Date(this.tableData[i].createtime), 'yyyy.MM.dd hh:mm:ss')
+
               }
-              else{
-                this.result = 2;
-                // this.$message({
-                //   type: 'error',
-                //   message: '密码错误'
-                // });
+              if(this.tableData[i].hasOwnProperty('updatetime') && this.tableData[i].updatetime != null && this.tableData[i].updatetime != ""){
+                //this.tableData[i].updatetime=moment(this.tableData[i].updatetime).format('YYYY-MM-DD HH:mm:ss');
+                this.tableData[i].updatetime= formatDate(new Date(this.tableData[i].updatetime), 'yyyy.MM.dd hh:mm:ss')
+
               }
-            });
-          // if (this.userinfo.name == "admin" && this.userinfo.pass == "admin") {
-          //   this.vlogin=true;
-          //   // this.$router.push('/')
-          //   this.$router.push({
-          //     path: '/',
-          //     name: 'home',
-          //     params: {
-          //       name: 'home',
-          //       dataObj: this.userinfo,
-          //       vlogin:this.vlogin
-          //     }
-          //   })
-          //
-          // }
-
-        },
-        resetForm(formName) {
-          this.$refs[formName].resetFields();
-        },
-
+            }
+            console.log(this.cols);
+            console.log(this.tableData);
+          }).catch(function (err) {
+            //console.log(err);
+          })
+          this.diag=true;
+        }
       }
 
     }
