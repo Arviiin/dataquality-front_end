@@ -315,7 +315,6 @@
       },
       save_edit() {
         console.log(this.form)
-        console.log(typeof this.form.rule);
         if(typeof this.form.rule == "object" && this.form.rule[0]!='密码强度'){
           this.form.rule = this.form.rule[0] + ':' + this.form.rule[1]
         }
