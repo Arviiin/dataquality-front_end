@@ -5,7 +5,7 @@
     <div>
       <menuSide></menuSide>
       <!--<el-form :model="userinfo" status-icon :rules="rules2" ref="userinfo" class="login-form">-->
-      <el-main style="background-color: #ffffff; height: 500px">
+      <el-main style="background-color: #ffffff; height: 1000px">
         <div class="title-container">
           <h2 class="title">数据质量综合量化指标维度编辑</h2>
         </div>
@@ -114,18 +114,12 @@
           <el-form :model="form">
             <el-row>
               <el-col :span="8">
-                <el-form-item label="表名">
-                  <el-input v-model="form.tablename" autocomplete="off"></el-input>
+                <el-form-item label="指标名">
+                  <el-input v-model="form.dimensionname" autocomplete="off" :disabled="true"></el-input>
                 </el-form-item>
               </el-col>
+
               <el-col :span="8" :offset="6">
-                <el-form-item label="字段名">
-                  <el-input v-model="form.columnname" autocomplete="off"></el-input>
-                </el-form-item>
-              </el-col>
-            </el-row>
-            <el-row>
-              <el-col :span="12">
                 <el-form-item label="规则约束">
                   <el-select
                     v-model="form.rule"
@@ -140,6 +134,18 @@
                       :value="item.value">
                     </el-option>
                   </el-select>
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="8">
+                <el-form-item label="表名">
+                  <el-input v-model="form.tablename"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="8" :offset="6">
+                <el-form-item label="字段名">
+                  <el-input v-model="form.columnname"></el-input>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -275,23 +281,6 @@
           {headers: {'Content-Type': 'application/json;charset=UTF-8'}}
         ).then(response => {
           console.log(response.data);
-          // if(response.data.status=="success"){
-          //   console.log("注册成功");
-          //   this.$message({
-          //     type: 'success',
-          //     message: '注册成功'
-          //   });
-          //   let hopRouter
-          //     = '/login/login'
-          //   this.$router.replace(hopRouter);
-          // }
-          // else{
-          //   console.log("注册失败");
-          //   this.$message({
-          //     type: 'error',
-          //     message: response.data.msg
-          //   });
-          // }
         }).catch(function (err) {
           console.log(err);
         })
@@ -317,6 +306,9 @@
 <style scoped>
   .el-button{
     margin-top: -100px;
+  }
+  .el-select{
+    display: inline;
   }
   .page-info a {
     color: #C6C6C6;
@@ -347,5 +339,8 @@
   .grid-content {
     border-radius: 4px;
     min-height: 36px;
+  }
+  /deep/ span.el-input__suffix{
+     top: 20px;
   }
 </style>

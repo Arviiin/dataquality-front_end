@@ -4,7 +4,7 @@
     <hr>
     <div>
       <menuSide></menuSide>
-      <el-main style="background-color: #ffffff; height: 500px">
+      <el-main style="background-color: #ffffff; height: 1000px">
         <div style="display: flex;height: 500px;width: 100%;align-items: center;justify-content: center;">
           <chart ref="dschart" :options="polar" style="margin-top: 20px"></chart>
         </div>

@@ -7,7 +7,7 @@
     <div>
       <menuSide :vlogin="this.vlogin"></menuSide>
       <!--<el-form :model="userinfo" status-icon :rules="rules2" ref="userinfo" class="login-form">-->
-      <el-main style="background-color: #ffffff; height: 350px">
+      <el-main style="background-color: #ffffff; height: 1000px">
         <div class="title-container">
           <h3 class="title">数据一览</h3>
         </div>

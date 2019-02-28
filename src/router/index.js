@@ -11,7 +11,7 @@ Vue.use(Router)
 
 //数据处理相关
 // import loginsuc from '@/views/dataprocess/loginsuc'
-import datapro from '@/views/dataprocess/datapro'
+// import datapro from '@/views/dataprocess/datapro'
 import databrowser from '@/views/dataprocess/databrowser'
 import data_assess from '@/views/dataprocess/data_assess'
 import weight_allo from '@/views/dataprocess/weight_allo'
@@ -49,11 +49,11 @@ export default new Router({//整个访问流程是：前端请求地址path，�
 //   path: '/dataprocess/loginsuc',
 //   component: loginsuc,
 //   children: [
-    {
-      path: "/dataprocess/datapro",
-      name: 'datapro',
-      component: datapro
-    },
+//     {
+//       path: "/dataprocess/datapro",
+//       name: 'datapro',
+//       component: datapro
+//     },
     {
       path: "/dataprocess/databrowser",
       name: 'databrowser',
