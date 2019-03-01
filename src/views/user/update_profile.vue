@@ -34,128 +34,147 @@
 <script>
   import navHeader from '@/views/components/nav'
   import menuSide from '@/views/components/menuside'
-    export default {
-      name: "update_profile",
-      components: {
-        navHeader,
-        menuSide
-      },
-      data() {
-        var checkName = (rule, value, callback) => {
-          if (!value) {
-            return callback(new Error('用户名不能为空'));
-          }
-        };
-        var checkCompany = (rule, value, callback) => {
-          if (!value) {
-            return callback(new Error('公司名不能为空'));
-          }
-        };
-        var checkMail = (rule, value, callback) => {
-          if (!value) {
-            return callback(new Error('邮箱不能为空'));
-          }
-        };
-        return {
-          vlogin:false,
-          userinfo: {
-            name:'',
-            pass: '',
-            checkPass: '',
-            company: '',
-            mail:'',
-            phone:''
-          },
-          userinfo0: {
-            username:'',
-            password: '',
-            company: '',
-            email:'',
-            telephone:''
-          },
-          rules: {
-            name: [
-              { validator: checkName, trigger: 'blur' }
-            ],
-            pass: [
-              { validator: validatePass, trigger: 'blur' }
-            ],
-            checkPass: [
-              { validator: validatePass2, trigger: 'blur' }
-            ],
-            company: [
-              { validator: checkCompany, trigger: 'blur' }
-            ],
-            mail: [
-              { validator: checkMail, trigger: 'blur' }
-            ]
-          }
+  export default {
+    name: "update_profile",
+    components: {
+      navHeader,
+      menuSide
+    },
+    data() {
+      var checkName = (rule, value, callback) => {
+        if (!value) {
+          return callback(new Error('用户名不能为空'));
         }
-      },
-      methods: {
-        submitForm(formName) {
-          this.userinfo0.username=formName.name;
-          this.userinfo0.password=formName.pass;
-          this.userinfo0.company=formName.company;
-          this.userinfo0.email=formName.mail;
-          this.userinfo0.telephone=formName.phone;
-          console.log(this.userinfo0);
-          // this.$refs[formName].validate((valid) => {
-          //   console.log(valid);
-          //   if (valid) {
-          //     alert('submit!');
-
-          //确认注册按钮
-          this.$confirm('是否确认注册?', '确认注册', {
-            confirmButtonText: '确认',
-            cancelButtonText: '取消',
-            type: 'warning'
-          }).then(() => {
-            //和后端交互
-            this.$ajax.post('http://localhost:8080/reg',
-              JSON.stringify(this.userinfo0),
-              {headers: {'Content-Type': 'application/json;charset=UTF-8'}}
-            ).then(response => {
-              console.log(response.data);
-              if(response.data.status=="success"){
-                console.log("注册成功");
-                this.$message({
-                  type: 'success',
-                  message: '注册成功'
-                });
-                let hopRouter
-                  = '/login/login'
-                this.$router.replace(hopRouter);
-              }
-              else{
-                console.log("注册失败");
-                this.$message({
-                  type: 'error',
-                  message: response.data.msg
-                });
-              }
-            }).catch(function (err) {
-              console.log(err);
-            })
-          }).catch(() => {
-            console.log("取消");
-            this.$message({
-              type: 'info',
-              message: '取消'
-            });
-          });
-
-          // } else {
-          //   console.log('error submit!!');
-          //   return false;
-          // }
-          // });
+      };
+      var validatePass = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请输入密码'));
+        } else {
+          if (this.userinfo.checkPass !== '') {
+            this.$refs.userinfo.validateField('checkPass');
+          }
+          callback();
+        }
+      };
+      var validatePass2 = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请再次输入密码'));
+        } else if (value !== this.userinfo.pass) {
+          callback(new Error('两次输入密码不一致!'));
+        } else {
+          callback();
+        }
+      };
+      var checkCompany = (rule, value, callback) => {
+        if (!value) {
+          return callback(new Error('公司名不能为空'));
+        }
+      };
+      var checkMail = (rule, value, callback) => {
+        if (!value) {
+          return callback(new Error('邮箱不能为空'));
+        }
+      };
+      return {
+        vlogin:false,
+        userinfo: {
+          name:'',
+          pass: '',
+          checkPass: '',
+          company: '',
+          mail:'',
+          phone:''
         },
-        resetForm(formName) {
-          this.$refs[formName].resetFields();
+        userinfo0: {
+          username:'',
+          password: '',
+          company: '',
+          email:'',
+          telephone:''
+        },
+        rules: {
+          name: [
+            { validator: checkName, trigger: 'blur' }
+          ],
+          pass: [
+            { validator: validatePass, trigger: 'blur' }
+          ],
+          checkPass: [
+            { validator: validatePass2, trigger: 'blur' }
+          ],
+          company: [
+            { validator: checkCompany, trigger: 'blur' }
+          ],
+          mail: [
+            { validator: checkMail, trigger: 'blur' }
+          ]
         }
       }
+    },
+    methods: {
+      submitForm(formName) {
+        this.userinfo0.username=formName.name;
+        this.userinfo0.password=formName.pass;
+        this.userinfo0.company=formName.company;
+        this.userinfo0.email=formName.mail;
+        this.userinfo0.telephone=formName.phone;
+        console.log(this.userinfo0);
+        // this.$refs[formName].validate((valid) => {
+        //   console.log(valid);
+        //   if (valid) {
+        //     alert('submit!');
+
+        //确认注册按钮
+        this.$confirm('是否确认注册?', '确认注册', {
+          confirmButtonText: '确认',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          //和后端交互
+          this.$ajax.post('http://localhost:8080/reg',
+            JSON.stringify(this.userinfo0),
+            {headers: {'Content-Type': 'application/json;charset=UTF-8'}}
+          ).then(response => {
+            console.log(response.data);
+            if(response.data.status=="success"){
+              console.log("注册成功");
+              this.$message({
+                type: 'success',
+                message: '注册成功'
+              });
+              let hopRouter
+                = '/login/login'
+              this.$router.replace(hopRouter);
+            }
+            else{
+              console.log("注册失败");
+              this.$message({
+                type: 'error',
+                message: response.data.msg
+              });
+            }
+          }).catch(function (err) {
+            console.log(err);
+          })
+        }).catch(() => {
+          console.log("取消");
+          this.$message({
+            type: 'info',
+            message: '取消'
+          });
+        });
+
+        // } else {
+        //   console.log('error submit!!');
+        //   return false;
+        // }
+        // });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+      }
     }
+  }
 </script>
 
 <style scoped>

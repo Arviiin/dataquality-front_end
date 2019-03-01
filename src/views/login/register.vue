@@ -164,7 +164,7 @@
                  console.log("注册失败");
                  this.$message({
                    type: 'error',
-                   message: response.data.msg
+                   message: response.data.result
                  });
                }
              }).catch(function (err) {
