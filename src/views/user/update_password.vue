@@ -4,7 +4,7 @@
     <hr>
     <div>
       <menuSide :vlogin="this.vlogin"></menuSide>
-      <el-main style="background-color: #ffffff; height: 1000px">
+      <el-main style="background-color: #ffffff; height: 700px">
         <div class="title-container">
           <h3 class="title">修改密码</h3>
         </div>
@@ -87,6 +87,9 @@
           })
           this.diag=true;
         }
+      },
+      mounted:function () {
+        window.scrollTo(0,0);
       }
 
     }

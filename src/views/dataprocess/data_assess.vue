@@ -5,7 +5,7 @@
     <div>
       <menuSide></menuSide>
       <!--<el-form :model="userinfo" status-icon :rules="rules2" ref="userinfo" class="login-form">-->
-      <el-main style="background-color: #ffffff; height: 1000px">
+      <el-main style="background-color: #ffffff; height: 700px">
         <div class="title-container">
           <h2 class="title">数据质量综合量化指标维度编辑</h2>
         </div>
@@ -350,6 +350,7 @@
       }
     },
     mounted:function () {
+      window.scrollTo(0,0);
       if(localStorage.getItem("User"))
       {
         this.userinfo.name=localStorage.getItem("User");

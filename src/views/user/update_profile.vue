@@ -4,7 +4,7 @@
     <hr>
     <div>
       <menuSide :vlogin="this.vlogin"></menuSide>
-      <el-main style="background-color: #ffffff; height: 1000px">
+      <el-main style="background-color: #ffffff; height: 700px">
         <div class="title-container">
           <h3 class="title">修改资料</h3>
         </div>
@@ -173,6 +173,9 @@
       resetForm(formName) {
         this.$refs[formName].resetFields();
       }
+    },
+    mounted:function () {
+      window.scrollTo(0,0);
     }
   }
 </script>

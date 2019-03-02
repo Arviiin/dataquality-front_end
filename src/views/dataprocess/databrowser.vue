@@ -7,7 +7,7 @@
     <div>
       <menuSide :vlogin="this.vlogin"></menuSide>
       <!--<el-form :model="userinfo" status-icon :rules="rules2" ref="userinfo" class="login-form">-->
-      <el-main style="background-color: #ffffff; height: 1000px">
+      <el-main style="background-color: #ffffff; height: 700px">
         <div class="title-container">
           <h3 class="title">数据一览</h3>
         </div>
@@ -35,13 +35,13 @@
           <!--添加一列-->
         <!--</el-button>-->
 
-        <el-pagination v-if="this.diag==true"
+        <!--<el-pagination v-if="this.diag==true"
           background
           layout="prev, pager, next"
           :total="1000"
           style="float: right"
         >
-        </el-pagination>
+        </el-pagination>-->
       </el-main>
     </div>
   </div>
@@ -53,7 +53,6 @@
   import navFooter from '@/views/components/footer'
   import menuSide from '@/views/components/menuside'
   import {formatDate} from '../../script/common.js'
-
 
   let moment = require("moment");
 
@@ -97,7 +96,12 @@
 
       }
     },
+    /*created:function(){
+      this.scrollToRightTop();
+    },*/
     mounted:function(){
+      window.scrollTo(0,0);
+      //this.scrollToRightTop();
       if(localStorage.getItem("User"))
       {
         this.userinfo.name=localStorage.getItem("User");
@@ -105,6 +109,9 @@
       }
     },
     methods:{
+      /*scrollToRightTop() {
+        window.scrollTo(0,0);
+      },*/
       search(tablename){
         console.log(tablename);
         this.$ajax({

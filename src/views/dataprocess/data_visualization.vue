@@ -4,7 +4,7 @@
     <hr>
     <div>
       <menuSide></menuSide>
-      <el-main style="background-color: #ffffff; height: 1000px">
+      <el-main style="background-color: #ffffff; height: 700px">
         <div style="display: flex;height: 500px;width: 100%;align-items: center;justify-content: center;">
           <chart ref="dschart" :options="polar" style="margin-top: 20px"></chart>
         </div>
@@ -38,6 +38,7 @@
           'chart': ECharts//注册chart组件
       },
       mounted: function () {
+        window.scrollTo(0,0);
         var _this = this;
         this.$ajax.get('http://localhost:8080/data/visualization')
           .then(response => {
