@@ -12,14 +12,14 @@
           <el-form-item label="原始密码" prop="pass">
             <el-input type="password" clearable v-model="userinfo.pass" autocomplete="off"></el-input>
           </el-form-item>
-          <el-form-item label="更新密码" prop="pass">
-            <el-input type="password" clearable v-model="userinfo.pass" autocomplete="off"></el-input>
+          <el-form-item label="更新密码" prop="newpass">
+            <el-input type="password" clearable v-model="userinfo.newpass" autocomplete="off"></el-input>
           </el-form-item>
-          <el-form-item label="密码确认" prop="pass">
-            <el-input type="password" clearable v-model="userinfo.pass" autocomplete="off"></el-input>
+          <el-form-item label="密码确认" prop="checkPass">
+            <el-input type="password" clearable v-model="userinfo.checkPass" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="submitForm(userinfo)">提交</el-button>
+            <el-button type="primary" @click="updatePassword(userinfo)">提交</el-button>
             <el-button @click="resetForm('userinfo')">重置</el-button>
           </el-form-item>
         </el-form>
@@ -38,29 +38,47 @@
         menuSide
       },
       data() {
-        var checkName = (rule, value, callback) => {
-          if (!value) {
-            return callback(new Error('用户名不能为空'));
-          }
-        };
         var validatePass = (rule, value, callback) => {
           if (value === '') {
             callback(new Error('请输入密码'));
           }
         };
+        var validatePass1 = (rule, value, callback) => {
+          if (value === '') {
+            callback(new Error('请输入密码'));
+          } else {
+            if (this.userinfo.checkPass !== '') {
+              this.$refs.userinfo.validateField('checkPass');
+            }
+            callback();
+          }
+        };
+        var validatePass2 = (rule, value, callback) => {
+          if (value === '') {
+            callback(new Error('请再次输入密码'));
+          } else if (value !== this.userinfo.newpass) {
+            callback(new Error('两次输入密码不一致!'));
+          } else {
+            callback();
+          }
+        };
         return {
           userinfo: {
-            name:'',
             pass: '',
+            newpass:'',
+            checkPass:''
           },
           result: '',
           vlogin:false,
           rules: {
-            name: [
-              { validator: checkName, trigger: 'blur' }
-            ],
             pass: [
               { validator: validatePass, trigger: 'blur' }
+            ],
+            newpass: [
+              { validator: validatePass1, trigger: 'blur' }
+            ],
+            checkPass: [
+              { validator: validatePass2, trigger: 'blur' }
             ],
           }
         }
@@ -70,26 +88,47 @@
           console.log(tablename);
           this.$ajax({
             method: 'post',
-            url: 'http://localhost:8080/data/list',
+            url: 'http://localhost:8080/user/update_password',
             params: {
-              tablename: tablename
+              username: localStorage.getItem("User"),
+              password: tablename.pass,
+              new_password:tablename.newpass
             }
           }).then(response => {
             console.log(response.data);
-            this.cols = response.data.result.clo;
-            this.tableData = response.data.result.tableData;
-            this.tableData = JSON.parse(this.tableData)
-
-            console.log(this.cols);
-            console.log(this.tableData);
+            if(response.data.result==0){
+              this.$message({
+                type: 'success',
+                message: '修改成功'
+              });
+            }
+            else if (response.data.result==1){
+              this.$message({
+                type: 'error',
+                message: '原密码错误'
+              });
+            }
+            else {
+              this.$message({
+                type: 'error',
+                message: '修改失败'
+              });
+            }
           }).catch(function (err) {
-            //console.log(err);
+            console.log(err);
           })
-          this.diag=true;
+        },
+        resetForm(formName) {
+          this.$refs[formName].resetFields();
         }
       },
       mounted:function () {
         window.scrollTo(0,0);
+        if(localStorage.getItem("User"))
+        {
+          this.userinfo.name=localStorage.getItem("User");
+          this.vlogin=true;
+        }
       }
 
     }
