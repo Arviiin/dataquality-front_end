@@ -4,13 +4,13 @@
     <hr>
     <div>
       <menuSide></menuSide>
-      <el-main style="background-color: #ffffff; height: 1000px">
+      <el-main style="background-color: #ffffff; height: 700px">
         <!--<div style="display: flex;height: 500px;width: 100%;align-items: center;justify-content: center;">-->
           <el-table
             :header-cell-style="{background:'#ccc'}"
             :data="tableData"
             style="width: 100%"
-            height="1000">
+            ><!--height="1000"-->
             <el-table-column
               fixed
               prop="date"
@@ -113,6 +113,9 @@
             zip: 200333
           }]
         }
+      },
+      mounted:function () {
+        window.scrollTo(0,0);
       }
 
     }

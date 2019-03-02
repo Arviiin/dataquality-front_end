@@ -4,7 +4,7 @@
     <hr>
     <div>
       <menuSide :vlogin="this.vlogin"></menuSide>
-      <el-main style="background-color: #ffffff; height: 1000px">
+      <el-main style="background-color: #ffffff; height: 700px">
         <div class="title-container">
           <h3 class="title">修改密码</h3>
         </div>
@@ -78,21 +78,8 @@
             console.log(response.data);
             this.cols = response.data.result.clo;
             this.tableData = response.data.result.tableData;
-            // this.cols = JSON.parse(this.cols)
             this.tableData = JSON.parse(this.tableData)
 
-            for(var i=0;i<this.tableData.length;i++){
-              if(this.tableData[i].hasOwnProperty('createtime') && this.tableData[i].createtime != null && this.tableData[i].createtime != ""){
-                //this.tableData[i].createtime=moment(this.tableData[i].createtime).format('YYYY-MM-DD HH:mm:ss');
-                this.tableData[i].createtime= formatDate(new Date(this.tableData[i].createtime), 'yyyy.MM.dd hh:mm:ss')
-
-              }
-              if(this.tableData[i].hasOwnProperty('updatetime') && this.tableData[i].updatetime != null && this.tableData[i].updatetime != ""){
-                //this.tableData[i].updatetime=moment(this.tableData[i].updatetime).format('YYYY-MM-DD HH:mm:ss');
-                this.tableData[i].updatetime= formatDate(new Date(this.tableData[i].updatetime), 'yyyy.MM.dd hh:mm:ss')
-
-              }
-            }
             console.log(this.cols);
             console.log(this.tableData);
           }).catch(function (err) {
@@ -100,6 +87,9 @@
           })
           this.diag=true;
         }
+      },
+      mounted:function () {
+        window.scrollTo(0,0);
       }
 
     }
