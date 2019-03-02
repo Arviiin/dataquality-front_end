@@ -5,7 +5,7 @@
     <div>
       <menuSide></menuSide>
       <!--<el-form :model="userinfo" status-icon :rules="rules2" ref="userinfo" class="login-form">-->
-      <el-main style="background-color: #ffffff; height: 1000px">
+      <el-main style="background-color: #ffffff; height: 700px">
         <div class="title-container">
           <h3 class="title">数据质量综合评价指标权重</h3>
         </div>
@@ -37,6 +37,7 @@
           <el-col :span="3">
             <div class="grid-content bg-purple">
               <el-select
+                @change="change"
                 v-model="weightValue.completeness"
                 size="small"
                 filterable
@@ -47,7 +48,8 @@
                   v-for="item in options1"
                   :key="item.value"
                   :label="item.label"
-                  :value="item.value">
+                  :value="item.value"
+                  :disabled="item.disabled">
                 </el-option>
               </el-select>
             </div>
@@ -55,6 +57,7 @@
           <el-col :span="3">
             <div class="grid-content bg-purple">
               <el-select
+                @change="change"
                 v-model="weightValue.consistency"
                 size="small"
                 filterable
@@ -65,7 +68,8 @@
                   v-for="item in options2"
                   :key="item.value"
                   :label="item.label"
-                  :value="item.value">
+                  :value="item.value"
+                  :disabled="item.disabled">
                 </el-option>
               </el-select>
             </div>
@@ -73,6 +77,7 @@
           <el-col :span="3">
             <div class="grid-content bg-purple">
               <el-select
+                @change="change"
                 v-model="weightValue.compliance"
                 size="small"
                 filterable
@@ -91,6 +96,7 @@
           <el-col :span="3">
             <div class="grid-content bg-purple">
               <el-select
+                @change="change"
                 v-model="weightValue.accuracy"
                 size="small"
                 filterable
@@ -109,6 +115,7 @@
           <el-col :span="3">
             <div class="grid-content bg-purple">
               <el-select
+                @change="change"
                 v-model="weightValue.uniqueness"
                 size="small"
                 filterable
@@ -127,6 +134,7 @@
           <el-col :span="3">
             <div class="grid-content bg-purple-light">
               <el-select
+                @change="change"
                 v-model="weightValue.timeliness"
                 size="small"
                 filterable
@@ -145,6 +153,7 @@
           <el-col :span="3">
             <div class="grid-content bg-purple">
               <el-select
+                @change="change"
                 v-model="weightValue.vulnerability"
                 size="small"
                 filterable
@@ -236,222 +245,439 @@
           regular: ''
         },
         dialogFormVisible: false,
+        // options1: [{
+        //   value: '0.1',
+        //   label: '0.1'
+        // }, {
+        //   value: '0.2',
+        //   label: '0.2'
+        // }, {
+        //   value: '0.3',
+        //   label: '0.3'
+        // }, {
+        //   value: '0.4',
+        //   label: '0.4'
+        // }, {
+        //   value: '0.5',
+        //   label: '0.5'
+        // }, {
+        //   value: '0.6',
+        //   label: '0.6'
+        // }, {
+        //   value: '0.7',
+        //   label: '0.7'
+        // }, {
+        //   value: '0.8',
+        //   label: '0.8'
+        // }, {
+        //   value: '0.9',
+        //   label: '0.9'
+        // }, {
+        //   value: '1.0',
+        //   label: '1.0'
+        // }],
+        // options2: [{
+        //   value: '0.1',
+        //   label: '0.1'
+        // }, {
+        //   value: '0.2',
+        //   label: '0.2'
+        // }, {
+        //   value: '0.3',
+        //   label: '0.3'
+        // }, {
+        //   value: '0.4',
+        //   label: '0.4'
+        // }, {
+        //   value: '0.5',
+        //   label: '0.5'
+        // }, {
+        //   value: '0.6',
+        //   label: '0.6'
+        // }, {
+        //   value: '0.7',
+        //   label: '0.7'
+        // }, {
+        //   value: '0.8',
+        //   label: '0.8'
+        // }, {
+        //   value: '0.9',
+        //   label: '0.9'
+        // }, {
+        //   value: '1.0',
+        //   label: '1.0'
+        // }],
+        // options3: [{
+        //   value: '0.1',
+        //   label: '0.1'
+        // }, {
+        //   value: '0.2',
+        //   label: '0.2'
+        // }, {
+        //   value: '0.3',
+        //   label: '0.3'
+        // }, {
+        //   value: '0.4',
+        //   label: '0.4'
+        // }, {
+        //   value: '0.5',
+        //   label: '0.5'
+        // }, {
+        //   value: '0.6',
+        //   label: '0.6'
+        // }, {
+        //   value: '0.7',
+        //   label: '0.7'
+        // }, {
+        //   value: '0.8',
+        //   label: '0.8'
+        // }, {
+        //   value: '0.9',
+        //   label: '0.9'
+        // }, {
+        //   value: '1.0',
+        //   label: '1.0'
+        // }],
+        // options4: [{
+        //   value: '0.1',
+        //   label: '0.1'
+        // }, {
+        //   value: '0.2',
+        //   label: '0.2'
+        // }, {
+        //   value: '0.3',
+        //   label: '0.3'
+        // }, {
+        //   value: '0.4',
+        //   label: '0.4'
+        // }, {
+        //   value: '0.5',
+        //   label: '0.5'
+        // }, {
+        //   value: '0.6',
+        //   label: '0.6'
+        // }, {
+        //   value: '0.7',
+        //   label: '0.7'
+        // }, {
+        //   value: '0.8',
+        //   label: '0.8'
+        // }, {
+        //   value: '0.9',
+        //   label: '0.9'
+        // }, {
+        //   value: '1.0',
+        //   label: '1.0'
+        // }],
+        // options5: [{
+        //   value: '0.1',
+        //   label: '0.1'
+        // }, {
+        //   value: '0.2',
+        //   label: '0.2'
+        // }, {
+        //   value: '0.3',
+        //   label: '0.3'
+        // }, {
+        //   value: '0.4',
+        //   label: '0.4'
+        // }, {
+        //   value: '0.5',
+        //   label: '0.5'
+        // }, {
+        //   value: '0.6',
+        //   label: '0.6'
+        // }, {
+        //   value: '0.7',
+        //   label: '0.7'
+        // }, {
+        //   value: '0.8',
+        //   label: '0.8'
+        // }, {
+        //   value: '0.9',
+        //   label: '0.9'
+        // }, {
+        //   value: '1.0',
+        //   label: '1.0'
+        // }],
+        // options6: [{
+        //   value: '0.1',
+        //   label: '0.1'
+        // }, {
+        //   value: '0.2',
+        //   label: '0.2'
+        // }, {
+        //   value: '0.3',
+        //   label: '0.3'
+        // }, {
+        //   value: '0.4',
+        //   label: '0.4'
+        // }, {
+        //   value: '0.5',
+        //   label: '0.5'
+        // }, {
+        //   value: '0.6',
+        //   label: '0.6'
+        // }, {
+        //   value: '0.7',
+        //   label: '0.7'
+        // }, {
+        //   value: '0.8',
+        //   label: '0.8'
+        // }, {
+        //   value: '0.9',
+        //   label: '0.9'
+        // }, {
+        //   value: '1.0',
+        //   label: '1.0'
+        // }],
+        // options7: [{
+        //   value: '0.1',
+        //   label: '0.1'
+        // }, {
+        //   value: '0.2',
+        //   label: '0.2'
+        // }, {
+        //   value: '0.3',
+        //   label: '0.3'
+        // }, {
+        //   value: '0.4',
+        //   label: '0.4'
+        // }, {
+        //   value: '0.5',
+        //   label: '0.5'
+        // }, {
+        //   value: '0.6',
+        //   label: '0.6'
+        // }, {
+        //   value: '0.7',
+        //   label: '0.7'
+        // }, {
+        //   value: '0.8',
+        //   label: '0.8'
+        // }, {
+        //   value: '0.9',
+        //   label: '0.9'
+        // }, {
+        //   value: '1.0',
+        //   label: '1.0'
+        // }],
         options1: [{
-          value: '0.1',
-          label: '0.1'
+          value: 0.1,
+          label: 0.1
         }, {
-          value: '0.2',
-          label: '0.2'
+          value: 0.2,
+          label: 0.2
         }, {
-          value: '0.3',
-          label: '0.3'
+          value: 0.3,
+          label: 0.3
         }, {
-          value: '0.4',
-          label: '0.4'
+          value: 0.4,
+          label: 0.4
         }, {
-          value: '0.5',
-          label: '0.5'
+          value: 0.5,
+          label: 0.5
         }, {
-          value: '0.6',
-          label: '0.6'
+          value: 0.6,
+          label: 0.6
         }, {
-          value: '0.7',
-          label: '0.7'
+          value: 0.7,
+          label: 0.7
         }, {
-          value: '0.8',
-          label: '0.8'
+          value: 0.8,
+          label: 0.8
         }, {
-          value: '0.9',
-          label: '0.9'
+          value: 0.9,
+          label: 0.9
         }, {
-          value: '1.0',
-          label: '1.0'
+          value: 1.0,
+          label: 1.0
         }],
         options2: [{
-          value: '0.1',
-          label: '0.1'
+          value: 0.1,
+          label: 0.1
         }, {
-          value: '0.2',
-          label: '0.2'
+          value: 0.2,
+          label: 0.2
         }, {
-          value: '0.3',
-          label: '0.3'
+          value: 0.3,
+          label: 0.3
         }, {
-          value: '0.4',
-          label: '0.4'
+          value: 0.4,
+          label: 0.4
         }, {
-          value: '0.5',
-          label: '0.5'
+          value: 0.5,
+          label: 0.5
         }, {
-          value: '0.6',
-          label: '0.6'
+          value: 0.6,
+          label: 0.6
         }, {
-          value: '0.7',
-          label: '0.7'
+          value: 0.7,
+          label: 0.7
         }, {
-          value: '0.8',
-          label: '0.8'
+          value: 0.8,
+          label: 0.8
         }, {
-          value: '0.9',
-          label: '0.9'
+          value: 0.9,
+          label: 0.9
         }, {
-          value: '1.0',
-          label: '1.0'
+          value: 1.0,
+          label: 1.0
         }],
         options3: [{
-          value: '0.1',
-          label: '0.1'
+          value: 0.1,
+          label: 0.1
         }, {
-          value: '0.2',
-          label: '0.2'
+          value: 0.2,
+          label: 0.2
         }, {
-          value: '0.3',
-          label: '0.3'
+          value: 0.3,
+          label: 0.3
         }, {
-          value: '0.4',
-          label: '0.4'
+          value: 0.4,
+          label: 0.4
         }, {
-          value: '0.5',
-          label: '0.5'
+          value: 0.5,
+          label: 0.5
         }, {
-          value: '0.6',
-          label: '0.6'
+          value: 0.6,
+          label: 0.6
         }, {
-          value: '0.7',
-          label: '0.7'
+          value: 0.7,
+          label: 0.7
         }, {
-          value: '0.8',
-          label: '0.8'
+          value: 0.8,
+          label: 0.8
         }, {
-          value: '0.9',
-          label: '0.9'
+          value: 0.9,
+          label: 0.9
         }, {
-          value: '1.0',
-          label: '1.0'
+          value: 1.0,
+          label: 1.0
         }],
         options4: [{
-          value: '0.1',
-          label: '0.1'
+          value: 0.1,
+          label: 0.1
         }, {
-          value: '0.2',
-          label: '0.2'
+          value: 0.2,
+          label: 0.2
         }, {
-          value: '0.3',
-          label: '0.3'
+          value: 0.3,
+          label: 0.3
         }, {
-          value: '0.4',
-          label: '0.4'
+          value: 0.4,
+          label: 0.4
         }, {
-          value: '0.5',
-          label: '0.5'
+          value: 0.5,
+          label: 0.5
         }, {
-          value: '0.6',
-          label: '0.6'
+          value: 0.6,
+          label: 0.6
         }, {
-          value: '0.7',
-          label: '0.7'
+          value: 0.7,
+          label: 0.7
         }, {
-          value: '0.8',
-          label: '0.8'
+          value: 0.8,
+          label: 0.8
         }, {
-          value: '0.9',
-          label: '0.9'
+          value: 0.9,
+          label: 0.9
         }, {
-          value: '1.0',
-          label: '1.0'
+          value: 1.0,
+          label: 1.0
         }],
         options5: [{
-          value: '0.1',
-          label: '0.1'
+          value: 0.1,
+          label: 0.1
         }, {
-          value: '0.2',
-          label: '0.2'
+          value: 0.2,
+          label: 0.2
         }, {
-          value: '0.3',
-          label: '0.3'
+          value: 0.3,
+          label: 0.3
         }, {
-          value: '0.4',
-          label: '0.4'
+          value: 0.4,
+          label: 0.4
         }, {
-          value: '0.5',
-          label: '0.5'
+          value: 0.5,
+          label: 0.5
         }, {
-          value: '0.6',
-          label: '0.6'
+          value: 0.6,
+          label: 0.6
         }, {
-          value: '0.7',
-          label: '0.7'
+          value: 0.7,
+          label: 0.7
         }, {
-          value: '0.8',
-          label: '0.8'
+          value: 0.8,
+          label: 0.8
         }, {
-          value: '0.9',
-          label: '0.9'
+          value: 0.9,
+          label: 0.9
         }, {
-          value: '1.0',
-          label: '1.0'
+          value: 1.0,
+          label: 1.0
         }],
         options6: [{
-          value: '0.1',
-          label: '0.1'
+          value: 0.1,
+          label: 0.1
         }, {
-          value: '0.2',
-          label: '0.2'
+          value: 0.2,
+          label: 0.2
         }, {
-          value: '0.3',
-          label: '0.3'
+          value: 0.3,
+          label: 0.3
         }, {
-          value: '0.4',
-          label: '0.4'
+          value: 0.4,
+          label: 0.4
         }, {
-          value: '0.5',
-          label: '0.5'
+          value: 0.5,
+          label: 0.5
         }, {
-          value: '0.6',
-          label: '0.6'
+          value: 0.6,
+          label: 0.6
         }, {
-          value: '0.7',
-          label: '0.7'
+          value: 0.7,
+          label: 0.7
         }, {
-          value: '0.8',
-          label: '0.8'
+          value: 0.8,
+          label: 0.8
         }, {
-          value: '0.9',
-          label: '0.9'
+          value: 0.9,
+          label: 0.9
         }, {
-          value: '1.0',
-          label: '1.0'
+          value: 1.0,
+          label: 1.0
         }],
         options7: [{
-          value: '0.1',
-          label: '0.1'
+          value: 0.1,
+          label: 0.1
         }, {
-          value: '0.2',
-          label: '0.2'
+          value: 0.2,
+          label: 0.2
         }, {
-          value: '0.3',
-          label: '0.3'
+          value: 0.3,
+          label: 0.3
         }, {
-          value: '0.4',
-          label: '0.4'
+          value: 0.4,
+          label: 0.4
         }, {
-          value: '0.5',
-          label: '0.5'
+          value: 0.5,
+          label: 0.5
         }, {
-          value: '0.6',
-          label: '0.6'
+          value: 0.6,
+          label: 0.6
         }, {
-          value: '0.7',
-          label: '0.7'
+          value: 0.7,
+          label: 0.7
         }, {
-          value: '0.8',
-          label: '0.8'
+          value: 0.8,
+          label: 0.8
         }, {
-          value: '0.9',
-          label: '0.9'
+          value: 0.9,
+          label: 0.9
         }, {
-          value: '1.0',
-          label: '1.0'
+          value: 1.0,
+          label: 1.0
         }],
       weightValue: {
           completeness: '',
@@ -467,6 +693,21 @@
       }
     },
     methods: {
+      change(){
+        let sum = this.weightValue.completeness
+                + this.weightValue.consistency
+                + this.weightValue.compliance
+                + this.weightValue.accuracy
+                + this.weightValue.uniqueness
+                + this.weightValue.timeliness
+                + this.weightValue.vulnerability;
+        console.log(sum);
+        if (sum==1){
+          this.options1.disabled=true;
+          this.options2.disabled=true;
+          this.options3.disabled=true;
+        }
+      },
       handleLogin() {
         this.$router.push('/dataprocess/datapro');
       },
@@ -504,6 +745,7 @@
       }
     },
     mounted:function () {
+      window.scrollTo(0,0);
       if(localStorage.getItem("User"))
       {
         this.userinfo.name=localStorage.getItem("User");
