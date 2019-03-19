@@ -5,47 +5,112 @@
     <div>
       <menuSide></menuSide>
       <el-main style="background-color: #ffffff; height: 700px">
-        <!--<div style="display: flex;height: 500px;width: 100%;align-items: center;justify-content: center;">-->
-          <el-table
-            :header-cell-style="{background:'#ccc'}"
-            :data="tableData"
-            style="width: 100%"
-            ><!--height="1000"-->
-            <el-table-column
-              fixed
-              prop="date"
-              label="评估模板标识">
-            </el-table-column>
-            <el-table-column
-              prop="name"
-              label="规则系列标识">
-            </el-table-column>
-            <el-table-column
-              prop="province"
-              label="总数量">
-            </el-table-column>
-            <el-table-column
-              prop="city"
-              label="合格数量">
-            </el-table-column>
-            <el-table-column
-              prop="address"
-              label="不符数量">
-            </el-table-column>
-            <el-table-column
-              prop="zip"
-              label="评估权重">
-            </el-table-column>
-            <el-table-column
-              prop="zip1"
-              label="评估得分">
-            </el-table-column>
-            <el-table-column
-              prop="date"
-              label="评估时间">
-            </el-table-column>
-          </el-table>
-        <!--</div>-->
+        <h1>数据质量评价报告</h1>
+          <table border="1" style="margin: 0 auto;">
+            <tr >
+              <th>名称</th>
+              <td colspan="3"></td>
+              <!--<td></td>-->
+              <!--<td></td>-->
+              <th>评价人员</th>
+              <td colspan="2"></td>
+              <!--<td></td>-->
+            </tr>
+            <tr>
+              <th>编号</th>
+              <td colspan="3"></td>
+              <!--<td></td>-->
+              <!--<td></td>-->
+              <th>评价日期</th>
+              <td colspan="2"></td>
+              <!--<td></td>-->
+            </tr>
+            <tr>
+              <th colspan="7" style="height: 60px; font-size: 16px;">评价内容</th>
+            </tr>
+            <tr>
+              <th>序号</th>
+              <th>质量维度指标</th>
+              <th>指标权重</th>
+              <th>合格数量</th>
+              <th>总数</th>
+              <th>良率</th>
+              <th>分值</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>完备性</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>一致性</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>依从性</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>准确性</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>唯一性</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>现实性</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>保密性</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <th>综合加权总分</th>
+              <td colspan="5"></td>
+            </tr>
+            <tr>
+              <td></td>
+              <th>备注</th>
+              <td colspan="5"></td>
+            </tr>
+          </table>
       </el-main>
     </div>
   </div>
@@ -122,5 +187,21 @@
 </script>
 
 <style scoped>
+tr{
+  height: 40px;
+}
+td,th,tr{
+  font-size: 12px;
+}
+table{
+  border-collapse:collapse;
+  border: 1px solid #000000;
+}
+td{
+  border-collapse:collapse;
+  border: 1px solid #000000;
+  width: 75px;
+
+}
 
 </style>
