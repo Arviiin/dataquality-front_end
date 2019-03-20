@@ -13,6 +13,7 @@ Vue.use(Router)
 // import loginsuc from '@/views/dataprocess/loginsuc'
 // import datapro from '@/views/dataprocess/datapro'
 import databrowser from '@/views/dataprocess/databrowser'
+import evaluation_init from '@/views/dataprocess/evaluation_init'
 import data_assess from '@/views/dataprocess/data_assess'
 import weight_allo from '@/views/dataprocess/weight_allo'
 
@@ -22,6 +23,7 @@ import evaluation_report from '@/views/dataprocess/evaluation_report'
 
 import update_password from '@/views/user/update_password'
 import update_profile from '@/views/user/update_profile'
+
 
 export default new Router({//整个访问流程是：前端请求地址path，然后通过这里配置的路由component去对应找到相应的vue页面
   routes: [                 //比如 path: '/login/login' 找到component: login 再对应到import login from '@/views/login/login' 在/views/login下找login.vue
@@ -58,6 +60,11 @@ export default new Router({//整个访问流程是：前端请求地址path，�
       path: "/dataprocess/databrowser",
       name: 'databrowser',
       component: databrowser
+    },
+    {
+      path: "/dataprocess/evaluation_init",
+      name: 'evaluation_init',
+      component: evaluation_init
     },
     {
       path: "/dataprocess/data_assess",

@@ -50,12 +50,15 @@
             <span>评价配置</span>
           </template>
           <el-menu-item-group>
+            <router-link :vlogin="this.vlogin" to="/dataprocess/evaluation_init">
+              <el-menu-item index="3-1" >初始配置</el-menu-item>
+            </router-link>
             <router-link :vlogin="this.vlogin" to="/dataprocess/data_assess">
               <!--<router-link :to="{ name: '/dataprocess/data_assess', params: { vlogin: this.vlogin}}">-->
-              <el-menu-item index="3-1" >指标设置</el-menu-item>
+              <el-menu-item index="3-2" >指标设置</el-menu-item>
             </router-link>
             <router-link to="/dataprocess/weight_allo" :vlogin="this.vlogin">
-              <el-menu-item index="3-2" >权重分配</el-menu-item>
+              <el-menu-item index="3-3" >权重分配</el-menu-item>
             </router-link>
           </el-menu-item-group>
         </el-submenu>

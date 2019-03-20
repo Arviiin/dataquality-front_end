@@ -21,7 +21,7 @@
               <td colspan="3">{{this.tableData.evaluationNumber}}</td>
               <!--<td></td>-->
               <!--<td></td>-->
-              <th>评价日期</th>
+              <th>评价时间</th>
               <td colspan="2">{{this.dimensionDetailResultBean.updatetime}}</td>
               <!--<td></td>-->
             </tr>
