@@ -187,7 +187,8 @@
           </el-col>
         </el-row>
 
-
+        <el-row></el-row> <el-row></el-row> <el-row></el-row>
+        <br><br><br> <br><br><br> <br><br><br> <br><br>
         <el-row>
           <el-col :span="3" :offset="14">
             <div class="grid-content bg-purple">
@@ -207,8 +208,6 @@
 
     </div>
 
-    <!--<hr>-->
-    <!--<navFooter class="footer"></navFooter>-->
   </div>
 
 </template>
@@ -244,224 +243,6 @@
         options5: [0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0],
         options6: [0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0],
         options7: [0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0],
-
-        // options1: [{
-        //   value: 0.1,
-        //   label: 0.1
-        // }, {
-        //   value: 0.2,
-        //   label: 0.2
-        // }, {
-        //   value: 0.3,
-        //   label: 0.3
-        // }, {
-        //   value: 0.4,
-        //   label: 0.4
-        // }, {
-        //   value: 0.5,
-        //   label: 0.5
-        // }, {
-        //   value: 0.6,
-        //   label: 0.6
-        // }, {
-        //   value: 0.7,
-        //   label: 0.7
-        // }, {
-        //   value: 0.8,
-        //   label: 0.8
-        // }, {
-        //   value: 0.9,
-        //   label: 0.9
-        // }, {
-        //   value: 1.0,
-        //   label: 1.0
-        // }],
-        // options2: [{
-        //   value: 0.1,
-        //   label: 0.1
-        // }, {
-        //   value: 0.2,
-        //   label: 0.2
-        // }, {
-        //   value: 0.3,
-        //   label: 0.3
-        // }, {
-        //   value: 0.4,
-        //   label: 0.4
-        // }, {
-        //   value: 0.5,
-        //   label: 0.5
-        // }, {
-        //   value: 0.6,
-        //   label: 0.6
-        // }, {
-        //   value: 0.7,
-        //   label: 0.7
-        // }, {
-        //   value: 0.8,
-        //   label: 0.8
-        // }, {
-        //   value: 0.9,
-        //   label: 0.9
-        // }, {
-        //   value: 1.0,
-        //   label: 1.0
-        // }],
-        // options3: [{
-        //   value: 0.1,
-        //   label: 0.1
-        // }, {
-        //   value: 0.2,
-        //   label: 0.2
-        // }, {
-        //   value: 0.3,
-        //   label: 0.3
-        // }, {
-        //   value: 0.4,
-        //   label: 0.4
-        // }, {
-        //   value: 0.5,
-        //   label: 0.5
-        // }, {
-        //   value: 0.6,
-        //   label: 0.6
-        // }, {
-        //   value: 0.7,
-        //   label: 0.7
-        // }, {
-        //   value: 0.8,
-        //   label: 0.8
-        // }, {
-        //   value: 0.9,
-        //   label: 0.9
-        // }, {
-        //   value: 1.0,
-        //   label: 1.0
-        // }],
-        // options4: [{
-        //   value: 0.1,
-        //   label: 0.1
-        // }, {
-        //   value: 0.2,
-        //   label: 0.2
-        // }, {
-        //   value: 0.3,
-        //   label: 0.3
-        // }, {
-        //   value: 0.4,
-        //   label: 0.4
-        // }, {
-        //   value: 0.5,
-        //   label: 0.5
-        // }, {
-        //   value: 0.6,
-        //   label: 0.6
-        // }, {
-        //   value: 0.7,
-        //   label: 0.7
-        // }, {
-        //   value: 0.8,
-        //   label: 0.8
-        // }, {
-        //   value: 0.9,
-        //   label: 0.9
-        // }, {
-        //   value: 1.0,
-        //   label: 1.0
-        // }],
-        // options5: [{
-        //   value: 0.1,
-        //   label: 0.1
-        // }, {
-        //   value: 0.2,
-        //   label: 0.2
-        // }, {
-        //   value: 0.3,
-        //   label: 0.3
-        // }, {
-        //   value: 0.4,
-        //   label: 0.4
-        // }, {
-        //   value: 0.5,
-        //   label: 0.5
-        // }, {
-        //   value: 0.6,
-        //   label: 0.6
-        // }, {
-        //   value: 0.7,
-        //   label: 0.7
-        // }, {
-        //   value: 0.8,
-        //   label: 0.8
-        // }, {
-        //   value: 0.9,
-        //   label: 0.9
-        // }, {
-        //   value: 1.0,
-        //   label: 1.0
-        // }],
-        // options6: [{
-        //   value: 0.1,
-        //   label: 0.1
-        // }, {
-        //   value: 0.2,
-        //   label: 0.2
-        // }, {
-        //   value: 0.3,
-        //   label: 0.3
-        // }, {
-        //   value: 0.4,
-        //   label: 0.4
-        // }, {
-        //   value: 0.5,
-        //   label: 0.5
-        // }, {
-        //   value: 0.6,
-        //   label: 0.6
-        // }, {
-        //   value: 0.7,
-        //   label: 0.7
-        // }, {
-        //   value: 0.8,
-        //   label: 0.8
-        // }, {
-        //   value: 0.9,
-        //   label: 0.9
-        // }, {
-        //   value: 1.0,
-        //   label: 1.0
-        // }],
-        // options7: [{
-        //   value: 0.1,
-        //   label: 0.1
-        // }, {
-        //   value: 0.2,
-        //   label: 0.2
-        // }, {
-        //   value: 0.3,
-        //   label: 0.3
-        // }, {
-        //   value: 0.4,
-        //   label: 0.4
-        // }, {
-        //   value: 0.5,
-        //   label: 0.5
-        // }, {
-        //   value: 0.6,
-        //   label: 0.6
-        // }, {
-        //   value: 0.7,
-        //   label: 0.7
-        // }, {
-        //   value: 0.8,
-        //   label: 0.8
-        // }, {
-        //   value: 0.9,
-        //   label: 0.9
-        // }, {
-        //   value: 1.0,
-        //   label: 1.0
-        // }],
       weightValue: {
           completeness: null,
           consistency: null,
@@ -539,7 +320,7 @@
           + parseFloat(this.weightValue.vulnerability)
         console.log(sum);
         sum=Math.round(sum*1000)/1000
-        if(sum!=1)
+        if(sum!=1&&sum!=0)
         {
           this.$alert('指标权重之和必须为1', '警告', {
             confirmButtonText: '确定',
