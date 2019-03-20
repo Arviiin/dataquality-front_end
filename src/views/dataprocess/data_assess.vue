@@ -304,9 +304,9 @@
       handleUpdate(target) {
         console.log(target)
         this.form.dimensionname = target
-        this.form.rule=''
-        this.form.tablename=''
-        this.form.columnname=''
+        // this.form.rule=''
+        // this.form.tablename=''
+        // this.form.columnname=''
         this.dialogFormVisible = true
       },
       deleterow(index) {
