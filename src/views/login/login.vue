@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navHeader class="header" :userinfo="this.userinfo" :vlogin="this.vlogin"></navHeader>
+    <navHeader class="header" :userinfo="this.userinfo" :vlogin="this.vlogin0"></navHeader>
     <hr>
     <div>
       <div class="page-info">
@@ -59,7 +59,7 @@ import navFooter from '@/views/components/footer'
             pass: '',
           },
           result: '',
-          vlogin:false,
+          vlogin0:false,
           rules: {
             name: [
               { validator: checkName, trigger: 'blur' }
@@ -79,50 +79,14 @@ import navFooter from '@/views/components/footer'
               console.log(response.data)
               if (response.data == 0) {
                 this.result = 0;
-                // this.$message({
-                //   type: 'success',
-                //   message: '登陆成功'
-                // });
-                // this.vlogin=true;
-                // this.$router.push({
-                //   path: '/login/loginsuc',
-                //   name: 'loginsucess',
-                //   params: {
-                //     name: 'loginsucess',
-                //     dataObj: this.userinfo.name,
-                //     vlogin:this.vlogin
-                //   }
-                // })
 
               } else if(response.data == 1){
                 this.result = 1;
-                // this.$message({
-                //   type: 'error',
-                //   message: '用户名不存在'
-                // });
               }
               else{
                 this.result = 2;
-                // this.$message({
-                //   type: 'error',
-                //   message: '密码错误'
-                // });
               }
             });
-          // if (this.userinfo.name == "admin" && this.userinfo.pass == "admin") {
-          //   this.vlogin=true;
-          //   // this.$router.push('/')
-          //   this.$router.push({
-          //     path: '/',
-          //     name: 'home',
-          //     params: {
-          //       name: 'home',
-          //       dataObj: this.userinfo,
-          //       vlogin:this.vlogin
-          //     }
-          //   })
-          //
-          // }
 
         },
         resetForm(formName) {
@@ -140,14 +104,14 @@ import navFooter from '@/views/components/footer'
                 type: 'success',
                 message: '登陆成功'
               });
-              this.vlogin=true;
+              this.vlogin0=true;
               this.$router.push({
                 path: '/login/loginsuc',
                 name: 'loginsucess',
                 params: {
                   name: 'loginsucess',
                   dataObj: this.userinfo.name,
-                  vlogin:this.vlogin
+                  vlogin:this.vlogin0
                 }
               })
             }

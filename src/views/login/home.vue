@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navHeader class="header" :userinfo="this.userinfo" :vlogin="this.vlogin"></navHeader>
+    <navHeader class="header" :userinfo="this.userinfo" :vlogin="this.vlogin0"></navHeader>
     <hr>
     <div>
       <el-carousel :interval="4000" type="card">
@@ -12,7 +12,7 @@
       <div class="container">
         <div class="signin-section">
           <h3><span>数据质量</span> 看见数据的本质</h3>
-          <div v-if="vlogin==false">
+          <div v-if="vlogin0==false">
             <router-link to="/login/login">
               <el-button type="primary">登录账户</el-button>
             </router-link>
@@ -20,7 +20,7 @@
               <el-button type="warning">加入我们</el-button>
             </router-link>
           </div>
-          <div v-if="vlogin==true">
+          <div v-if="vlogin0==true">
             <router-link to="/dataprocess/databrowser">
               <el-button type="primary">管理我的数据</el-button>
             </router-link>
@@ -59,7 +59,7 @@
     },
     data () {
       return {
-        vlogin:false,
+        vlogin0:false,
         userinfo:{
           name:'',
         },
@@ -73,10 +73,10 @@
     mounted:function(){
       if(localStorage.getItem("User")){
         this.userinfo.name=localStorage.getItem("User");
-        this.vlogin=true;
+        this.vlogin0=true;
       }
-      if(!localStorage.getItem("User")||this.$route.params.vlogin==false){
-        this.vlogin=false;
+      if(!localStorage.getItem("User")||this.$route.params.vlogin11==false){
+        this.vlogin0=false;
       }
     },
     methods: {

@@ -39,6 +39,11 @@
       },
       mounted: function () {
         window.scrollTo(0,0);
+        if(localStorage.getItem("User"))
+        {
+          this.userinfo.name=localStorage.getItem("User");
+          this.vlogin=true;
+        }
         var _this = this;
         this.$ajax.get('http://localhost:8080/data/visualization')
           .then(response => {
@@ -54,6 +59,13 @@
       methods: {},
       data: function () {
         return {
+          vlogin:false,
+          userinfo: {
+            name:'',
+            company: '',
+            mail:'',
+            phone:''
+          },
           polar: {
             title: {
               text: ''

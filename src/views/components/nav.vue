@@ -51,7 +51,6 @@
     data() {
       return {
         vlogin0: false,
-        vlogin:''
       }
     },
     methods:{
@@ -65,14 +64,14 @@
           }).then(function () {
             // getRequest("/logout")
             _this.userinfo.name = null;
-            _this.vlogin = false;
+            // _this.vlogin = false; 这句话会报警告 因为 子组件不能修改父组件传过来的值
             _this.vlogin0 = false;
             localStorage.clear();
             console.log(localStorage.getItem("User"));
             _this.$router.replace({
                 path: '/',
                 params: {
-                  vlogin:this.vlogin
+                  vlogin11:false
                 }
               },
               );
