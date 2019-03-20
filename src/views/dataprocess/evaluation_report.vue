@@ -13,16 +13,16 @@
               <!--<td></td>-->
               <!--<td></td>-->
               <th>评价人员</th>
-              <td colspan="2"></td>
+              <td colspan="2">{{this.tableData.evaluationRemarkUsername}}</td>
               <!--<td></td>-->
             </tr>
             <tr>
               <th>编号</th>
-              <td colspan="3"></td>
+              <td colspan="3">{{this.tableData.evaluationNumber}}</td>
               <!--<td></td>-->
               <!--<td></td>-->
               <th>评价日期</th>
-              <td colspan="2"></td>
+              <td colspan="2">{{this.dimensionDetailResultBean.updatetime}}</td>
               <!--<td></td>-->
             </tr>
             <tr>
@@ -40,75 +40,75 @@
             <tr>
               <td>1</td>
               <td>完备性</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td>{{this.weightResult.completeness}}</td>
+              <td>{{(this.dimensionDetailResultBean.dataFileCompletenessResult+this.dimensionDetailResultBean.dataValueCompletenessResult)/2}}</td>
+              <td>{{(this.dimensionDetailResultBean.expectedTotalRecordAmount+this.dimensionDetailResultBean.totalRecordAmountOfDataValueCompleteness)/2}}</td>
+              <td>{{this.dimensionResultRatioBean.Completeness}}</td>
+              <td>{{this.dimensionScore.dataCompletenessScore}}</td>
             </tr>
             <tr>
               <td>2</td>
               <td>一致性</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td>{{this.weightResult.consistency}}</td>
+              <td>{{(this.dimensionDetailResultBean.referentialConsistencyResult+this.dimensionDetailResultBean.formatConsistencyResult)/2}}</td>
+              <td>{{(this.dimensionDetailResultBean.totalRecordAmountOfFormatConsistency+this.dimensionDetailResultBean.totalRecordAmountOfReferentialConsistency)/2}}</td>
+              <td>{{this.dimensionResultRatioBean.Consistency}}</td>
+              <td>{{this.dimensionScore.dataConsistencyScore}}</td>
             </tr>
             <tr>
               <td>3</td>
               <td>依从性</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td>{{this.weightResult.compliance}}</td>
+              <td>{{this.dimensionDetailResultBean.dataRecordComplianceResult}}</td>
+              <td>{{this.dimensionDetailResultBean.totalRecordAmountOfDataRecordCompliance}}</td>
+              <td>{{this.dimensionResultRatioBean.Compliance}}</td>
+              <td>{{this.dimensionScore.dataRecordComplianceScore}}</td>
             </tr>
             <tr>
               <td>4</td>
               <td>准确性</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td>{{this.weightResult.accuracy}}</td>
+              <td>{{this.dimensionDetailResultBean.rangeAccuracyResult}}</td>
+              <td>{{this.dimensionDetailResultBean.totalRecordAmountOfRangeAccuracy}}</td>
+              <td>{{this.dimensionResultRatioBean.Accuracy}}</td>
+              <td>{{this.dimensionScore.rangeAccuracyScore}}</td>
             </tr>
             <tr>
               <td>5</td>
               <td>唯一性</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td>{{this.weightResult.uniqueness}}</td>
+              <td>{{this.dimensionDetailResultBean.recordUniquenessResult}}</td>
+              <td>{{this.dimensionDetailResultBean.totalRecordAmountOfRecordUniqueness}}</td>
+              <td>{{this.dimensionResultRatioBean.Uniqueness}}</td>
+              <td>{{this.dimensionScore.recordUniquenessScore}}</td>
             </tr>
             <tr>
               <td>6</td>
               <td>现实性</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td>{{this.weightResult.timeliness}}</td>
+              <td>{{this.dimensionDetailResultBean.timeBasedTimelinessResult}}</td>
+              <td>{{this.dimensionDetailResultBean.totalRecordAmountOfTimeBasedTimeliness}}</td>
+              <td>{{this.dimensionResultRatioBean.Timeliness}}</td>
+              <td>{{this.dimensionScore.timeBasedTimelinessScore}}</td>
             </tr>
             <tr>
               <td>7</td>
               <td>保密性</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td>{{this.weightResult.vulnerability}}</td>
+              <td>{{this.dimensionDetailResultBean.dataNonVulnerabilityResult}}</td>
+              <td>{{this.dimensionDetailResultBean.totalRecordAmountOfTimeBasedTimeliness}}</td>
+              <td>{{this.dimensionResultRatioBean.Confidentiality}}</td>
+              <td>{{this.dimensionScore.dataNonVulnerabilityScore}}</td>
             </tr>
             <tr>
               <td></td>
               <th>综合加权总分</th>
-              <td colspan="5"></td>
+              <td colspan="5">{{this.dimensionScore.totalDataQualityScore}}</td>
             </tr>
             <tr>
               <td></td>
               <th>备注</th>
-              <td colspan="5"></td>
+              <td colspan="5">{{this.tableData.evaluationRemark}}</td>
             </tr>
           </table>
       </el-main>
@@ -134,7 +134,11 @@
             mail:'',
             phone:''
           },
-          tableData:[]
+          tableData:[],
+          weightResult:{},
+          dimensionDetailResultBean:{},
+          dimensionResultRatioBean:{},
+          dimensionScore:{}
         }
       },
       mounted:function () {
@@ -153,6 +157,11 @@
         }).then(response => {
           console.log(response.data);
           this.tableData=response.data.result;
+          this.weightResult = this.tableData.weightResult;
+          this.dimensionDetailResultBean = this.tableData.dimensionDetailResultBean;
+          this.dimensionResultRatioBean = this.tableData.dimensionResultRatioBean;
+          this.dimensionScore = this.tableData.dimensionScore;
+          this.dimensionDetailResultBean.updatetime = new Date(+new Date(this.dimensionDetailResultBean.updatetime) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
         })
       }
     }
