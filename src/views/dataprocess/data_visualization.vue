@@ -1,17 +1,11 @@
 <template>
   <div>
-    <navHeader class="header" :userinfo="this.userinfo" :vlogin="this.vlogin"></navHeader>
-    <hr>
-    <div>
-      <menuSide></menuSide>
-      <el-main style="background-color: #ffffff; height: 700px">
-        <div style="display: flex;height: 500px;width: 100%;align-items: center;justify-content: center;">
-          <chart ref="dschart" :options="polar" style="margin-top: 20px"></chart>
-        </div>
-      </el-main>
+  <hr>
+    <div
+      style="display: flex;height: 500px;width: 100%;align-items: center;justify-content: center;">
+      <chart ref="dschart" :options="polar" style="margin-top: 20px"></chart>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -26,25 +20,19 @@
     import 'echarts/theme/dark'
     import 'echarts/lib/chart/bar'
 
-    import navHeader from '@/views/components/nav'
-    import menuSide from '@/views/components/menuside'
-
-    //import {getRequest} from '@/utils/api'
     export default {
         name: "data_visualization",
         components: {
-          navHeader,
-          menuSide,
           'chart': ECharts//注册chart组件
       },
       mounted: function () {
-        window.scrollTo(0,0);
-        if(localStorage.getItem("User"))
+        var _this = this;
+        /*if(localStorage.getItem("User"))
         {
           this.userinfo.name=localStorage.getItem("User");
           this.vlogin=true;
-        }
-        var _this = this;
+        }*/
+
         this.$ajax.get('http://localhost:8080/data/visualization')
           .then(response => {
             console.log(response.data)
@@ -59,13 +47,7 @@
       methods: {},
       data: function () {
         return {
-          vlogin:false,
-          userinfo: {
-            name:'',
-            company: '',
-            mail:'',
-            phone:''
-          },
+          /*vlogin:false,*/
           polar: {
             title: {
               text: ''

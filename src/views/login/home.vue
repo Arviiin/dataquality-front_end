@@ -21,7 +21,7 @@
             </router-link>
           </div>
           <div v-if="vlogin0==true">
-            <router-link to="/dataprocess/databrowser">
+            <router-link to="/single_page_home">
               <el-button type="primary">管理我的数据</el-button>
             </router-link>
           </div>

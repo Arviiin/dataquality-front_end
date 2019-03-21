@@ -1,11 +1,6 @@
 <template>
   <div>
-<!--//不知道改什么？？-->
-    <navHeader class="header" :userinfo="this.userinfo" :vlogin="this.vlogin"></navHeader>
     <hr>
-
-    <div>
-      <menuSide :vlogin="this.vlogin"></menuSide>
       <!--<el-form :model="userinfo" status-icon :rules="rules2" ref="userinfo" class="login-form">-->
       <el-main style="background-color: #ffffff; height: 700px">
         <div class="title-container">
@@ -44,25 +39,16 @@
         </el-pagination>-->
       </el-main>
     </div>
-  </div>
-
 </template>
 
 <script>
-  import navHeader from '@/views/components/nav'
-  import navFooter from '@/views/components/footer'
-  import menuSide from '@/views/components/menuside'
+
   import {formatDate} from '../../script/common.js'
 
   let moment = require("moment");
 
   export default {
     name: "databrowser",
-    components:{
-      navHeader,
-      navFooter,
-      menuSide
-    },
     data(){
       return {
         diag:false,

@@ -1,9 +1,6 @@
 <template>
   <div>
-    <navHeader class="header" :userinfo="this.userinfo" :vlogin="this.vlogin"></navHeader>
     <hr>
-    <div>
-      <menuSide></menuSide>
       <el-main style="background-color: #ffffff; height: 700px">
         <h1>数据质量评价报告</h1>
           <table border="1" style="margin: 0 auto;">
@@ -113,18 +110,11 @@
           </table>
       </el-main>
     </div>
-  </div>
 </template>
 
 <script>
-  import navHeader from '@/views/components/nav'
-  import menuSide from '@/views/components/menuside'
     export default {
-        name: "evaluation_report",
-        components: {
-          navHeader,
-          menuSide,
-        },
+      name: "evaluation_report",
       data() {
         return {
           vlogin:false,

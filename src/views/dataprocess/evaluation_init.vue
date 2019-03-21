@@ -1,9 +1,6 @@
 <template>
   <div>
-    <navHeader class="header" :userinfo="this.userinfo" :vlogin="this.vlogin"></navHeader>
     <hr>
-    <div>
-      <menuSide :vlogin="this.vlogin"></menuSide>
       <el-main style="background-color: #ffffff; height: 700px">
         <div class="title-container">
           <h3 class="title">数据质量评价初始配置</h3>
@@ -25,18 +22,11 @@
         </el-form>
       </el-main>
     </div>
-  </div>
 </template>
 
 <script>
-  import navHeader from '@/views/components/nav'
-  import menuSide from '@/views/components/menuside'
   export default {
     name: "evaluation_init",
-    components: {
-      navHeader,
-      menuSide
-    },
     data() {
       var checkName = (rule, value, callback) => {
         if (!value) {

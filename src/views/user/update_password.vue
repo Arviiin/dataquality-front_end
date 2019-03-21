@@ -1,42 +1,32 @@
 <template>
   <div>
-    <navHeader class="header" :userinfo="this.userinfo" :vlogin="this.vlogin"></navHeader>
     <hr>
-    <div>
-      <menuSide :vlogin="this.vlogin"></menuSide>
-      <el-main style="background-color: #ffffff; height: 700px">
-        <div class="title-container">
-          <h3 class="title">修改密码</h3>
-        </div>
-        <el-form :model="userinfo" status-icon :rules="rules" ref="userinfo" label-width="100px" class="login-form">
-          <el-form-item label="原始密码" prop="pass">
-            <el-input type="password" clearable v-model="userinfo.pass" autocomplete="off"></el-input>
-          </el-form-item>
-          <el-form-item label="更新密码" prop="newpass">
-            <el-input type="password" clearable v-model="userinfo.newpass" autocomplete="off"></el-input>
-          </el-form-item>
-          <el-form-item label="密码确认" prop="checkPass">
-            <el-input type="password" clearable v-model="userinfo.checkPass" autocomplete="off"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="updatePassword(userinfo)">提交</el-button>
-            <el-button @click="resetForm('userinfo')">重置</el-button>
-          </el-form-item>
-        </el-form>
-      </el-main>
-    </div>
+    <el-main style="background-color: #ffffff; height: 700px">
+      <div class="title-container">
+        <h3 class="title">修改密码</h3>
+      </div>
+      <el-form :model="userinfo" status-icon :rules="rules" ref="userinfo" label-width="100px" class="login-form">
+        <el-form-item label="原始密码" prop="pass">
+          <el-input type="password" clearable v-model="userinfo.pass" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="更新密码" prop="newpass">
+          <el-input type="password" clearable v-model="userinfo.newpass" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="密码确认" prop="checkPass">
+          <el-input type="password" clearable v-model="userinfo.checkPass" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="updatePassword(userinfo)">提交</el-button>
+          <el-button @click="resetForm('userinfo')">重置</el-button>
+        </el-form-item>
+      </el-form>
+    </el-main>
   </div>
 </template>
 
 <script>
-  import navHeader from '@/views/components/nav'
-  import menuSide from '@/views/components/menuside'
     export default {
       name: "update_password",
-      components:{
-        navHeader,
-        menuSide
-      },
       data() {
         var validatePass = (rule, value, callback) => {
           if (value === '') {

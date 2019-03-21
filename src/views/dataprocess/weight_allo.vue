@@ -1,10 +1,6 @@
 <template>
   <div>
-    <navHeader class="header" :userinfo="this.userinfo" :vlogin="this.vlogin"></navHeader>
     <hr>
-    <div>
-      <menuSide></menuSide>
-      <!--<el-form :model="userinfo" status-icon :rules="rules2" ref="userinfo" class="login-form">-->
       <el-main style="background-color: #ffffff; height: 700px">
         <div class="title-container">
           <h3 class="title">数据质量综合评价指标权重</h3>
@@ -202,28 +198,13 @@
             </div>
           </el-col>
         </el-row>
-
-
       </el-main>
-
     </div>
-
-  </div>
-
 </template>
 
 <script>
-  import navHeader from '@/views/components/nav'
-  import navFooter from '@/views/components/footer'
-  import menuSide from '@/views/components/menuside'
-
   export default {
     name: "weight_allo",
-    components: {
-      navHeader,
-      navFooter,
-      menuSide
-    },
     data() {
       return {
         userinfo: {

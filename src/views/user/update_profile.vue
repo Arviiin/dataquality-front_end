@@ -1,9 +1,6 @@
 <template>
   <div>
-    <navHeader class="header" :userinfo="this.userinfo" :vlogin="this.vlogin"></navHeader>
     <hr>
-    <div>
-      <menuSide :vlogin="this.vlogin"></menuSide>
       <el-main style="background-color: #ffffff; height: 700px">
         <div class="title-container">
           <h3 class="title">修改资料</h3>
@@ -28,18 +25,11 @@
         </el-form>
       </el-main>
     </div>
-  </div>
 </template>
 
 <script>
-  import navHeader from '@/views/components/nav'
-  import menuSide from '@/views/components/menuside'
   export default {
     name: "update_profile",
-    components: {
-      navHeader,
-      menuSide
-    },
     data() {
       var checkName = (rule, value, callback) => {
         if (!value) {

@@ -1,15 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+//登录注册相关
 import home from '@/views/login/home'
 import login from '@/views/login/login'
 import register from '@/views/login/register'
 import loginsucess from '@/views/login/loginsucess'
-
-
-Vue.use(Router)
-
-
 //数据处理相关
+import single_page_home from '@/views/components/single_page_home'
 // import loginsuc from '@/views/dataprocess/loginsuc'
 // import datapro from '@/views/dataprocess/datapro'
 import databrowser from '@/views/dataprocess/databrowser'
@@ -24,27 +21,32 @@ import evaluation_report from '@/views/dataprocess/evaluation_report'
 import update_password from '@/views/user/update_password'
 import update_profile from '@/views/user/update_profile'
 
+Vue.use(Router)
 
 export default new Router({//整个访问流程是：前端请求地址path，然后通过这里配置的路由component去对应找到相应的vue页面
   routes: [                 //比如 path: '/login/login' 找到component: login 再对应到import login from '@/views/login/login' 在/views/login下找login.vue
     {
       path: '/',
-      name: 'home',
+      name: '欢迎页面',
+      hidden: true,
       component: home
     },
     {
       path: '/login/login',
-      name: 'login',
+      name: '登录',
+      hidden: true,
       component: login
     },
     {
       path: '/login/register',
-      name: 'register',
+      name: '注册',
+      hidden: true,
       component: register
     },
     {
       path: '/login/loginsucess',
       name: 'loginsucess',
+      hidden: true,
       component: loginsucess
     },
 //{
@@ -57,52 +59,89 @@ export default new Router({//整个访问流程是：前端请求地址path，�
 //       component: datapro
 //     },
     {
-      path: "/dataprocess/databrowser",
-      name: 'databrowser',
-      component: databrowser
+      path: '/single_page_home',
+      component:single_page_home,
+      name:"账户管理",
+      /*iconCls: 'fa fa-file-text-o',*/
+      children:[
+          {
+            path: "/user/update_password",
+            name: '修改密码',
+            component: update_password,
+            meta: {
+              keepAlive: true
+            }
+          },
+          {
+            path: "/user/update_profile",
+            name: '修改资料',
+            component: update_profile,
+            meta: {
+              keepAlive: true
+            }
+          }
+      ]
     },
+
     {
-      path: "/dataprocess/evaluation_init",
-      name: 'evaluation_init',
-      component: evaluation_init
+      path: '/single_page_home',
+      component:single_page_home,
+      name:"我的数据",
+      children:[
+        {
+          path: "/dataprocess/databrowser",
+          name: '数据一览',
+          component: databrowser
+        }
+      ]
     },
+
     {
-      path: "/dataprocess/data_assess",
-      name: 'data_assess',
-      component: data_assess
+      path: '/single_page_home',
+      component:single_page_home,
+      name:"评价配置",
+      children:[
+        {
+          path: "/dataprocess/evaluation_init",
+          name: '初始配置',
+          component: evaluation_init
+        },
+        {
+          path: "/dataprocess/data_assess",
+          name: '指标设置',
+          component: data_assess
+        },
+        {
+          path: "/dataprocess/weight_allo",
+          name: '权重分配',
+          component: weight_allo
+        }
+      ]
     },
+
     {
-      path: "/dataprocess/weight_allo",
-      name: '权重分配',
-      component: weight_allo
-    },
-    {
-      path: "/dataprocess/data_visualization",
-      name: '数据可视化',
-      component: data_visualization
-    },
-    {
-      path: "/dataprocess/echarts_test",
-      name: '数据可视化测试',
-      component: echarts_test
-    },
-    {
-      path: "/user/update_password",
-      name: '修改密码',
-      component: update_password
-    },
-    {
-      path: "/user/update_profile",
-      name: '修改资料',
-      component: update_profile
-    },
-    {
-      path: "/dataprocess/evaluation_report",
-      name: '评价报告',
-      component: evaluation_report
+      path: '/single_page_home',
+      component:single_page_home,
+      name:"结果一览",
+      children:[
+        {
+          path: "/dataprocess/data_visualization",
+          name: '数据可视化',
+          component: data_visualization
+        },
+        {
+          path: "/dataprocess/echarts_test",
+          name: '数据可视化测试',
+          hidden:true,
+          component: echarts_test
+        },
+        {
+          path: "/dataprocess/evaluation_report",
+          name: '评价报告',
+          component: evaluation_report
+        }
+      ]
     }
-    //   ]
-    // }
 
   ]//routes end
 })
