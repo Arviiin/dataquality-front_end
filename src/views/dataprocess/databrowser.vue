@@ -1,5 +1,6 @@
 <template>
   <div>
+    <hr>
       <!--<el-form :model="userinfo" status-icon :rules="rules2" ref="userinfo" class="login-form">-->
       <el-main style="background-color: #ffffff; height: 700px">
         <div class="title-container">

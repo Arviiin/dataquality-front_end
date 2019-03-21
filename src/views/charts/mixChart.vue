@@ -2,6 +2,9 @@
   <div class="chart-container">
     <chart height="100%" width="100%"/>
   </div>
+  <!--<div class="test">-->
+    <!--测试-->
+  <!--</div>-->
 </template>
 
 <script>
@@ -18,6 +21,15 @@ export default {
   position: relative;
   width: 100%;
   height: calc(100vh - 84px);
+  margin-left: -20px;
+  margin-right: 20px;
+  /*padding-right: 50px;*/
 }
+  /*.test{*/
+    /*height: 100%;*/
+    /*width: 100%;*/
+    /*background-color: red;*/
+    /*margin-left: -20px;*/
+  /*}*/
 </style>
 
