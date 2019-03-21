@@ -106,11 +106,8 @@ import navFooter from '@/views/components/footer'
               });
               this.vlogin0=true;
               this.$router.push({
-                path: '/login/loginsuc',
-                name: 'loginsucess',
+                path: '/',
                 params: {
-                  name: 'loginsucess',
-                  dataObj: this.userinfo.name,
                   vlogin:this.vlogin0
                 }
               })

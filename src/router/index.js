@@ -4,7 +4,7 @@ import Router from 'vue-router'
 import home from '@/views/login/home'
 import login from '@/views/login/login'
 import register from '@/views/login/register'
-import loginsucess from '@/views/login/loginsucess'
+// import loginsucess from '@/views/login/loginsucess'
 //数据处理相关
 import single_page_home from '@/views/components/single_page_home'
 // import loginsuc from '@/views/dataprocess/loginsuc'
@@ -43,12 +43,12 @@ export default new Router({//整个访问流程是：前端请求地址path，�
       hidden: true,
       component: register
     },
-    {
-      path: '/login/loginsucess',
-      name: 'loginsucess',
-      hidden: true,
-      component: loginsucess
-    },
+    // {
+    //   path: '/login/loginsucess',
+    //   name: 'loginsucess',
+    //   hidden: true,
+    //   component: loginsucess
+    // },
 //{
 //   path: '/dataprocess/loginsuc',
 //   component: loginsuc,

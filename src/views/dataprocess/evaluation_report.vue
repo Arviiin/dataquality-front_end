@@ -1,6 +1,6 @@
 <template>
   <div>
-    <hr>
+
       <el-main style="background-color: #ffffff; height: 700px">
         <h1>数据质量评价报告</h1>
           <table border="1" style="margin: 0 auto;">

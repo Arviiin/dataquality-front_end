@@ -1,17 +1,13 @@
 <template>
   <el-container class="home_container">
-    <el-aside width="200px" style="background-color:#374355; text-align:left" >
-      <div style="margin-top:20px; margin-bottom:20px;">
-        <span class="title0">数据质量分析平台</span>
-      </div>
-      <hr/>
+    <el-aside width="210px" style="background-color:#374355; text-align:left" >
       <!--default-active="2" 进入单页面应用看到第二个页面    router很关键，点击侧边栏就可以跳转页面-->
       <el-menu
         default-active="2"
         class="el-menu-vertical-demo"
         background-color="#374355"
-        text-color="#fff"
-        active-text-color="#ffd04b"
+        text-color="rgb(191, 203, 217)"
+        active-text-color="rgb(64, 158, 255)"
         router>
         <template v-for="(item,index) in this.$router.options.routes" v-if="!item.hidden">
           <div style="background-color: #1c2738">
@@ -40,17 +36,21 @@
 
     <el-container>
     <el-header class="el-h">
-      <div class="home_title"></div>
+      <div class="home_title">
+        <div style="margin-top:20px; margin-bottom:20px;">
+          <span class="title0">数据质量分析平台</span>
+        </div>
+      </div>
       <div class="home_userinfoContainer">
         <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link home_userinfo">
               {{this.name}}<i class="el-icon-arrow-down el-icon--right home_userinfo"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="deal">管理数据</el-dropdown-item>
+            <el-dropdown-item command="myhome">回到首页</el-dropdown-item>
+            <el-dropdown-item command="revise">修改资料</el-dropdown-item>
+            <el-dropdown-item command="pswd">修改密码</el-dropdown-item>
             <el-dropdown-item command="logout">退出登陆</el-dropdown-item>
-            <el-dropdown-item command="sysMsg">系统消息</el-dropdown-item>
-            <el-dropdown-item command="MyHome">个人主页</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -91,7 +91,7 @@
               type: 'warning'
             }).then(function () {
               // getRequest("/logout")
-              _this.userinfo.name = null;
+              _this.name = null;
               // _this.vlogin = false; 这句话会报警告 因为 子组件不能修改父组件传过来的值
               _this.vlogin0 = false;
               localStorage.clear();
@@ -107,8 +107,14 @@
               //取消
             })
           }
-          if(command == 'deal'){
-            this.$router.replace({path: '/dataprocess/databrowser'});
+          if(command == 'revise'){
+            this.$router.replace({path: '/user/update_profile'});
+          }
+          if(command == 'pswd'){
+            this.$router.replace({path: '/user/update_password'});
+          }
+          if(command == 'myhome'){
+            this.$router.replace({path: '/'});
           }
         }
       },
@@ -135,19 +141,22 @@
   }
 
   .el-h {
-    background-color: rgb(238, 238, 238);
     color: #000;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 50px;
+    line-height: 50px;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.12), 0 0 3px 0 rgba(0,0,0,.04);
   }
 
 
   .home_title {
-    color: #fff;
-    font-size: 22px;
+    color: #000;
+    font-size: 18px;
     display: inline;
+    font-weight: bold;
   }
 
   .home_userinfo {
@@ -159,19 +168,19 @@
     display: inline;
     margin-right: 20px;
   }
-  .title0 {
-    position: relative;
-    padding-left: 2rem;
-    padding-right: 16px;
-    vertical-align: middle;
-    letter-spacing: 0.29px;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 16px;
-    border-radius: 0px;
-    color: rgb(255, 255, 255);
-    background-color: transparent;
-    width: 100%;
-    height: 48px;
-  }
+  /*.title0 {*/
+    /*position: relative;*/
+    /*padding-left: 2rem;*/
+    /*padding-right: 16px;*/
+    /*vertical-align: middle;*/
+    /*letter-spacing: 0.29px;*/
+    /*text-transform: uppercase;*/
+    /*!*font-weight: bold;*!*/
+    /*font-size: 16px;*/
+    /*border-radius: 0px;*/
+    /*color: #000;*/
+    /*background-color: transparent;*/
+    /*width: 100%;*/
+    /*height: 48px;*/
+  /*}*/
 </style>

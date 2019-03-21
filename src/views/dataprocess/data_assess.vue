@@ -1,6 +1,6 @@
 <template>
   <div>
-    <hr>
+
     <el-main style="background-color: #ffffff; height: 700px">
       <div class="title-container">
         <h2 class="title">数据质量综合量化指标维度编辑</h2>
