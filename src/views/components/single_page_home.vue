@@ -1,7 +1,46 @@
 <template>
   <el-container class="home_container">
+    <el-aside width="200px" style="background-color:#374355; text-align:left" >
+      <div style="margin-top:20px; margin-bottom:20px;">
+        <span class="title0">数据质量分析平台</span>
+      </div>
+      <hr/>
+      <!--default-active="2" 进入单页面应用看到第二个页面    router很关键，点击侧边栏就可以跳转页面-->
+      <el-menu
+        default-active="2"
+        class="el-menu-vertical-demo"
+        background-color="#374355"
+        text-color="#fff"
+        active-text-color="#ffd04b"
+        router>
+        <template v-for="(item,index) in this.$router.options.routes" v-if="!item.hidden">
+          <div style="background-color: #1c2738">
+          <el-submenu :index="index+''" v-if="item.children.length>1" :key="index">
+            <template slot="title">
+              <!--<i :class="item.iconCls"></i> 这里侧边栏图标遍历，我先不搞，写死-->
+              <i class="el-icon-setting"></i>
+              <span>{{item.name}}</span>
+            </template>
+            <!--删去了<el-menu-item-group>-->
+            <el-menu-item v-for="child in item.children" v-if="!child.hidden" :index="child.path" :key="child.path">
+              {{child.name}}
+            </el-menu-item>
+          </el-submenu>
+          <template v-else>
+            <div style="background-color: #011327">
+            <el-menu-item :index="item.children[0].path">
+              <i class="el-icon-setting"></i>
+              <span slot="title">{{item.children[0].name}}</span>
+            </el-menu-item></div>
+          </template>
+          </div>
+        </template>
+      </el-menu>
+    </el-aside>
+
+    <el-container>
     <el-header class="el-h">
-      <div class="home_title">数据质量分析平台</div>
+      <div class="home_title"></div>
       <div class="home_userinfoContainer">
         <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link home_userinfo">
@@ -16,34 +55,7 @@
         </el-dropdown>
       </div>
     </el-header>
-    <el-container>
-      <el-aside width="200px">
-        <!--default-active="2" 进入单页面应用看到第二个页面    router很关键，点击侧边栏就可以跳转页面-->
-        <el-menu
-          default-active="2"
-          class="el-menu-vertical-demo" style="background-color: #ECECEC" router>
-          <template v-for="(item,index) in this.$router.options.routes" v-if="!item.hidden">
-            <el-submenu :index="index+''" v-if="item.children.length>1" :key="index">
-              <template slot="title">
-                <!--<i :class="item.iconCls"></i> 这里侧边栏图标遍历，我先不搞，写死-->
-                <i class="el-icon-setting"></i>
-                <span>{{item.name}}</span>
-              </template>
-            <!--删去了<el-menu-item-group>-->
-              <el-menu-item v-for="child in item.children" v-if="!child.hidden" :index="child.path" :key="child.path">
-                {{child.name}}
-              </el-menu-item>
-            </el-submenu>
-            <template v-else>
-              <el-menu-item :index="item.children[0].path">
-                <i class="el-icon-setting"></i>
-                <span slot="title">{{item.children[0].name}}</span>
-              </el-menu-item>
-            </template>
-          </template>
-        </el-menu>
-      </el-aside>
-      <el-container>
+
         <el-main>
           <!--面包屑导航-->
           <el-breadcrumb separator-class="el-icon-arrow-right">
@@ -57,7 +69,6 @@
           <router-view v-if="!this.$route.meta.keepAlive"></router-view>
         </el-main>
       </el-container>
-    </el-container>
   </el-container>
 </template>
 
@@ -124,23 +135,14 @@
   }
 
   .el-h {
-    background-color: #20a0ff;
-    color: #333;
+    background-color: rgb(238, 238, 238);
+    color: #000;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
 
-  .el-aside {
-    background-color: #ECECEC;
-  }
-
-  .el-main {
-    background-color: #fff;
-    color: #000;
-    text-align: center;
-  }
 
   .home_title {
     color: #fff;
@@ -149,12 +151,27 @@
   }
 
   .home_userinfo {
-    color: #fff;
+    color: #000;
     cursor: pointer;
   }
 
   .home_userinfoContainer {
     display: inline;
     margin-right: 20px;
+  }
+  .title0 {
+    position: relative;
+    padding-left: 2rem;
+    padding-right: 16px;
+    vertical-align: middle;
+    letter-spacing: 0.29px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 0px;
+    color: rgb(255, 255, 255);
+    background-color: transparent;
+    width: 100%;
+    height: 48px;
   }
 </style>
