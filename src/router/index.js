@@ -15,6 +15,7 @@ import data_assess from '@/views/dataprocess/data_assess'
 import weight_allo from '@/views/dataprocess/weight_allo'
 
 import data_visualization from '@/views/dataprocess/data_visualization'
+import mixChart from '@/views/charts/mixChart'
 import echarts_test from '@/views/test/echarts_test'
 import evaluation_report from '@/views/dataprocess/evaluation_report'
 
@@ -23,7 +24,8 @@ import update_profile from '@/views/user/update_profile'
 
 Vue.use(Router)
 
-export default new Router({//整个访问流程是：前端请求地址path，然后通过这里配置的路由component去对应找到相应的vue页面
+export default new Router({//整个访问流程是：浏览器输入地址然后会来到这里的路由匹配相应的地址path，
+                            // 然后通过这里配置的路由component去对应找到相应的vue页面
   routes: [                 //比如 path: '/login/login' 找到component: login 再对应到import login from '@/views/login/login' 在/views/login下找login.vue
     {
       path: '/',
@@ -69,7 +71,7 @@ export default new Router({//整个访问流程是：前端请求地址path，�
             name: '修改密码',
             component: update_password,
             meta: {
-              keepAlive: true
+              keepAlive: false//是否要缓存页面 默认false  此处可以不写
             }
           },
           {
@@ -77,7 +79,7 @@ export default new Router({//整个访问流程是：前端请求地址path，�
             name: '修改资料',
             component: update_profile,
             meta: {
-              keepAlive: true
+              keepAlive: false//是否要缓存页面 默认false  此处可以不写
             }
           }
       ]
@@ -91,7 +93,10 @@ export default new Router({//整个访问流程是：前端请求地址path，�
         {
           path: "/dataprocess/databrowser",
           name: '数据一览',
-          component: databrowser
+          component: databrowser,
+          meta: {
+            keepAlive: true//是否要缓存页面 默认false
+          }
         }
       ]
     },
@@ -134,6 +139,11 @@ export default new Router({//整个访问流程是：前端请求地址path，�
           name: '数据可视化测试',
           hidden:true,
           component: echarts_test
+        },
+        {
+          path: "/charts/mixChart",
+          name: '混合图表',
+          component: mixChart
         },
         {
           path: "/dataprocess/evaluation_report",
