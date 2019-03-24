@@ -2,6 +2,7 @@
   <div>
     <hr>
       <el-main style="background-color: #ffffff; height: 700px">
+
         <h1>数据质量评价报告</h1>
           <table border="1" style="margin: 0 auto;">
             <tr >
@@ -38,8 +39,8 @@
               <td>1</td>
               <td>完备性</td>
               <td>{{this.weightResult.completeness}}</td>
-              <td>{{(this.dimensionDetailResultBean.dataFileCompletenessResult+this.dimensionDetailResultBean.dataValueCompletenessResult)/2}}</td>
-              <td>{{(this.dimensionDetailResultBean.expectedTotalRecordAmount+this.dimensionDetailResultBean.totalRecordAmountOfDataValueCompleteness)/2}}</td>
+              <td>{{this.dimensionDetailResultBean.CompletenessResult}}</td>
+              <td>{{this.dimensionDetailResultBean.CompletenessTotalRecordAmount}}</td>
               <td>{{this.dimensionResultRatioBean.Completeness}}</td>
               <td>{{this.dimensionScore.dataCompletenessScore}}</td>
             </tr>
@@ -47,8 +48,8 @@
               <td>2</td>
               <td>一致性</td>
               <td>{{this.weightResult.consistency}}</td>
-              <td>{{(this.dimensionDetailResultBean.referentialConsistencyResult+this.dimensionDetailResultBean.formatConsistencyResult)/2}}</td>
-              <td>{{(this.dimensionDetailResultBean.totalRecordAmountOfFormatConsistency+this.dimensionDetailResultBean.totalRecordAmountOfReferentialConsistency)/2}}</td>
+              <td>{{this.dimensionDetailResultBean.ConsistencyResult}}</td>
+              <td>{{this.dimensionDetailResultBean.ConsistencyTotalRecordAmount}}</td>
               <td>{{this.dimensionResultRatioBean.Consistency}}</td>
               <td>{{this.dimensionScore.dataConsistencyScore}}</td>
             </tr>
@@ -138,6 +139,7 @@
           this.userinfo.name=localStorage.getItem("User");
           this.vlogin=true;
         }
+        console.log(localStorage.getItem("User"));
         this.$ajax({
           method: 'post',
           url: 'http://localhost:8080/result/report',
@@ -146,12 +148,27 @@
           }
         }).then(response => {
           console.log(response.data);
-          this.tableData=response.data.result;
-          this.weightResult = this.tableData.weightResult;
-          this.dimensionDetailResultBean = this.tableData.dimensionDetailResultBean;
-          this.dimensionResultRatioBean = this.tableData.dimensionResultRatioBean;
-          this.dimensionScore = this.tableData.dimensionScore;
-          this.dimensionDetailResultBean.updatetime = new Date(+new Date(this.dimensionDetailResultBean.updatetime) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
+          if (response.data.status == "ok") {
+            this.tableData=response.data.result;
+            this.weightResult = this.tableData.weightResult;
+            this.dimensionDetailResultBean = this.tableData.dimensionDetailResultBean;
+            this.dimensionResultRatioBean = this.tableData.dimensionResultRatioBean;
+            this.dimensionScore = this.tableData.dimensionScore;
+            this.dimensionDetailResultBean.CompletenessTotalRecordAmount= Math.round((this.dimensionDetailResultBean.expectedTotalRecordAmount+this.dimensionDetailResultBean.totalRecordAmountOfDataValueCompleteness)/2);
+            this.dimensionDetailResultBean.CompletenessResult=Math.round((this.dimensionDetailResultBean.dataFileCompletenessResult+this.dimensionDetailResultBean.dataValueCompletenessResult)/2);
+
+            this.dimensionDetailResultBean.ConsistencyTotalRecordAmount= Math.round((this.dimensionDetailResultBean.totalRecordAmountOfFormatConsistency+this.dimensionDetailResultBean.totalRecordAmountOfReferentialConsistency)/2);
+            this.dimensionDetailResultBean.ConsistencyResult=Math.round((this.dimensionDetailResultBean.referentialConsistencyResult+this.dimensionDetailResultBean.formatConsistencyResult)/2);
+
+
+
+
+
+            this.dimensionDetailResultBean.updatetime = new Date(+new Date(this.dimensionDetailResultBean.updatetime) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
+          } else if(response.data.status == "error"){
+            this.$message({type: 'error', message: '数据加载失败!'});
+          }
+
         })
       }
     }

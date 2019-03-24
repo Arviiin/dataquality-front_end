@@ -1,9 +1,12 @@
 <template>
   <div>
   <hr>
+    <div class="title-container">
+      <h2 class="title">数据质量综合评价维度比值</h2>
+    </div>
     <div
       style="display: flex;height: 500px;width: 100%;align-items: center;justify-content: center;">
-      <chart ref="dschart" :options="polar" style="margin-top: 20px"></chart>
+      <chart ref="dschart" :options="optionsData" style="margin-top: 20px"></chart>
     </div>
   </div>
 </template>
@@ -13,12 +16,12 @@
     import ECharts from 'vue-echarts/components/ECharts.vue'
     // 导入echarts的图形类型
     import 'echarts/lib/chart/line'
+    import 'echarts/lib/chart/bar'
     import 'echarts/lib/component/tooltip'
     import 'echarts/lib/component/polar'
     import 'echarts/lib/component/legend'
     import 'echarts/lib/component/title'
     import 'echarts/theme/dark'
-    import 'echarts/lib/chart/bar'
 
     export default {
         name: "data_visualization",
@@ -27,11 +30,6 @@
       },
       mounted: function () {
         var _this = this;
-        /*if(localStorage.getItem("User"))
-        {
-          this.userinfo.name=localStorage.getItem("User");
-          this.vlogin=true;
-        }*/
 
         this.$ajax.get('http://localhost:8080/data/visualization')
           .then(response => {
@@ -47,8 +45,8 @@
       methods: {},
       data: function () {
         return {
-          /*vlogin:false,*/
-          polar: {
+          //实际上就只有这一个变量optionsData将其与options双向绑定，options就是我们图表的关键。
+          optionsData: {
             title: {
               text: ''
             },
@@ -68,7 +66,16 @@
                 saveAsImage: {}
               }
             },
-            tooltip: {},
+            /*tooltip: {},*/
+            /*竖杠*/
+            tooltip: {
+              trigger: 'axis',
+              axisPointer: {
+                textStyle: {
+                  color: '#fff'
+                }
+              }
+            },
             legend: {
               data: ['dq']
             },
@@ -81,7 +88,7 @@
               type: 'line',
               data: []
             }],
-            animationDuration: 3000
+            animationDuration: 3000//动画完成的时间
           }
         }
       }
@@ -90,5 +97,8 @@
 </script>
 
 <style scoped>
-
+  .echarts {
+    width: 800px;
+    height: 500px;
+  }
 </style>

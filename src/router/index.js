@@ -13,12 +13,16 @@ import databrowser from '@/views/dataprocess/databrowser'
 import evaluation_init from '@/views/dataprocess/evaluation_init'
 import data_assess from '@/views/dataprocess/data_assess'
 import weight_allo from '@/views/dataprocess/weight_allo'
-
+//可视化相关
 import data_visualization from '@/views/dataprocess/data_visualization'
+
 import mixChart from '@/views/charts/mixChart'
 import echarts_test from '@/views/test/echarts_test'
 import evaluation_report from '@/views/dataprocess/evaluation_report'
-
+import charts_test from '@/views/charts/mix_chart'
+import lineChart from '@/views/charts/line_chart'
+import pie_Chart from '@/views/charts/pie_chart'
+//用户相关
 import update_password from '@/views/user/update_password'
 import update_profile from '@/views/user/update_profile'
 
@@ -45,21 +49,9 @@ export default new Router({//整个访问流程是：浏览器输入地址然后
       hidden: true,
       component: register
     },
-    // {
-    //   path: '/login/loginsucess',
-    //   name: 'loginsucess',
-    //   hidden: true,
-    //   component: loginsucess
-    // },
-//{
-//   path: '/dataprocess/loginsuc',
-//   component: loginsuc,
-//   children: [
-//     {
-//       path: "/dataprocess/datapro",
-//       name: 'datapro',
-//       component: datapro
-//     },
+    /*
+      开始单页面侧边栏导航
+    */
     {
       path: '/single_page_home',
       component:single_page_home,
@@ -123,7 +115,7 @@ export default new Router({//整个访问流程是：浏览器输入地址然后
         }
       ]
     },
-
+//可视化相关
     {
       path: '/single_page_home',
       component:single_page_home,
@@ -135,14 +127,30 @@ export default new Router({//整个访问流程是：浏览器输入地址然后
           component: data_visualization
         },
         {
+          path: "/charts/lineChart",
+          name: 'line图表',
+          component: lineChart
+        },
+        {
+          path: "/charts/pie_Chart",
+          name: '饼图',
+          component: pie_Chart
+        },
+        {
           path: "/dataprocess/echarts_test",
           name: '数据可视化测试',
           hidden:true,
           component: echarts_test
         },
         {
+          path: "/charts/charts_test",
+          name: '混合图表',
+          component: charts_test
+        },
+        {
           path: "/charts/mixChart",
           name: '混合图表',
+          hidden:true,
           component: mixChart
         },
         {

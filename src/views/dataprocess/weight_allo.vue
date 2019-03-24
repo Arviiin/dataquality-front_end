@@ -5,6 +5,7 @@
         <div class="title-container">
           <h3 class="title">数据质量综合评价指标权重</h3>
         </div>
+        <br/><br/><br/><br/>
         <el-row>
           <el-col :span="3">
             <div class="grid-content bg-purple">完备性</div>

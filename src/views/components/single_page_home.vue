@@ -80,7 +80,7 @@
             type: 'warning'
           }).then(function () {
             // getRequest("/logout")
-            _this.userinfo.name = null;
+            _this.name = null;
             // _this.vlogin = false; 这句话会报警告 因为 子组件不能修改父组件传过来的值
             _this.vlogin0 = false;
             localStorage.clear();

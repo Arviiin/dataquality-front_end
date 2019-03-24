@@ -3,9 +3,9 @@
     <hr>
     <el-main style="background-color: #ffffff; height: 700px">
       <div class="title-container">
-        <h2 class="title">数据质量综合量化指标维度编辑</h2>
+        <h3 class="title">数据质量综合量化指标维度编辑</h3>
       </div>
-      <br>
+      <br><br>
       <el-row>
         <el-col :span="8">
           <div class="grid-content bg-purple" style="font-size: 18px;font-weight:700">一级指标</div>

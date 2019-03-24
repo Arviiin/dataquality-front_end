@@ -1,6 +1,8 @@
 <template>
-  <div class="chart-container">
-    <chart height="100%" width="100%"/>
+
+    <div class="chart-container">
+      <chart height="100%" width="100%"/>
+    <!--</div>-->
   </div>
   <!--<div class="test">-->
     <!--测试-->
@@ -20,7 +22,9 @@ export default {
 .chart-container{
   position: relative;
   width: 100%;
-  height: calc(100vh - 84px);
+  /*height: calc(100vh - 84px);*/
+  height: 100%;
+  /*margin-top: 10px;*/
   margin-left: -20px;
   margin-right: 20px;
   /*padding-right: 50px;*/
