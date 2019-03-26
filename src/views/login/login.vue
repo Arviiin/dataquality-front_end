@@ -46,11 +46,15 @@ import navFooter from '@/views/components/footer'
         var checkName = (rule, value, callback) => {
           if (!value) {
             return callback(new Error('用户名不能为空'));
+          }else {
+            callback();
           }
         };
         var validatePass = (rule, value, callback) => {
           if (value === '') {
             callback(new Error('请输入密码'));
+          }else {
+            callback();
           }
         };
         return {
