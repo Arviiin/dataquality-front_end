@@ -36,6 +36,7 @@
             console.log(response.data)
             if (response.data.code == 200) {
               _this.$refs.dschart.options.xAxis.data = response.data.categories;
+              console.log(response.data.ds);
               _this.$refs.dschart.options.series[0].data = response.data.ds;
             } else {
               _this.$message({type: 'error', message: '数据加载失败!'});

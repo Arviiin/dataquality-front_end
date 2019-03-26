@@ -15,7 +15,7 @@
           <!--<h3 class="title">注册界面</h3>-->
         <!--</div>-->
         <el-form-item label="用户名" prop="name">
-          <el-input v-model.number="userinfo.name" clearable></el-input>
+          <el-input v-model="userinfo.name" clearable></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="pass">
           <el-input type="password" clearable v-model="userinfo.pass" autocomplete="off"></el-input>
@@ -24,10 +24,10 @@
           <el-input type="password" clearable v-model="userinfo.checkPass" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="公司" prop="company">
-          <el-input v-model.number="userinfo.company" clearable></el-input>
+          <el-input v-model="userinfo.company" clearable></el-input>
         </el-form-item>
         <el-form-item label="邮箱" prop="mail">
-          <el-input v-model.number="userinfo.mail" clearable></el-input>
+          <el-input v-model="userinfo.mail" clearable></el-input>
         </el-form-item>
         <el-form-item label="电话" prop="phone">
           <el-input v-model.number="userinfo.phone" clearable></el-input>
@@ -58,6 +58,8 @@
       var checkName = (rule, value, callback) => {
         if (!value) {
           return callback(new Error('用户名不能为空'));
+        }else {
+          callback();
         }
       };
       var validatePass = (rule, value, callback) => {
@@ -82,11 +84,15 @@
       var checkCompany = (rule, value, callback) => {
         if (!value) {
           return callback(new Error('公司名不能为空'));
+        }else {
+          callback();
         }
       };
       var checkMail = (rule, value, callback) => {
         if (!value) {
           return callback(new Error('邮箱不能为空'));
+        }else {
+          callback();
         }
       };
       return {

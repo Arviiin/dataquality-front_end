@@ -36,6 +36,8 @@
       var checkCompany = (rule, value, callback) => {
         if (!value) {
           return callback(new Error('评价名称不能为空'));
+        }else {
+          callback();
         }
       };
       return {

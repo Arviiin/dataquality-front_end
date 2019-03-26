@@ -34,16 +34,22 @@
       var checkName = (rule, value, callback) => {
         if (!value) {
           return callback(new Error('用户名不能为空'));
+        }else {
+          callback();
         }
       };
       var checkCompany = (rule, value, callback) => {
         if (!value) {
           return callback(new Error('公司名不能为空'));
+        }else {
+          callback();
         }
       };
       var checkMail = (rule, value, callback) => {
         if (!value) {
           return callback(new Error('邮箱不能为空'));
+        }else {
+          callback();
         }
       };
       return {

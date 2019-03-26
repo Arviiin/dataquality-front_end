@@ -31,6 +31,8 @@
         var validatePass = (rule, value, callback) => {
           if (value === '') {
             callback(new Error('请输入密码'));
+          }else {
+            callback();
           }
         };
         var validatePass1 = (rule, value, callback) => {
