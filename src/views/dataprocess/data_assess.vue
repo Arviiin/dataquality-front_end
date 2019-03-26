@@ -118,7 +118,7 @@
               width="250px"
               align="center">
               <template slot-scope="scope">
-                <el-popover trigger="click" placement="top" content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。">
+                <el-popover trigger="click" placement="top">
                 <div slot="reference" class="name-wrapper">
                 <el-tag size="medium">{{ scope.row.one }}</el-tag>
                 </div>
@@ -152,17 +152,18 @@
             </el-table-column>
           </el-table>
       <br>
-      <el-row >
+
         <!--<el-col :offset="8">-->
         <!--<div class="grid-content bg-purple">-->
         <!--<el-button type="primary" plain @click="addzb = true">添加指标</el-button>-->
         <!--</div>-->
         <!--</el-col>-->
+        <el-row>
         <el-col :span="24">
-          <div class="grid-content bg-purple">
+          <!--<div class="grid-content bg-purple">-->
             <el-button type="primary" plain @click="dialogVisible = true">提交</el-button>
-            <el-button type="primary" plain @click="dialogVisible = true">取消</el-button>
-          </div>
+            <el-button type="primary" plain @click="reset">重置</el-button>
+          <!--</div>-->
         </el-col>
       </el-row>
 
@@ -397,7 +398,7 @@
         this.dimensions.splice(index,1);
       },
       save_edit() {
-        console.log(this.form)
+        console.log(this.form);
         if(typeof this.form.rule == "object" && this.form.rule[0]!='密码强度'){
           this.form.rule = this.form.rule[0] + ':' + this.form.rule[1]
         }
@@ -422,6 +423,10 @@
         }).catch(function (err) {
           console.log(err);
         })
+      },
+      reset(){
+        this.tableVisible=false;
+        this.dimensions=[];
       },
       handleClose(done) {
         this.$confirm('确认关闭？')
