@@ -151,12 +151,26 @@
               </template>
             </el-table-column>
           </el-table>
+      <br>
+      <el-row >
+        <!--<el-col :offset="8">-->
+        <!--<div class="grid-content bg-purple">-->
+        <!--<el-button type="primary" plain @click="addzb = true">添加指标</el-button>-->
+        <!--</div>-->
+        <!--</el-col>-->
+        <el-col :span="24">
+          <div class="grid-content bg-purple">
+            <el-button type="primary" plain @click="dialogVisible = true">提交</el-button>
+            <el-button type="primary" plain @click="dialogVisible = true">取消</el-button>
+          </div>
+        </el-col>
+      </el-row>
 
       <br><br>
       <hr><br>
         <el-table v-if="tableVisible==true"
           :data="dimensions"
-          style="width: 100%">
+          >
           <el-table-column
             prop="dimensionname"
             label="指标名"
@@ -165,39 +179,29 @@
           <el-table-column
             prop="tablename"
             label="表名"
+
           >
           </el-table-column>
           <el-table-column
             prop="columnname"
-            label="字段名">
+            label="字段名"
+         >
           </el-table-column>
           <el-table-column
             prop="rule"
-            label="规则约束">
+            label="规则约束"
+           >
           </el-table-column>
           <el-table-column
-            fixed="right"
+            align="center"
             label="操作"
             width="100">
             <template slot-scope="scope">
-              <el-button @click="deleterow(scope.$index)" type="text" size="small">删除</el-button>
+              <el-button @click="deleterow(scope.$index)" type="danger" icon="el-icon-delete" size="small">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
 
-      <br>
-      <el-row v-if="tableVisible==true">
-        <!--<el-col :offset="8">-->
-        <!--<div class="grid-content bg-purple">-->
-        <!--<el-button type="primary" plain @click="addzb = true">添加指标</el-button>-->
-        <!--</div>-->
-        <!--</el-col>-->
-        <el-col :offset="10">
-          <div class="grid-content bg-purple">
-            <el-button type="primary" plain @click="dialogVisible = true">提交</el-button>
-          </div>
-        </el-col>
-      </el-row>
 
 
       <!--评估参数设置的模态框-->
