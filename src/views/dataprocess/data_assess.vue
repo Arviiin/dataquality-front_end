@@ -376,8 +376,8 @@
           value: '电话规则',
           label: '电话规则'
         }, {
-          value: '忽略规则',
-          label: '忽略规则'
+          value: '一般规则',
+          label: '一般规则'
         }],
         value8: '',
         vlogin0:'',
@@ -402,7 +402,7 @@
         if(typeof this.form.rule == "object" && this.form.rule[0]!='密码强度'){
           this.form.rule = this.form.rule[0] + ':' + this.form.rule[1]
         }
-        if(this.form.rule[0]=='密码强度'){
+        if(typeof this.form.rule == "object" && this.form.rule[0]=='密码强度'){
           this.form.rule = this.form.rule[1]
         }
         this.newForm = Object.assign({}, this.form)
