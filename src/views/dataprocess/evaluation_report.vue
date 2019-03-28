@@ -108,6 +108,11 @@
               <th>备注</th>
               <td colspan="5">{{this.tableData.evaluationRemark}}</td>
             </tr>
+            <tr>
+              <td></td>
+              <th>建议</th>
+              <td colspan="5" style="text-align: left">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{this.tableData.suggestion}}</td>
+            </tr>
           </table>
       </el-main>
     </div>
