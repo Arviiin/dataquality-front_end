@@ -78,14 +78,14 @@
               }
             },
             legend: {
-              data: ['dq']
+              data: ['ratio']
             },
             xAxis: {
               data: []
             },
             yAxis: {},
             series: [{
-              name: 'dq',
+              name: 'ratio',
               type: 'line',
               data: []
             }],

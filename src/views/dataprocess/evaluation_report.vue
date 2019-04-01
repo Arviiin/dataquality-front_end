@@ -32,8 +32,8 @@
               <th>指标权重</th>
               <th>合格数量</th>
               <th>总数</th>
-              <th>良率</th>
-              <th>分值</th>
+              <th>合格率</th>
+              <th>加权得分</th>
             </tr>
             <tr>
               <td>1</td>
@@ -93,7 +93,7 @@
               <td>7</td>
               <td>保密性</td>
               <td>{{this.weightResult.vulnerability}}</td>
-              <td>{{this.dimensionDetailResultBean.dataNonVulnerabilityResult}}</td>
+              <td>{{Math.round(this.dimensionDetailResultBean.dataNonVulnerabilityResult*this.dimensionDetailResultBean.totalRecordAmountOfTimeBasedTimeliness/100)}}</td>
               <td>{{this.dimensionDetailResultBean.totalRecordAmountOfTimeBasedTimeliness}}</td>
               <td>{{this.dimensionResultRatioBean.Confidentiality}}</td>
               <td>{{this.dimensionScore.dataNonVulnerabilityScore}}</td>
@@ -166,12 +166,9 @@
             this.dimensionDetailResultBean.ConsistencyResult=Math.round((this.dimensionDetailResultBean.referentialConsistencyResult+this.dimensionDetailResultBean.formatConsistencyResult)/2);
 
 
-
-
-
             this.dimensionDetailResultBean.updatetime = new Date(+new Date(this.dimensionDetailResultBean.updatetime) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
           } else if(response.data.status == "error"){
-            this.$message({type: 'error', message: '数据加载失败!'});
+            this.$message({type: 'error', message: '数据加载失败! 请检查是否进行初始化配置'});
           }
 
         })

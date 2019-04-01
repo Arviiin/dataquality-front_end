@@ -73,6 +73,11 @@ export default new Router({//整个访问流程是：浏览器输入地址然后
             meta: {
               keepAlive: false//是否要缓存页面 默认false  此处可以不写
             }
+          },
+          {
+            path: "/user/update_profile",
+            name: '用户管理',
+            component: update_profile
           }
       ]
     },
@@ -157,6 +162,23 @@ export default new Router({//整个访问流程是：浏览器输入地址然后
           path: "/dataprocess/evaluation_report",
           name: '评价报告',
           component: evaluation_report
+        }
+      ]
+    },
+    {
+      path: '/single_page_home',
+      component:single_page_home,
+      name:"其他功能",
+      children:[
+        {
+          path: "/dataprocess/data_visualization",
+          name: '系统管理',
+          component: data_visualization
+        },
+        {
+          path: "/dataprocess/data_visualization",
+          name: '邮件发送',
+          component: data_visualization
         }
       ]
     }

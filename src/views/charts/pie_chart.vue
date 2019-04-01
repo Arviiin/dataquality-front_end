@@ -4,20 +4,21 @@
     <div class="title-container">
       <h2 class="title">数据质量评价各个质量特性饼图</h2>
     </div>
-    <el-row :gutter="10"><!--gutter 属性来指定每一栏之间的间隔，默认间隔为 0。-->
-      <el-col :span="12">
+    <!--<el-row :gutter="0">&lt;!&ndash;gutter 属性来指定每一栏之间的间隔，默认间隔为 0。&ndash;&gt;-->
+      <!--<el-col :span="12">-->
         <div
           style="display: flex;height: 500px;width: 100%;align-items: center;justify-content: center;">
           <v-chart ref="dschart" :options="optionsData" style="margin-top: 20px"></v-chart>
         </div>
-      </el-col>
-      <el-col :span="12">
+      <!--</el-col>-->
+      <!--<el-col :span="12">-->
+        <br/><br/><br/><br/><br/><br/><br/><br/>
         <div
           style="display: flex;height: 500px;width: 100%;align-items: center;justify-content: center;">
           <v-chart ref="dschart_weight" :options="optionsWeightData" style="margin-top: 20px"></v-chart>
         </div>
-      </el-col>
-    </el-row>
+      <!--</el-col>-->
+    <!--</el-row>-->
 
 
   </div>
@@ -82,7 +83,7 @@
           },
           legend: {
             left: 'center',
-            bottom: '10',
+            bottom: '50',
             data: []
           },
           calculable: true,
@@ -118,7 +119,7 @@
           },
           legend: {
             left: 'center',
-            bottom: '10',
+            bottom: '50',
             data: []
           },
           calculable: true,

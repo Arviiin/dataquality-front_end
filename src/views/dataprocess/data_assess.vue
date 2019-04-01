@@ -205,8 +205,8 @@
 
 
 
-      <!--评估参数设置的模态框-->
-      <el-dialog title="二级指标评估参数设置" :visible.sync="dialogFormVisible">
+      <!--评价参数设置的模态框-->
+      <el-dialog title="二级指标评价参数设置" :visible.sync="dialogFormVisible">
         <el-form :model="form">
           <el-row>
             <el-col :span="8">
