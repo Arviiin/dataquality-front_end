@@ -13,6 +13,8 @@ import databrowser from '@/views/dataprocess/databrowser'
 import evaluation_init from '@/views/dataprocess/evaluation_init'
 import data_assess from '@/views/dataprocess/data_assess'
 import weight_allo from '@/views/dataprocess/weight_allo'
+import email from '@/views/dataprocess/email'
+import sys_manage from '@/views/dataprocess/sys_manage'
 //可视化相关
 import data_visualization from '@/views/dataprocess/data_visualization'
 
@@ -171,14 +173,14 @@ export default new Router({//整个访问流程是：浏览器输入地址然后
       name:"其他功能",
       children:[
         {
-          path: "/dataprocess/data_visualization",
+          path: "/dataprocess/sys_manage",
           name: '系统管理',
-          component: data_visualization
+          component: sys_manage
         },
         {
-          path: "/dataprocess/data_visualization",
+          path: "/dataprocess/email",
           name: '邮件发送',
-          component: data_visualization
+          component: email
         }
       ]
     }

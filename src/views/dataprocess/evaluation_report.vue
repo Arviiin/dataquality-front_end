@@ -32,7 +32,7 @@
               <th>指标权重</th>
               <th>合格数量</th>
               <th>总数</th>
-              <th>合格率</th>
+              <th>得分</th>
               <th>加权得分</th>
             </tr>
             <tr>
@@ -157,7 +157,7 @@
             this.tableData=response.data.result;
             this.weightResult = this.tableData.weightResult;
             this.dimensionDetailResultBean = this.tableData.dimensionDetailResultBean;
-            this.dimensionResultRatioBean = this.tableData.dimensionResultRatioBean;
+            this.dimensionResultRatioBean = this.tableData.dimensionResultRatioBean;//这里实际上是dimensionResultRatioScoreBean
             this.dimensionScore = this.tableData.dimensionScore;
             this.dimensionDetailResultBean.CompletenessTotalRecordAmount= Math.round((this.dimensionDetailResultBean.expectedTotalRecordAmount+this.dimensionDetailResultBean.totalRecordAmountOfDataValueCompleteness)/2);
             this.dimensionDetailResultBean.CompletenessResult=Math.round((this.dimensionDetailResultBean.dataFileCompletenessResult+this.dimensionDetailResultBean.dataValueCompletenessResult)/2);

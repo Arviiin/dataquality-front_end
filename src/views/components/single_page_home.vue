@@ -1,7 +1,7 @@
 <template>
   <el-container class="home_container">
     <el-header class="el-h">
-      <div class="home_title">数据质量分析平台</div>
+      <div class="home_title">数据质量量化评价分析</div>
       <div class="home_userinfoContainer">
         <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link home_userinfo">

@@ -26,7 +26,7 @@
       <el-col :span="16">
         <div class="grid-content">
           <router-link to="/">
-            <span style="font-size: 40px; color: rgb(0,54,108)">数据质量分析平台</span></router-link>
+            <span style="font-size: 40px; color: rgb(0,54,108)">数据质量量化分析平台</span></router-link>
         </div>
       </el-col>
       <el-col :span="8">

@@ -1,4 +1,5 @@
 <template>
+  <!--已经弃用-->
   <div>
     <el-col :span="5">
       <h5>菜单栏</h5>
@@ -12,8 +13,6 @@
           background-color="#545c64"
           text-color="#fff"
           active-text-color="#ffd04b">-->
-
-
         <el-submenu index="1">
           <template slot="title">
             <i class="el-icon-setting"></i>

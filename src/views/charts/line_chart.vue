@@ -2,7 +2,7 @@
   <div>
     <hr>
     <div class="title-container">
-      <h2 class="title">数据质量评价line表</h2>
+      <h2 class="title">数据质量评价line图</h2>
     </div>
     <div
       style="display: flex;height: 500px;width: 100%;align-items: center;justify-content: center;">
@@ -71,11 +71,17 @@
       return {
         optionsData: {
           xAxis: {
-            data: [ ],
-            boundaryGap: false,
+            // data: ['数据完备性', '数据一致性', '数据依从性', '数据准确性', '数据唯一性', '数据现实性', '数据保密性'],
+            data: [],
+            boundaryGap: true,
             axisTick: {
               show: false
+            },
+            axisLabel: {
+              interval:0,
+              rotate:40
             }
+
           },
           grid: {
             left: 10,
@@ -111,7 +117,8 @@
             },
             smooth: true,
             type: 'line',
-            data: [],//expectedData
+            // data: [10000, 12000, 16100, 13400, 10500, 14000, 14500],//expectedData  expectedData: [100, 120, 161, 134, 105, 160, 165],
+            data: [],
             animationDuration: 2800,
             animationEasing: 'cubicInOut'
           },
@@ -131,7 +138,8 @@
                   }
                 }
               },
-              data: [],//actualData,
+              // data: [12000, 8000, 11000, 15400, 16200, 12000, 12500],//actualData,  actualData: [120, 82, 91, 154, 162, 140, 145]
+              data: [],
               animationDuration: 2800,
               animationEasing: 'quadraticOut'
             }]
@@ -142,7 +150,7 @@
 </script>
 <style scoped>
   .echarts {
-    width: 1200px;
-    height: 500px;
+    width: 1000px;
+    height: 400px;
   }
 </style>

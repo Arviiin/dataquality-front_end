@@ -110,24 +110,24 @@
               }
             }
           },
-          grid: {
-            left: '5%',
-            right: '5%',
+          grid: {//直角坐标系内绘图网格
+            left: '11%',
+            right: '10%',
             borderWidth: 0,
-            top: 150,
-            bottom: 95,
+            top: 130,//表格离容器顶层距离
+            bottom: 145,//表格离容器底层距离
             textStyle: {
               color: '#fff'
             }
           },
           /*上方控制按钮*/
           legend: {
-            x: '60%',
-            top: '13%',
+            x: '55%',
+            top: '11%',
             textStyle: {
               color: '#90979c'
             },
-            data: ['合格数', '不合格数', '数据总数']
+            data: ['合格数量', '不合格数', '数据总数']
           },
           calculable: true,
           xAxis: {
@@ -147,8 +147,8 @@
               show: false
             },
             axisLabel: {
-              interval: 0
-
+              interval: 0,
+              rotate:40
             },
             data: []
           },
@@ -200,7 +200,7 @@
             end: 35
           }],
           series: [{
-            name: '合格数',
+            name: '合格数量',
             type: 'bar',
             stack: 'total',
             barMaxWidth: 35,
@@ -270,7 +270,7 @@
 </script>
 <style scoped>
   .echarts {
-    width: 800px;
+    width: 900px;
     height: 500px;
   }
 </style>
