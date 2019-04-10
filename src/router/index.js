@@ -14,19 +14,21 @@ import evaluation_init from '@/views/dataprocess/evaluation_init'
 import data_assess from '@/views/dataprocess/data_assess'
 import weight_allo from '@/views/dataprocess/weight_allo'
 import email from '@/views/dataprocess/email'
-import sys_manage from '@/views/dataprocess/sys_manage'
+import email_record from '@/views/dataprocess/email_record'
 //可视化相关
 import data_visualization from '@/views/dataprocess/data_visualization'
 
-import mixChart from '@/views/charts/mixChart'
-import echarts_test from '@/views/test/echarts_test'
+import echarts_test from '@/views/others/echarts_test'
 import evaluation_report from '@/views/dataprocess/evaluation_report'
-import charts_test from '@/views/charts/mix_chart'
+import mix_chart from '@/views/charts/mix_chart'
 import lineChart from '@/views/charts/line_chart'
 import pie_Chart from '@/views/charts/pie_chart'
 //用户相关
 import update_password from '@/views/user/update_password'
 import update_profile from '@/views/user/update_profile'
+//管理相关
+import user_manage from '@/views/others/user_manage'
+import sys_manage from '@/views/others/sys_manage'
 
 Vue.use(Router)
 
@@ -75,11 +77,6 @@ export default new Router({//整个访问流程是：浏览器输入地址然后
             meta: {
               keepAlive: false//是否要缓存页面 默认false  此处可以不写
             }
-          },
-          {
-            path: "/user/update_profile",
-            name: '用户管理',
-            component: update_profile
           }
       ]
     },
@@ -122,11 +119,23 @@ export default new Router({//整个访问流程是：浏览器输入地址然后
         }
       ]
     },
-//可视化相关
     {
       path: '/single_page_home',
       component:single_page_home,
       name:"结果一览",
+      children:[
+        {
+          path: "/dataprocess/evaluation_report",
+          name: '评价报告',
+          component: evaluation_report
+        }
+      ]
+    },
+    //可视化相关
+    {
+      path: '/single_page_home',
+      component:single_page_home,
+      name:"图表展示",
       children:[
         {
           path: "/dataprocess/data_visualization",
@@ -144,43 +153,49 @@ export default new Router({//整个访问流程是：浏览器输入地址然后
           component: pie_Chart
         },
         {
-          path: "/dataprocess/echarts_test",
+          path: "/dataprocess/echarts_test",//import echarts_test from '@/views/others/echarts_test'
           name: '数据可视化测试',
           hidden:true,
           component: echarts_test
         },
         {
-          path: "/charts/charts_test",
+          path: "/charts/mix_chart",//import charts_test from '@/views/charts/mix_chart'
           name: '混合图表',
-          component: charts_test
-        },
-        {
-          path: "/charts/mixChart",
-          name: '混合图表',
-          hidden:true,
-          component: mixChart
-        },
-        {
-          path: "/dataprocess/evaluation_report",
-          name: '评价报告',
-          component: evaluation_report
+          component: mix_chart
         }
       ]
     },
     {
       path: '/single_page_home',
       component:single_page_home,
-      name:"其他功能",
+      name:"邮件功能",
       children:[
-        {
-          path: "/dataprocess/sys_manage",
-          name: '系统管理',
-          component: sys_manage
-        },
         {
           path: "/dataprocess/email",
           name: '邮件发送',
           component: email
+        },
+        {
+          path: "/dataprocess/email_record",
+          name: '邮件管理',
+          component: email_record
+        }
+      ]
+    },
+    {
+      path: '/single_page_home',
+      component:single_page_home,
+      name:"系统管理",
+      children:[
+        {
+          path: "/others/user_manage",
+          name: '用户管理',
+          component: user_manage
+        },
+        {
+          path: "/others/sys_manage",
+          name: '平台管理',
+          component: sys_manage
         }
       ]
     }

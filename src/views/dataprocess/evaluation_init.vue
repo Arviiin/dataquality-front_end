@@ -9,6 +9,9 @@
           <el-form-item label="评价人员" prop="name">
             <el-input v-model="userinfo.name" disabled></el-input>
           </el-form-item>
+          <el-form-item label="邮箱地址" prop="email">
+            <el-input v-model="userinfo.email" placeholder="请输入邮箱地址，默认则把评价报告发送到当前用户邮箱" clearable></el-input>
+          </el-form-item>
           <el-form-item label="评价名称" prop="evaluation_name">
             <el-input v-model="userinfo.evaluation_name" clearable></el-input>
           </el-form-item>
@@ -33,7 +36,21 @@
           return callback(new Error('评价人员姓名不能为空'));
         }
       };
-      var checkCompany = (rule, value, callback) => {
+      //允许不输入，但不允许输错
+      var checkEmail = (rule, value, callback) => {
+        if (value === '') {
+          callback();
+        } else {
+          if (value !== '') {
+            var reg=/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+            if(!reg.test(value)){
+              callback(new Error('请输入有效的邮箱'));
+            }
+          }
+          callback();
+        }
+      };
+      var checkEvaluationName = (rule, value, callback) => {
         if (!value) {
           return callback(new Error('评价名称不能为空'));
         }else {
@@ -44,6 +61,7 @@
         vlogin:false,
         userinfo: {
           name:'',
+          email:'',
           evaluation_name: '',
           evaluation_remark:''
         },
@@ -51,17 +69,20 @@
           name: [
             { validator: checkName, trigger: 'blur' }
           ],
+          email: [
+            { validator: checkEmail, trigger: 'blur' }
+          ],
           evaluation_name: [
-            { validator: checkCompany, trigger: 'blur' }
+            { validator: checkEvaluationName, trigger: 'blur' }
           ]
         }
       }
     },
     methods: {
       submitForm(formName) {
-
         console.log(formName)
         console.log(localStorage.getItem("User"));
+        console.log(formName.email);
         console.log(formName.evaluation_name);
         console.log(formName.evaluation_remark);
 
@@ -70,6 +91,7 @@
           url: 'http://localhost:8080/data/evaluation_init',
           params: {
             username: localStorage.getItem("User"),
+            email:formName.email,
             evaluation_name: formName.evaluation_name,
             evaluation_remark:formName.evaluation_remark
           }
@@ -80,8 +102,7 @@
               type: 'success',
               message: '提交成功'
             });
-          }
-          else {
+          } else {
             this.$message({
               type: 'error',
               message: '提交失败'
@@ -90,8 +111,6 @@
         }).catch(function (err) {
           console.log(err);
         })
-
-
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
@@ -99,9 +118,9 @@
     },
     mounted:function () {
       window.scrollTo(0,0);
-      if(localStorage.getItem("User"))
-      {
+      if(localStorage.getItem("User")){
         this.userinfo.name=localStorage.getItem("User");
+        //this.userinfo.email=22
         this.vlogin=true;
       }
     }

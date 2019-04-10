@@ -3,9 +3,9 @@
     <hr>
       <el-main style="background-color: #ffffff; height: 700px">
         <div class="title-container">
-          <h3 class="title">系统管理</h3>
+          <h3 class="title">平台管理</h3>
         </div>
-        <el-button  @click="sysManage()">系统管理</el-button>
+        <el-button  @click="sysManage()">平台管理</el-button>
       </el-main>
     </div>
 </template>
@@ -13,7 +13,7 @@
 <script>
 
   export default {
-    name: "email",
+    name: "sys_manage",
     data(){
       return {
 

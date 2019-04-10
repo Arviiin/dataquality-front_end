@@ -23,7 +23,7 @@
           default-active="2"
           class="el-menu-vertical-demo" style="background-color: #ECECEC;text-align: left;" router>
           <template v-for="(item,index) in this.$router.options.routes" v-if="!item.hidden">
-            <el-submenu :index="index+''" v-if="item.children.length>1" :key="index">
+            <el-submenu :index="index+''" v-if="item.children.length>=1" :key="index">
               <template slot="title">
                 <!--<i :class="item.iconCls"></i> 这里侧边栏图标遍历，我先不搞，写死-->
                 <i class="el-icon-setting"></i>
